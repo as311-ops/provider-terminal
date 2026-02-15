@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROVIDER Integrated Pipeline</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+<style>
+:root {
+    --bg: #0a0c10;
+    --surface: #12151c;
+    --surface-2: #1a1e28;
+    --surface-3: #222836;
+    --border: #2a3040;
+    --text: #e2e5ee;
+    --text-dim: #6b7394;
+    --accent: #6366f1;
+    --green: #10b981;
+    --green-dim: #10b98133;
+    --yellow: #f59e0b;
+    --yellow-dim: #f59e0b22;
+    --orange: #f97316;
+    --red: #ef4444;
+    --red-dim: #ef444422;
+    --cyan: #06b6d4;
+    --pink: #ec4899;
+    --radius: 10px;
+    --glow-green: 0 0 20px #10b98133;
+    --glow-red: 0 0 20px #ef444433;
+    --glow-yellow: 0 0 20px #f59e0b33;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* ─── Layout ─── */
+.app {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    min-height: 100vh;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 16px;
+    gap: 14px;
+}
+
+/* ─── Alert Banner ─── */
+.alert-banner {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+    font-weight: 600;
+    animation: pulse-bg 2s ease-in-out infinite;
+}
+.alert-banner.active { display: flex; }
+.alert-banner.critical {
+    background: linear-gradient(90deg, #ef444422, #ef444411);
+    border: 1px solid #ef444466;
+    color: #fca5a5;
+}
+.alert-banner.warning {
+    background: linear-gradient(90deg, #f59e0b22, #f59e0b11);
+    border: 1px solid #f59e0b44;
+    color: #fcd34d;
+}
+@keyframes pulse-bg {
+    0%,100% { opacity:1; }
+    50% { opacity:0.85; }
+}
+.alert-banner .icon { font-size: 1.2rem; }
+.alert-banner .dismiss {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1.1rem;
+    opacity: 0.6;
+}
+.alert-banner .dismiss:hover { opacity:1; }
+
+/* ─── Top Bar ─── */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.top-bar h1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+.top-bar h1 span {
+    background: linear-gradient(135deg, var(--red), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.status-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+}
+.status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+    animation: blink 1.5s ease-in-out infinite;
+}
+.status-dot.live { background: var(--green); box-shadow: var(--glow-green); }
+.status-dot.paused { background: var(--yellow); animation: none; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.controls {
+    display: flex;
+    gap: 8px;
+}
+.controls button {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.controls button:hover { border-color: var(--accent); }
+.controls button.active { background: var(--accent); border-color: var(--accent); }
+
+/* ─── KPIs ─── */
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+}
+.kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    position: relative;
+}
+.kpi::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+.kpi.green::after { background: var(--green); }
+.kpi.yellow::after { background: var(--yellow); }
+.kpi.red::after { background: var(--red); }
+.kpi.blue::after { background: var(--cyan); }
+.kpi-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+}
+.kpi-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.kpi-sub {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+}
+
+/* ─── Main Grid ─── */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 14px;
+    min-height: 0;
+}
+@media (max-width: 1100px) {
+    .main-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Market Cards ─── */
+.market-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    max-height: calc(100vh - 320px);
+    padding-right: 4px;
+}
+.market-panel::-webkit-scrollbar { width: 4px; }
+.market-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.market-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.market-card.alert-critical {
+    border-color: #ef444466;
+    box-shadow: var(--glow-red);
+}
+.market-card.alert-warning {
+    border-color: #f59e0b44;
+    box-shadow: var(--glow-yellow);
+}
+
+.mc-header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.mc-type {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+.mc-question {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+    line-height: 1.3;
+}
+
+.mc-prob-section {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+.mc-prob {
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+.mc-change {
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.mc-change.up { color: var(--red); }
+.mc-change.down { color: var(--green); }
+.mc-change.flat { color: var(--text-dim); }
+
+.mc-sparkline {
+    display: flex;
+    align-items: flex-end;
+    gap: 1px;
+    height: 32px;
+}
+.mc-sparkline .bar {
+    width: 3px;
+    border-radius: 1px;
+    transition: height 0.3s;
+}
+
+.mc-meta {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 14px;
+    font-size: 0.62rem;
+    color: var(--text-dim);
+}
+.mc-meta .trend-badge {
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+.trend-rising { background: #ef444422; color: #fca5a5; }
+.trend-falling { background: #10b98122; color: #6ee7b7; }
+.trend-stable { background: var(--surface-3); color: var(--text-dim); }
+.trend-volatile { background: #f59e0b22; color: #fcd34d; }
+
+/* ─── Alert Feed ─── */
+.alert-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: calc(100vh - 320px);
+    overflow-y: auto;
+}
+.alert-panel h3 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding: 4px 0;
+    z-index: 1;
+}
+.alert-count {
+    font-size: 0.62rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.alert-item {
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 10px 12px;
+    border-left: 3px solid var(--border);
+    font-size: 0.72rem;
+    animation: slide-in 0.3s ease-out;
+}
+@keyframes slide-in {
+    from { opacity:0; transform:translateX(20px); }
+    to { opacity:1; transform:translateX(0); }
+}
+.alert-item.critical { border-left-color: var(--red); background: var(--red-dim); }
+.alert-item.warning { border-left-color: var(--yellow); background: var(--yellow-dim); }
+.alert-item.info { border-left-color: var(--cyan); }
+
+.alert-time {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+}
+.alert-type {
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 3px;
+    font-weight: 700;
+}
+.alert-msg {
+    color: var(--text);
+    line-height: 1.4;
+}
+.alert-market {
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+    font-style: italic;
+}
+
+/* ─── Scenario Impact Panel ─── */
+.scenario-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-top: 14px;
+}
+.scenario-panel h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.scenario-panel h3 .resample-badge {
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    background: var(--accent);
+    color: white;
+    animation: flash 0.5s ease-out;
+}
+@keyframes flash { from { opacity: 0; transform: scale(1.2); } to { opacity: 1; transform: scale(1); } }
+
+.scenario-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 1fr;
+    gap: 14px;
+}
+@media (max-width: 1100px) {
+    .scenario-grid { grid-template-columns: 1fr; }
+}
+
+.sev-gauge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.sev-gauge canvas {
+    width: 160px !important;
+    height: 100px !important;
+}
+.sev-gauge .sev-labels {
+    display: flex;
+    gap: 14px;
+    font-size: 0.62rem;
+    color: var(--text-dim);
+}
+.sev-gauge .sev-labels span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sev-gauge .sev-labels .val {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.impact-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.impact-bars h4 {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-bottom: 2px;
+}
+.ib-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.68rem;
+}
+.ib-label {
+    flex: 0 0 130px;
+    text-align: right;
+    color: var(--text-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ib-track {
+    flex: 1;
+    height: 14px;
+    background: var(--bg);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+.ib-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+.ib-fill-overlay {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border-radius: 3px;
+    opacity: 0.4;
+    transition: width 0.5s ease;
+}
+.ib-val {
+    flex: 0 0 55px;
+    text-align: right;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.disruption-freq {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.disruption-freq h4 {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-bottom: 2px;
+}
+.df-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.68rem;
+}
+.df-label {
+    flex: 0 0 80px;
+    text-align: right;
+    color: var(--text-dim);
+}
+.df-bar {
+    flex: 1;
+    height: 14px;
+    background: var(--bg);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.df-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+}
+.df-val {
+    flex: 0 0 40px;
+    text-align: right;
+    font-weight: 600;
+}
+
+.stress-strip {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+.stress-card {
+    flex: 0 0 200px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.65rem;
+}
+.stress-card .sc-sev {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.stress-card .sc-types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    margin-bottom: 6px;
+}
+.stress-card .sc-types span {
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.55rem;
+}
+.stress-card .sc-events {
+    color: var(--text-dim);
+    line-height: 1.4;
+}
+
+/* ─── Footer ─── */
+footer {
+    text-align: center;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    padding: 8px 0;
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+    <!-- Alert Banner -->
+    <div class="alert-banner" id="alertBanner">
+        <span class="icon" id="bannerIcon"></span>
+        <span id="bannerText"></span>
+        <button class="dismiss" onclick="dismissBanner()">&times;</button>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div>
+            <h1><span>PROVIDER</span> Integrated Pipeline</h1>
+            <div class="status-row">
+                <span><span class="status-dot live" id="statusDot"></span> <span id="statusLabel">LIVE DEMO</span></span>
+                <span>Poll #<span id="pollCount">0</span></span>
+                <span>Update: <span id="lastUpdate">--:--:--</span></span>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="btnPause" onclick="togglePause()">&#10074;&#10074; Pause</button>
+            <button onclick="setSpeed(1)">1x</button>
+            <button class="active" onclick="setSpeed(3)">3x</button>
+            <button onclick="setSpeed(10)">10x</button>
+        </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpis" id="kpiRow"></div>
+
+    <!-- Main: Markets + Alert Feed -->
+    <div class="main-grid">
+        <div class="market-panel" id="marketPanel"></div>
+        <div class="alert-panel" id="alertPanel">
+            <h3>
+                Alert Feed
+                <span class="alert-count" id="alertCount" style="background:var(--surface-3);color:var(--text-dim)">0</span>
+            </h3>
+            <div id="alertList"></div>
+        </div>
+    </div>
+
+    <!-- Scenario Impact Panel -->
+    <div class="scenario-panel" id="scenarioPanel">
+        <h3>
+            Szenario-Impact
+            <span class="resample-badge" id="resampleBadge">Resample #0</span>
+            <span style="font-weight:400;font-size:0.62rem;color:var(--text-dim)" id="resampleReason"></span>
+        </h3>
+        <div class="scenario-grid">
+            <div class="sev-gauge" id="sevGauge">
+                <canvas id="gaugeChart" width="160" height="100"></canvas>
+                <div class="sev-labels">
+                    <span>P5<br><span class="val" id="sevP5">—</span></span>
+                    <span>Mean<br><span class="val" id="sevMean">—</span></span>
+                    <span>P95<br><span class="val" id="sevP95">—</span></span>
+                </div>
+            </div>
+            <div class="impact-bars" id="impactBars">
+                <h4>Top Parameter-Auswirkungen (P95)</h4>
+            </div>
+            <div class="disruption-freq" id="disruptionFreq">
+                <h4>Disruptions-H&auml;ufigkeit</h4>
+            </div>
+        </div>
+        <div class="stress-strip" id="stressStrip"></div>
+    </div>
+
+    <footer>
+        PROVIDER Integrated Pipeline &mdash;
+        Datenquelle: Polymarket (Simulated Demo Data)
+    </footer>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// TYPE COLORS & LABELS
+// ═══════════════════════════════════════════════════════════════
+
+const TC = {
+    geopolitical_conflict: { color:'#ef4444', bg:'#ef444422', label:'Geopolitik' },
+    energy_supply:         { color:'#f59e0b', bg:'#f59e0b22', label:'Energie' },
+    trade_restriction:     { color:'#f97316', bg:'#f9731622', label:'Handel' },
+    transport_disruption:  { color:'#06b6d4', bg:'#06b6d422', label:'Transport' },
+    agricultural_shock:    { color:'#22c55e', bg:'#22c55e22', label:'Agrar' },
+    financial_crisis:      { color:'#a855f7', bg:'#a855f722', label:'Finanzen' },
+    pandemic:              { color:'#ec4899', bg:'#ec489922', label:'Pandemie' },
+    climate_event:         { color:'#3b82f6', bg:'#3b82f622', label:'Klima' },
+    tech_disruption:       { color:'#6366f1', bg:'#6366f122', label:'Tech' },
+    political_instability: { color:'#8b5cf6', bg:'#8b5cf622', label:'Polit.Stab.' },
+};
+
+// ═══════════════════════════════════════════════════════════════
+// DEMO MARKETS
+// ═══════════════════════════════════════════════════════════════
+
+const MARKETS = [
+    { id:'ew_ukraine',     q:'Russia-Ukraine ceasefire by end of 2026?',          type:'geopolitical_conflict', rel:1.0,  base:0.44 },
+    { id:'ew_china_taiwan',q:'Will China invade Taiwan before 2027?',             type:'geopolitical_conflict', rel:0.9,  base:0.13 },
+    { id:'ew_eu_tariff',   q:'30% EU tariff in effect by August 2026?',           type:'trade_restriction',     rel:1.0,  base:0.35 },
+    { id:'ew_recession',   q:'US recession by end of 2026?',                      type:'financial_crisis',      rel:0.9,  base:0.25 },
+    { id:'ew_pandemic',    q:'New WHO-declared pandemic in 2026?',                type:'pandemic',              rel:0.9,  base:0.08 },
+    { id:'ew_oil',         q:'Oil price above $80/barrel by June 2026?',          type:'energy_supply',         rel:0.9,  base:0.40 },
+    { id:'ew_disaster',    q:'Major natural disaster ($50B+) in 2026?',           type:'climate_event',         rel:0.7,  base:0.30 },
+    { id:'ew_rare_earth',  q:'Ukraine rare earth deal before April 2026?',        type:'tech_disruption',       rel:0.8,  base:0.55 },
+    { id:'ew_brazil',      q:'Brazil agricultural export restrictions 2026?',     type:'agricultural_shock',    rel:0.9,  base:0.12 },
+    { id:'ew_red_sea',     q:'Red Sea shipping disruptions through 2026?',        type:'transport_disruption',  rel:0.9,  base:0.60 },
+    { id:'ew_ecb',         q:'ECB cuts rates below 2% by end of 2026?',           type:'financial_crisis',      rel:1.0,  base:0.35 },
+    { id:'ew_argentina',   q:'Argentina sovereign default in 2026?',              type:'political_instability', rel:0.7,  base:0.15 },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+
+let state = {};
+let alerts = [];
+let pollCount = 0;
+let paused = false;
+let speed = 3;
+let intervalId = null;
+let alertIdCounter = 0;
+const HISTORY_LEN = 40;
+const WARN = 0.40;
+const CRIT = 0.60;
+
+function initState() {
+    MARKETS.forEach(m => {
+        state[m.id] = {
+            ...m,
+            prob: m.base,
+            prev: m.base,
+            history: [m.base],
+            allHigh: m.base,
+            allLow: m.base,
+            trend: 'stable',
+            level: 'normal',
+        };
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SIMULATION
+// ═══════════════════════════════════════════════════════════════
+
+function tick() {
+    pollCount++;
+    const now = new Date();
+
+    for (const id in state) {
+        const s = state[id];
+        s.prev = s.prob;
+
+        // Mean-reverting random walk
+        const drift = (s.base - s.prob) * 0.02;
+        let noise = randn() * 0.015;
+
+        // 5% jump chance
+        if (Math.random() < 0.05) {
+            noise += (Math.random() < 0.5 ? -1 : 1) * (0.05 + Math.random() * 0.12);
+        }
+
+        // Correlation: geopolitical → energy
+        if (s.type === 'energy_supply') {
+            const ukr = state['ew_ukraine'];
+            if (ukr) noise += (ukr.prob - ukr.base) * 0.3 * randn() * 0.4;
+        }
+        // Correlation: recession → trade
+        if (s.type === 'trade_restriction') {
+            const rec = state['ew_recession'];
+            if (rec) noise += (rec.prob - rec.base) * 0.2 * randn() * 0.3;
+        }
+
+        s.prob = Math.max(0.01, Math.min(0.99, s.prob + drift + noise));
+        s.history.push(s.prob);
+        if (s.history.length > HISTORY_LEN) s.history.shift();
+
+        s.allHigh = Math.max(s.allHigh, s.prob);
+        s.allLow = Math.min(s.allLow, s.prob);
+        s.trend = classifyTrend(s.history);
+        s.level = s.prob >= CRIT ? 'critical' : s.prob >= WARN ? 'warning' : s.prob >= 0.25 ? 'watch' : 'normal';
+
+        // ── Generate alerts ──
+        const prevLevel = s.prev >= CRIT ? 'critical' : s.prev >= WARN ? 'warning' : 'normal';
+        const currLevel = s.level;
+
+        if (currLevel !== prevLevel) {
+            if (currLevel === 'critical') {
+                addAlert('critical', 'THRESHOLD', s.id, s.q, s.type,
+                    `KRITISCH: Wahrscheinlichkeit \u00fcber ${(CRIT*100).toFixed(0)}% (aktuell ${(s.prob*100).toFixed(1)}%)`);
+            } else if (currLevel === 'warning' && prevLevel === 'normal') {
+                addAlert('warning', 'THRESHOLD', s.id, s.q, s.type,
+                    `Warnschwelle ${(WARN*100).toFixed(0)}% \u00fcberschritten (aktuell ${(s.prob*100).toFixed(1)}%)`);
+            }
+        }
+
+        // Rapid shift
+        const change = Math.abs(s.prob - s.prev);
+        if (change >= 0.08) {
+            const dir = s.prob > s.prev ? 'gestiegen' : 'gefallen';
+            addAlert('warning', 'RAPID_SHIFT', s.id, s.q, s.type,
+                `Um ${(change*100).toFixed(1)}% ${dir} in letztem Intervall`);
+        }
+
+        // New all-time high
+        if (s.prob >= s.allHigh && s.history.length > 10 && s.prob > s.base * 1.3) {
+            if (Math.random() < 0.3) { // don't spam
+                addAlert('info', 'NEW_HIGH', s.id, s.q, s.type,
+                    `Neues Allzeithoch: ${(s.prob*100).toFixed(1)}%`);
+            }
+        }
+    }
+
+    render(now);
+}
+
+function addAlert(level, type, marketId, question, dtype, message) {
+    alertIdCounter++;
+    alerts.unshift({
+        id: alertIdCounter,
+        time: new Date(),
+        level, type, marketId, question, dtype, message,
+    });
+    if (alerts.length > 50) alerts.length = 50;
+
+    // Update banner
+    const crits = alerts.filter(a => a.level === 'critical').slice(0, 3);
+    if (crits.length > 0) {
+        showBanner('critical', crits[0].message);
+    } else {
+        const warns = alerts.filter(a => a.level === 'warning').slice(0, 3);
+        if (warns.length > 0) showBanner('warning', warns[0].message);
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════
+
+function render(now) {
+    // Status
+    document.getElementById('pollCount').textContent = pollCount;
+    document.getElementById('lastUpdate').textContent = now.toLocaleTimeString('de-DE');
+
+    // KPIs
+    const markets = Object.values(state);
+    const nCrit = markets.filter(m => m.level === 'critical').length;
+    const nWarn = markets.filter(m => m.level === 'warning').length;
+    const nRising = markets.filter(m => m.trend === 'rising').length;
+    const maxProb = Math.max(...markets.map(m => m.prob));
+    const avgProb = markets.reduce((a,m) => a + m.prob, 0) / markets.length;
+    const recentAlerts = alerts.filter(a => a.level !== 'info').length;
+
+    document.getElementById('kpiRow').innerHTML = `
+        <div class="kpi ${nCrit > 0 ? 'red' : nWarn > 0 ? 'yellow' : 'green'}">
+            <div class="kpi-label">Status</div>
+            <div class="kpi-value" style="color:${nCrit>0?'var(--red)':nWarn>0?'var(--yellow)':'var(--green)'}">${nCrit>0?'KRITISCH':nWarn>0?'WARNUNG':'NORMAL'}</div>
+            <div class="kpi-sub">${nCrit}x krit. / ${nWarn}x warn.</div>
+        </div>
+        <div class="kpi blue">
+            <div class="kpi-label">M&auml;rkte</div>
+            <div class="kpi-value">${markets.length}</div>
+            <div class="kpi-sub">${nRising} steigend</div>
+        </div>
+        <div class="kpi ${maxProb>CRIT?'red':maxProb>WARN?'yellow':'green'}">
+            <div class="kpi-label">H&ouml;chste Prob.</div>
+            <div class="kpi-value">${(maxProb*100).toFixed(1)}%</div>
+            <div class="kpi-sub">&empty; ${(avgProb*100).toFixed(1)}%</div>
+        </div>
+        <div class="kpi ${recentAlerts>5?'red':recentAlerts>2?'yellow':'green'}">
+            <div class="kpi-label">Alerts</div>
+            <div class="kpi-value">${recentAlerts}</div>
+            <div class="kpi-sub">Poll #${pollCount}</div>
+        </div>
+    `;
+
+    // Market cards
+    const sorted = [...markets].sort((a,b) => b.prob - a.prob);
+    document.getElementById('marketPanel').innerHTML = sorted.map(m => renderMarketCard(m)).join('');
+
+    // Alert feed
+    renderAlertFeed();
+}
+
+function renderMarketCard(m) {
+    const tc = TC[m.type] || { color:'#6366f1', bg:'#6366f122', label:m.type };
+    const change = m.prob - m.prev;
+    const changePct = (change * 100).toFixed(1);
+    const changeClass = change > 0.005 ? 'up' : change < -0.005 ? 'down' : 'flat';
+    const changeArrow = change > 0.005 ? '&#9650;' : change < -0.005 ? '&#9660;' : '&#9644;';
+    const alertClass = m.level === 'critical' ? 'alert-critical' : m.level === 'warning' ? 'alert-warning' : '';
+    const probColor = m.prob >= CRIT ? 'var(--red)' : m.prob >= WARN ? 'var(--yellow)' : 'var(--text)';
+
+    // Sparkline
+    const sparkBars = m.history.map((p, i) => {
+        const h = Math.max(2, p * 32);
+        const color = p >= CRIT ? 'var(--red)' : p >= WARN ? 'var(--yellow)' : 'var(--green)';
+        const opacity = 0.3 + (i / m.history.length) * 0.7;
+        return `<div class="bar" style="height:${h}px;background:${color};opacity:${opacity}"></div>`;
+    }).join('');
+
+    // Trend badge
+    const trendClass = `trend-${m.trend}`;
+    const trendLabel = { rising:'STEIGEND', falling:'FALLEND', stable:'STABIL', volatile:'VOLATIL' }[m.trend] || m.trend;
+
+    return `
+    <div class="market-card ${alertClass}">
+        <div class="mc-header">
+            <span class="mc-type" style="background:${tc.bg};color:${tc.color}">${tc.label}</span>
+            <span class="mc-question">${m.q}</span>
+        </div>
+        <div class="mc-prob-section">
+            <span class="mc-prob" style="color:${probColor}">${(m.prob*100).toFixed(1)}%</span>
+            <span class="mc-change ${changeClass}">${changeArrow} ${Math.abs(changePct)}%</span>
+        </div>
+        <div class="mc-sparkline">${sparkBars}</div>
+        <div class="mc-meta">
+            <span class="trend-badge ${trendClass}">${trendLabel}</span>
+            <span>Hoch: ${(m.allHigh*100).toFixed(1)}%</span>
+            <span>Tief: ${(m.allLow*100).toFixed(1)}%</span>
+            <span>EU: ${(m.rel*100).toFixed(0)}%</span>
+        </div>
+    </div>`;
+}
+
+function renderAlertFeed() {
+    const count = alerts.filter(a => a.level !== 'info').length;
+    const countEl = document.getElementById('alertCount');
+    countEl.textContent = count;
+    countEl.style.background = count > 5 ? 'var(--red)' : count > 0 ? 'var(--yellow)' : 'var(--surface-3)';
+    countEl.style.color = count > 0 ? 'white' : 'var(--text-dim)';
+
+    document.getElementById('alertList').innerHTML = alerts.slice(0, 20).map(a => {
+        const typeLabels = {
+            THRESHOLD: 'SCHWELLE',
+            RAPID_SHIFT: 'SCHNELLE \u00c4NDERUNG',
+            NEW_HIGH: 'NEUES HOCH',
+            CASCADE_RISK: 'KASKADE',
+        };
+        const tc = TC[a.dtype] || {};
+        const time = a.time.toLocaleTimeString('de-DE');
+        return `
+        <div class="alert-item ${a.level}">
+            <div class="alert-time">${time}</div>
+            <div class="alert-type" style="color:${a.level==='critical'?'var(--red)':a.level==='warning'?'var(--yellow)':'var(--cyan)'}">${typeLabels[a.type]||a.type}</div>
+            <div class="alert-msg">${a.message}</div>
+            <div class="alert-market">${a.question}</div>
+        </div>`;
+    }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BANNER
+// ═══════════════════════════════════════════════════════════════
+
+function showBanner(level, text) {
+    const banner = document.getElementById('alertBanner');
+    banner.className = `alert-banner active ${level}`;
+    document.getElementById('bannerIcon').textContent = level === 'critical' ? '\uD83D\uDD34' : '\u26A0\uFE0F';
+    document.getElementById('bannerText').textContent = text;
+}
+function dismissBanner() {
+    document.getElementById('alertBanner').className = 'alert-banner';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CONTROLS
+// ═══════════════════════════════════════════════════════════════
+
+function togglePause() {
+    paused = !paused;
+    const btn = document.getElementById('btnPause');
+    const dot = document.getElementById('statusDot');
+    if (paused) {
+        clearInterval(intervalId);
+        btn.textContent = '\u25B6 Resume';
+        btn.classList.add('active');
+        dot.className = 'status-dot paused';
+    } else {
+        startLoop();
+        btn.textContent = '\u23F8 Pause';
+        btn.classList.remove('active');
+        dot.className = 'status-dot live';
+    }
+}
+
+function setSpeed(s) {
+    speed = s;
+    document.querySelectorAll('.controls button:not(#btnPause)').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    if (!paused) { clearInterval(intervalId); startLoop(); }
+}
+
+function startLoop() {
+    const ms = Math.max(200, 2000 / speed);
+    intervalId = setInterval(tick, ms);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════
+
+function randn() {
+    let u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+
+function classifyTrend(h) {
+    if (h.length < 3) return 'stable';
+    const recent = h.slice(-5);
+    const diffs = [];
+    for (let i = 1; i < recent.length; i++) diffs.push(recent[i] - recent[i-1]);
+    const avg = diffs.reduce((a,b) => a+b, 0) / diffs.length;
+    const vol = Math.sqrt(diffs.reduce((a,d) => a + d*d, 0) / diffs.length);
+    if (vol > 0.04) return 'volatile';
+    if (avg > 0.008) return 'rising';
+    if (avg < -0.008) return 'falling';
+    return 'stable';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// KEYBOARD
+// ═══════════════════════════════════════════════════════════════
+
+document.addEventListener('keydown', e => {
+    if (e.key === ' ') { e.preventDefault(); togglePause(); }
+    if (e.key === '1') setSpeed(1);
+    if (e.key === '2') setSpeed(3);
+    if (e.key === '3') setSpeed(10);
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SCENARIO ENGINE (runs Monte Carlo in the browser)
+// ═══════════════════════════════════════════════════════════════
+
+const DISRUPTION_PROFILES = {
+    geopolitical_conflict: [
+        { name:'trade_corridor', base:-50, unit:'%' },
+        { name:'sanctions_impact', base:-25, unit:'%' },
+        { name:'uncertainty_index', base:2.0, unit:'x' },
+        { name:'energy_supply_risk', base:-30, unit:'%' },
+    ],
+    energy_supply: [
+        { name:'energy_cost', base:1.8, unit:'x' },
+        { name:'gas_availability', base:-40, unit:'%' },
+        { name:'transport_fuel_cost', base:1.5, unit:'x' },
+    ],
+    trade_restriction: [
+        { name:'import_cost', base:1.3, unit:'x' },
+        { name:'export_volume', base:-20, unit:'%' },
+        { name:'diversification_delay', base:90, unit:'d' },
+    ],
+    transport_disruption: [
+        { name:'shipping_lead_time', base:2.5, unit:'x' },
+        { name:'freight_cost', base:3.0, unit:'x' },
+        { name:'route_availability', base:-30, unit:'%' },
+    ],
+    agricultural_shock: [
+        { name:'soy_availability', base:-40, unit:'%' },
+        { name:'grain_price', base:1.7, unit:'x' },
+        { name:'feed_cost', base:1.6, unit:'x' },
+    ],
+    financial_crisis: [
+        { name:'credit_availability', base:-30, unit:'%' },
+        { name:'demand_shock', base:-15, unit:'%' },
+        { name:'currency_volatility', base:1.5, unit:'x' },
+    ],
+    pandemic: [
+        { name:'workforce_availability', base:-20, unit:'%' },
+        { name:'border_closure', base:-40, unit:'%' },
+        { name:'demand_volatility', base:2.0, unit:'x' },
+    ],
+    climate_event: [
+        { name:'agricultural_yield', base:-25, unit:'%' },
+        { name:'infrastructure_damage', base:-15, unit:'%' },
+        { name:'water_availability', base:-30, unit:'%' },
+    ],
+    tech_disruption: [
+        { name:'semiconductor_supply', base:-35, unit:'%' },
+        { name:'critical_mineral_cost', base:2.0, unit:'x' },
+        { name:'it_system_downtime', base:14, unit:'d' },
+    ],
+    political_instability: [
+        { name:'supplier_country_risk', base:1.5, unit:'x' },
+        { name:'export_policy_unc.', base:-15, unit:'%' },
+        { name:'investment_freeze', base:-20, unit:'%' },
+    ],
+};
+
+// Correlation pairs (same as Python backend)
+const CORR_MAP = {
+    'geopolitical_conflict|energy_supply': 0.7,
+    'geopolitical_conflict|trade_restriction': 0.6,
+    'geopolitical_conflict|transport_disruption': 0.5,
+    'geopolitical_conflict|financial_crisis': 0.4,
+    'energy_supply|financial_crisis': 0.5,
+    'trade_restriction|financial_crisis': 0.5,
+    'pandemic|transport_disruption': 0.6,
+    'pandemic|financial_crisis': 0.5,
+    'climate_event|agricultural_shock': 0.7,
+    'climate_event|transport_disruption': 0.4,
+    'tech_disruption|trade_restriction': 0.4,
+    'political_instability|trade_restriction': 0.5,
+    'political_instability|agricultural_shock': 0.4,
+};
+
+function getCorr(a, b) {
+    if (a === b) return 1;
+    return CORR_MAP[a+'|'+b] || CORR_MAP[b+'|'+a] || 0.05;
+}
+
+let scenarioStats = null;
+let stressScenarios = [];
+let resampleCount = 0;
+let lastResampleTick = 0;
+let lastSampleProbs = {};
+
+function shouldResample() {
+    // First run
+    if (resampleCount === 0) return 'Erster Lauf';
+
+    // Alert-triggered
+    const recentCritical = alerts.find(a => a.level === 'critical' && (pollCount - (a.tick||0)) < 2);
+    if (recentCritical) return 'Kritischer Alert';
+
+    // Drift since last sample
+    let maxDrift = 0;
+    for (const id in state) {
+        if (id in lastSampleProbs) {
+            maxDrift = Math.max(maxDrift, Math.abs(state[id].prob - lastSampleProbs[id]));
+        }
+    }
+    if (maxDrift >= 0.06) return `Drift ${(maxDrift*100).toFixed(1)}%`;
+
+    // Periodic (every 8 ticks)
+    if ((pollCount - lastResampleTick) >= 8) return 'Periodisch';
+
+    return null;
+}
+
+function runScenarios(nSamples) {
+    nSamples = nSamples || 500;
+    const markets = Object.values(state);
+    const n = markets.length;
+    if (n === 0) return;
+
+    const probs = markets.map(m => m.prob);
+    const types = markets.map(m => m.type);
+
+    // Build correlation matrix
+    const corr = Array.from({length:n}, () => Array(n).fill(0));
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            corr[i][j] = (i === j) ? 1 : (types[i] === types[j]) ? 0.8 : getCorr(types[i], types[j]);
+        }
+    }
+
+    // Cholesky decomposition (simplified, assumes PSD)
+    const L = Array.from({length:n}, () => Array(n).fill(0));
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j <= i; j++) {
+            let sum = 0;
+            for (let k = 0; k < j; k++) sum += L[i][k] * L[j][k];
+            if (i === j) {
+                L[i][j] = Math.sqrt(Math.max(corr[i][i] - sum, 0.001));
+            } else {
+                L[i][j] = (corr[i][j] - sum) / (L[j][j] || 0.001);
+            }
+        }
+    }
+
+    // Sample scenarios
+    const severities = [];
+    const typeCounts = {};
+    const paramSums = {};
+    const paramP95 = {};
+    const allScenarioParams = [];
+    const stressBuffer = [];
+
+    for (let s = 0; s < nSamples; s++) {
+        // Correlated normal -> uniform -> threshold
+        const z = Array(n).fill(0).map(() => randn());
+        const cz = Array(n).fill(0);
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j <= i; j++) cz[i] += L[i][j] * z[j];
+        }
+        const u = cz.map(v => 0.5 * (1 + erf(v / Math.sqrt(2))));
+        const triggered = u.map((ui, i) => ui < probs[i]);
+
+        // Aggregate parameters
+        const params = {};
+        const activeTypes = new Set();
+        const activeQuestions = [];
+        triggered.forEach((t, i) => {
+            if (!t) return;
+            const m = markets[i];
+            activeTypes.add(m.type);
+            activeQuestions.push(m.q);
+            const profile = DISRUPTION_PROFILES[m.type] || [];
+            profile.forEach(p => {
+                if (p.unit === 'x') {
+                    params[p.name] = (params[p.name] || 1) * p.base;
+                } else if (p.unit === '%') {
+                    params[p.name] = Math.max((params[p.name] || 0) + p.base, -95);
+                } else {
+                    params[p.name] = Math.max(params[p.name] || 0, p.base);
+                }
+            });
+        });
+
+        // Severity
+        const pvals = Object.entries(params);
+        let sevScores = pvals.map(([name, val]) => {
+            if (name.includes('cost') || name.includes('index') || name.includes('volatility') || name.includes('lead') || name.includes('price'))
+                return Math.min((Math.abs(val) - 1) / 2, 1);
+            if (name.includes('delay') || name.includes('downtime'))
+                return Math.min(val / 30, 1);
+            return Math.min(Math.abs(val) / 50, 1);
+        }).filter(v => v > 0);
+
+        const sev = sevScores.length > 0
+            ? (sevScores.reduce((a,b)=>a+b,0) / sevScores.length) + Math.min(activeTypes.size * 0.05, 0.3)
+            : 0;
+        const severity = Math.min(sev, 1);
+        severities.push(severity);
+
+        activeTypes.forEach(t => { typeCounts[t] = (typeCounts[t]||0) + 1; });
+        for (const [k, v] of Object.entries(params)) {
+            if (!paramSums[k]) paramSums[k] = [];
+            paramSums[k].push(Math.abs(v));
+        }
+
+        if (severity >= 0.5) {
+            stressBuffer.push({
+                severity: Math.round(severity * 1000) / 1000,
+                types: [...activeTypes],
+                questions: activeQuestions.slice(0, 4),
+                params,
+            });
+        }
+    }
+
+    // Compute stats
+    severities.sort((a,b) => a - b);
+    const mean = severities.reduce((a,b)=>a+b,0) / nSamples;
+    const p5 = severities[Math.floor(nSamples * 0.05)];
+    const p50 = severities[Math.floor(nSamples * 0.50)];
+    const p95 = severities[Math.floor(nSamples * 0.95)];
+
+    const freqs = {};
+    for (const [t, c] of Object.entries(typeCounts)) {
+        freqs[t] = Math.round(c / nSamples * 1000) / 10;
+    }
+
+    const paramStats = {};
+    for (const [k, vals] of Object.entries(paramSums)) {
+        vals.sort((a,b) => a - b);
+        paramStats[k] = {
+            mean: Math.round(vals.reduce((a,b)=>a+b,0) / vals.length * 10) / 10,
+            p95: Math.round(vals[Math.floor(vals.length * 0.95)] * 10) / 10,
+        };
+    }
+
+    stressBuffer.sort((a,b) => b.severity - a.severity);
+    stressScenarios = stressBuffer.slice(0, 8);
+
+    scenarioStats = { mean, p5, p50, p95, freqs, paramStats, nSamples };
+
+    // Record state
+    lastSampleProbs = {};
+    for (const id in state) lastSampleProbs[id] = state[id].prob;
+    lastResampleTick = pollCount;
+    resampleCount++;
+}
+
+// Error function approximation
+function erf(x) {
+    const a1=0.254829592, a2=-0.284496736, a3=1.421413741, a4=-1.453152027, a5=1.061405429, p=0.3275911;
+    const sign = x < 0 ? -1 : 1;
+    x = Math.abs(x);
+    const t = 1 / (1 + p * x);
+    return sign * (1 - ((((a5*t + a4)*t + a3)*t + a2)*t + a1) * t * Math.exp(-x*x));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER SCENARIO PANEL
+// ═══════════════════════════════════════════════════════════════
+
+let gaugeChart = null;
+
+function renderScenarioPanel() {
+    if (!scenarioStats) return;
+    const s = scenarioStats;
+
+    document.getElementById('resampleBadge').textContent = `Resample #${resampleCount}`;
+    document.getElementById('sevP5').textContent = (s.p5 * 100).toFixed(1) + '%';
+    document.getElementById('sevMean').textContent = (s.mean * 100).toFixed(1) + '%';
+    document.getElementById('sevP95').textContent = (s.p95 * 100).toFixed(1) + '%';
+    document.getElementById('sevMean').style.color = s.mean > 0.6 ? 'var(--red)' : s.mean > 0.4 ? 'var(--yellow)' : 'var(--green)';
+
+    // Gauge chart
+    renderGauge(s.mean);
+
+    // Impact bars (top 8 params by P95)
+    const params = Object.entries(s.paramStats).sort((a,b) => b[1].p95 - a[1].p95).slice(0, 8);
+    const maxP95 = Math.max(...params.map(([,v]) => v.p95), 1);
+    let ibHtml = '<h4>Top Parameter-Auswirkungen (P95)</h4>';
+    params.forEach(([name, v]) => {
+        const pct95 = (v.p95 / maxP95) * 100;
+        const pctMean = (v.mean / maxP95) * 100;
+        const color = v.p95 > 40 ? 'var(--red)' : v.p95 > 20 ? 'var(--yellow)' : 'var(--green)';
+        ibHtml += `<div class="ib-row">
+            <span class="ib-label" title="${name}">${name}</span>
+            <div class="ib-track">
+                <div class="ib-fill" style="width:${pctMean}%;background:${color};opacity:0.4"></div>
+                <div class="ib-fill-overlay" style="width:${pct95}%;background:${color};left:0"></div>
+            </div>
+            <span class="ib-val" style="color:${color}">${v.p95}</span>
+        </div>`;
+    });
+    document.getElementById('impactBars').innerHTML = ibHtml;
+
+    // Disruption frequency
+    const freqs = Object.entries(s.freqs).sort((a,b) => b[1] - a[1]);
+    let dfHtml = '<h4>Disruptions-H\u00e4ufigkeit</h4>';
+    freqs.forEach(([type, pct]) => {
+        const tc = TC[type] || { color: 'var(--accent)', label: type };
+        dfHtml += `<div class="df-row">
+            <span class="df-label">${tc.label}</span>
+            <div class="df-bar"><div class="df-fill" style="width:${pct}%;background:${tc.color}"></div></div>
+            <span class="df-val" style="color:${tc.color}">${pct}%</span>
+        </div>`;
+    });
+    document.getElementById('disruptionFreq').innerHTML = dfHtml;
+
+    // Stress scenario strip
+    let ssHtml = '';
+    stressScenarios.forEach((sc, i) => {
+        const sevColor = sc.severity > 0.7 ? 'var(--red)' : 'var(--yellow)';
+        const typeTags = sc.types.map(t => {
+            const tc = TC[t] || { color:'#6366f1', bg:'#6366f122', label:t };
+            return `<span style="background:${tc.bg};color:${tc.color}">${tc.label}</span>`;
+        }).join('');
+        const events = sc.questions.map(q => q.length > 35 ? q.substring(0,34)+'\u2026' : q).join('<br>');
+        ssHtml += `<div class="stress-card">
+            <div class="sc-sev" style="color:${sevColor}">${(sc.severity*100).toFixed(1)}%</div>
+            <div class="sc-types">${typeTags}</div>
+            <div class="sc-events">${events}</div>
+        </div>`;
+    });
+    document.getElementById('stressStrip').innerHTML = ssHtml;
+}
+
+function renderGauge(value) {
+    if (gaugeChart) gaugeChart.destroy();
+    const ctx = document.getElementById('gaugeChart').getContext('2d');
+    const color = value > 0.6 ? '#ef4444' : value > 0.4 ? '#f59e0b' : '#10b981';
+
+    gaugeChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [value, 1 - value],
+                backgroundColor: [color, '#1a1e2833'],
+                borderWidth: 0,
+                circumference: 180,
+                rotation: 270,
+            }]
+        },
+        options: {
+            responsive: false,
+            cutout: '75%',
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false },
+            },
+        },
+        plugins: [{
+            id: 'gaugeText',
+            afterDraw(chart) {
+                const { ctx, chartArea } = chart;
+                ctx.save();
+                ctx.fillStyle = color;
+                ctx.font = 'bold 22px monospace';
+                ctx.textAlign = 'center';
+                ctx.fillText((value * 100).toFixed(1) + '%', chartArea.width / 2 + chartArea.left, chartArea.height - 8);
+                ctx.font = '10px monospace';
+                ctx.fillStyle = '#6b7394';
+                ctx.fillText('SEVERITY', chartArea.width / 2 + chartArea.left, chartArea.height + 8);
+                ctx.restore();
+            }
+        }]
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INTEGRATED TICK (overrides original)
+// ═══════════════════════════════════════════════════════════════
+
+const originalTick = tick;
+tick = function() {
+    originalTick();
+
+    // Check if we should resample
+    const reason = shouldResample();
+    if (reason) {
+        runScenarios(500);
+        document.getElementById('resampleReason').textContent = reason;
+        renderScenarioPanel();
+    }
+};
+
+// ═══════════════════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════════════════
+
+initState();
+tick();
+startLoop();
+</script>
+</body>
+</html>

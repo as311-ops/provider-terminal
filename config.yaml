@@ -1,0 +1,198 @@
+# PROVIDER Terminal - Konfiguration
+# ====================================
+# Alle Werte hier ueberschreiben die Hardcoded-Defaults.
+# Fehlende Sektionen nutzen automatisch die Standardwerte.
+
+api:
+  rate_limit_delay: 0.5        # Sekunden zwischen Requests
+  max_retries: 3
+  initial_retry_delay: 1.0     # Sekunden
+  retry_backoff_factor: 2.0
+  timeout: 30                  # Request-Timeout in Sekunden
+
+categories:
+  # Polymarket Tag-IDs -> [Label, Beschreibung]
+  # --- Kern-Kategorien ---
+  100265: ["Geopolitics", "Kriege, Sanktionen, Konflikte"]
+  120: ["Finance", "Rezession, Zinsen, Inflation, Rohstoffe"]
+  2: ["Politics", "Wahlen, Handelspolitik, Regulierung"]
+  1401: ["Tech", "Cyberrisiken, KI-Disruption, Seltene Erden"]
+  # --- Energie ---
+  248: ["Energy Industry", "Energiemaerkte, Versorgungssicherheit"]
+  250: ["Crude Oil", "Rohoel-Preis und -Versorgung"]
+  102092: ["Electricity", "Stromversorgung, Netzstabilitaet"]
+  103637: ["Crude Oil Futures", "Rohoel-Futures, Preiserwartungen"]
+  103624: ["Uranium", "Kernenergie-Rohstoff"]
+  # --- Handel & Zoelle ---
+  311: ["Trade", "Internationaler Handel, Handelsabkommen"]
+  101737: ["Tariff", "Zollpolitik, Handelshemmnisse"]
+  101758: ["Tariffs", "Zoelle und Handelsrestriktionen"]
+  # --- Transport & Logistik ---
+  100597: ["Ports", "Haefen, Hafeninfrastruktur"]
+  100600: ["ILA", "Hafenarbeitergewerkschaft, Hafenstreiks"]
+  1439: ["Strikes", "Streiks, Arbeitskampf"]
+  102107: ["Houthi", "Houthi-Angriffe, Rotes Meer"]
+  # --- Agrar & Lebensmittel ---
+  101100: ["Food", "Lebensmittelversorgung, Agrarmaerkte"]
+  # --- Pandemie & Gesundheit ---
+  100182: ["H5N1", "Vogelgrippe, Tierseuchen"]
+  570: ["Pandemics", "Pandemien, globale Gesundheitskrisen"]
+  624: ["Diseases", "Krankheitsausbrueche, Epidemien"]
+  # --- Klima & Naturereignisse ---
+  832: ["Global Temp", "Globale Temperatur, Klimaentwicklung"]
+  507: ["Volcanic Eruption", "Vulkanausbrueche, Aschebelastung"]
+  # --- Rohstoffe & Infrastruktur ---
+  102139: ["Mining", "Bergbau, Rohstofffoerderung"]
+  100305: ["CrowdStrike", "Cyber-Vorfaelle, IT-Ausfaelle"]
+  1563: ["Outage", "Systemausfaelle, Infrastruktur-Stoerungen"]
+  # --- Makro & Zentralbanken ---
+  370: ["GDP", "Wirtschaftswachstum, BIP-Entwicklung"]
+  225: ["Economics", "Wirtschaftsindikatoren"]
+  100328: ["Economy", "Konjunktur, Wirtschaftslage"]
+  100486: ["Rates", "Leitzinsen, Zinspolitik"]
+  101615: ["European Central Bank", "EZB-Entscheidungen, Euro-Zinsen"]
+  100478: ["FOMC", "Fed-Zinsentscheidungen"]
+  103638: ["Gold Futures", "Gold-Preisentwicklung"]
+  103636: ["Foreign Exchange", "Devisenmaerkte, Wechselkurse"]
+  # --- Schluesselregionen ---
+  103025: ["European Union", "EU-Politik, Regulierung"]
+  100244: ["Germany", "Deutsche Politik, Wirtschaft"]
+  100194: ["Panama", "Panamakanal, Transitrouten"]
+  101522: ["Japan", "Halbleiter, Automobil, Lieferketten"]
+  102850: ["Sudan", "Geopolitik, Rotes Meer, Migration"]
+
+search_queries:
+  # Handel & Zoelle
+  - "tariff EU"
+  - "tariff Europe"
+  - "trade war"
+  - "trade deal"
+  - "export ban"
+  - "sanctions"
+  - "supply chain"
+  # Energie
+  - "oil price"
+  - "natural gas"
+  - "OPEC"
+  - "pipeline"
+  - "energy crisis"
+  - "nuclear energy"
+  # Transport & Logistik
+  - "Panama Canal"
+  - "Suez Canal"
+  - "Red Sea"
+  - "shipping"
+  - "port strike"
+  - "freight"
+  - "Black Sea"
+  - "strait Hormuz"
+  # Agrar & Lebensmittel
+  - "grain export"
+  - "soybean"
+  - "wheat price"
+  - "corn price"
+  - "rice export"
+  - "coffee price"
+  - "cocoa price"
+  - "palm oil"
+  - "sugar price"
+  - "fertilizer"
+  - "crop failure"
+  - "food crisis"
+  - "famine"
+  # Pandemie & Gesundheit
+  - "pandemic"
+  - "bird flu"
+  - "H5N1"
+  - "WHO emergency"
+  - "disease outbreak"
+  - "mpox"
+  - "epidemic"
+  - "lockdown"
+  - "quarantine"
+  # Klima & Naturereignisse
+  - "drought"
+  - "hurricane"
+  - "flood"
+  - "wildfire"
+  - "heat wave"
+  - "El Nino"
+  - "La Nina"
+  - "climate disaster"
+  - "earthquake"
+  # Geopolitik
+  - "ceasefire"
+  - "NATO"
+  - "China Taiwan"
+  - "Russia Ukraine"
+  - "India Pakistan"
+  - "Iran Israel"
+  - "North Korea"
+  - "coup"
+  # Finanzen & Makro
+  - "recession Europe"
+  - "inflation"
+  - "interest rate Fed"
+  - "interest rate ECB"
+  # Technologie & Rohstoffe
+  - "rare earth"
+  - "semiconductor"
+  - "chip shortage"
+  - "lithium"
+  - "cobalt"
+  - "cyber attack"
+  - "data center"
+  - "subsea cable"
+  - "undersea cable"
+  # Schluessellaender
+  - "Brazil"
+  - "Argentina"
+  - "Indonesia"
+  - "India export"
+  - "South Africa"
+  - "Turkey"
+  - "Vietnam"
+
+filtering:
+  min_volume: 10000            # Mindest-Handelsvolumen in USD
+  min_eu_relevance: 0.5        # Mindest-EU-Relevanz (0-1)
+
+monitoring:
+  threshold_watch: 0.25
+  threshold_warn: 0.40
+  threshold_critical: 0.60
+  rapid_shift_pct: 0.10
+  cascade_threshold: 3
+  cache_ttl: 300               # Sekunden (5 Minuten)
+  full_discovery_interval: 12  # Alle N Ticks Full Discovery
+
+sampling:
+  n_scenarios: 1000
+  n_stress: 100
+  seed: 42
+  min_stress_severity: 0.4
+
+correlations:
+  # Paarweise Korrelationen zwischen Disruption-Typen
+  geopolitical_conflict-energy_supply: 0.7
+  geopolitical_conflict-trade_restriction: 0.6
+  geopolitical_conflict-transport_disruption: 0.5
+  geopolitical_conflict-financial_crisis: 0.4
+  geopolitical_conflict-agricultural_shock: 0.4
+  energy_supply-trade_restriction: 0.3
+  energy_supply-financial_crisis: 0.5
+  energy_supply-transport_disruption: 0.3
+  trade_restriction-financial_crisis: 0.5
+  trade_restriction-agricultural_shock: 0.3
+  pandemic-transport_disruption: 0.6
+  pandemic-financial_crisis: 0.5
+  pandemic-agricultural_shock: 0.3
+  climate_event-agricultural_shock: 0.7
+  climate_event-transport_disruption: 0.4
+  climate_event-energy_supply: 0.3
+  tech_disruption-trade_restriction: 0.4
+  tech_disruption-geopolitical_conflict: 0.3
+  political_instability-trade_restriction: 0.5
+  political_instability-agricultural_shock: 0.4
+  political_instability-energy_supply: 0.3
+  financial_crisis-agricultural_shock: 0.2

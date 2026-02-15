@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROVIDER — Risk Terminal</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   DEUTSCHE BANK TERMINAL — Design System
+   Palette: DB Dark Blue #001e3c, Blue #0018a8, Accent #00d2ff
+   Typography: Monospace terminal aesthetic
+   ═══════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --db-deep: #000a18;
+    --db-dark: #001228;
+    --db-navy: #001e3c;
+    --db-mid: #002b55;
+    --db-blue: #0038a8;
+    --db-accent: #00d2ff;
+    --db-accent-dim: #00d2ff18;
+    --db-accent-lo: #00d2ff08;
+    --db-white: #e8edf4;
+    --db-gray: #5a7090;
+    --db-border: #0a2e52;
+    --db-border-hi: #0d3d6e;
+
+    --crit: #ff1a40;
+    --crit-bg: #ff1a4012;
+    --crit-glow: 0 0 24px #ff1a4033, 0 0 4px #ff1a4066;
+    --warn: #ff9500;
+    --warn-bg: #ff950010;
+    --ok: #00e676;
+    --ok-bg: #00e67608;
+    --info: var(--db-accent);
+
+    --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--mono); background:var(--db-deep); color:var(--db-white); font-size:11px; line-height:1.4; }
+
+/* ─── Scanline overlay ─── */
+body::after {
+    content:'';
+    position:fixed; top:0; left:0; right:0; bottom:0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,20,60,0.03) 2px, rgba(0,20,60,0.03) 4px);
+    pointer-events:none; z-index:9999;
+}
+
+/* ═══ APP GRID ═══ */
+.app {
+    display:grid;
+    grid-template-rows: auto auto 1fr auto;
+    height:100vh;
+    max-width:1900px;
+    margin:0 auto;
+    padding:6px 10px;
+    gap:4px;
+}
+
+/* ═══ HEADER ═══ */
+.hdr {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:6px 12px;
+    background:var(--db-dark);
+    border:1px solid var(--db-border);
+    border-left:3px solid var(--db-blue);
+}
+.hdr-brand {
+    font-size:9px;
+    font-weight:300;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    color:var(--db-gray);
+    border-right:1px solid var(--db-border);
+    padding-right:12px;
+    margin-right:4px;
+    line-height:1.2;
+}
+.hdr-brand b {
+    display:block;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.04em;
+    color:var(--db-accent);
+    text-transform:none;
+}
+.hdr-dot { width:6px;height:6px;border-radius:50%;display:inline-block; }
+.hdr-dot.live { background:var(--ok); box-shadow:0 0 8px #00e67644; animation:blink 1.5s ease-in-out infinite; }
+.hdr-dot.paused { background:var(--warn); animation:none; }
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hdr-status { font-size:9px; color:var(--db-gray); }
+.hdr-sep { color:var(--db-border); }
+
+/* Header KPIs */
+.hdr-kpis { display:flex; gap:2px; flex:1; margin-left:6px; }
+.hk { padding:2px 8px; display:flex; align-items:center; gap:5px; }
+.hk-l { font-size:8px; text-transform:uppercase; letter-spacing:.1em; color:var(--db-gray); font-weight:300; }
+.hk-v { font-size:13px; font-weight:700; font-variant-numeric:tabular-nums; }
+
+.hdr-ctrl { display:flex; gap:3px; margin-left:auto; }
+.hdr-ctrl button {
+    background:transparent; border:1px solid var(--db-border); color:var(--db-gray);
+    padding:2px 8px; font-size:9px; font-family:var(--mono); cursor:pointer;
+    transition:all .15s; font-weight:400;
+}
+.hdr-ctrl button:hover { border-color:var(--db-accent); color:var(--db-accent); }
+.hdr-ctrl button.on { background:var(--db-blue); border-color:var(--db-blue); color:white; font-weight:600; }
+#btnMode.on { background:var(--ok); border-color:var(--ok); color:var(--db-deep); font-weight:700; letter-spacing:.06em; }
+#btnRefresh { font-size:12px; padding:2px 6px; }
+#btnRefresh.spin { animation:spin .6s linear; }
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+/* ═══ CRITICAL SCENARIO BANNER ═══ */
+.crit-banner {
+    display:none;
+    padding:8px 14px;
+    background:linear-gradient(90deg, #ff1a400a, #ff1a4018, #ff1a400a);
+    border:1px solid #ff1a4044;
+    border-left:3px solid var(--crit);
+    animation:crit-pulse 3s ease-in-out infinite;
+    position:relative;
+    overflow:hidden;
+}
+.crit-banner.active { display:block; }
+@keyframes crit-pulse {
+    0%,100% { border-left-color:var(--crit); }
+    50% { border-left-color:#ff1a4088; }
+}
+.crit-banner::before {
+    content:'';
+    position:absolute; left:0; top:0; bottom:0; width:100%;
+    background:linear-gradient(90deg, #ff1a4008, transparent 30%);
+    pointer-events:none;
+}
+.crit-hdr { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+.crit-label {
+    font-size:9px; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--crit); padding:1px 8px; border:1px solid #ff1a4044; background:#ff1a4010;
+}
+.crit-count { font-size:9px; color:var(--crit); font-weight:600; }
+.crit-dismiss { position:absolute; top:6px; right:10px; background:none; border:none; color:var(--db-gray); cursor:pointer; font-size:14px; }
+.crit-dismiss:hover { color:var(--crit); }
+.crit-items { display:flex; flex-direction:column; gap:3px; }
+.crit-item {
+    display:grid;
+    grid-template-columns:auto 1fr auto auto;
+    gap:8px;
+    align-items:center;
+    padding:4px 8px;
+    background:#ff1a4008;
+    border-left:2px solid var(--crit);
+    font-size:10px;
+}
+.crit-item .ci-prob { font-size:16px; font-weight:700; color:var(--crit); font-variant-numeric:tabular-nums; min-width:60px; }
+.crit-item .ci-q { color:var(--db-white); }
+.crit-item .ci-type { font-size:8px; padding:1px 5px; border-radius:2px; font-weight:600; text-transform:uppercase; }
+.crit-item .ci-delta { font-size:10px; font-weight:600; }
+.crit-item .ci-delta.up { color:var(--crit); }
+.crit-item .ci-delta.dn { color:var(--ok); }
+
+/* ═══ MAIN: 3-zone layout ═══ */
+.main {
+    display:grid;
+    grid-template-columns:1fr 340px;
+    gap:4px;
+    min-height:0;
+    overflow:hidden;
+}
+@media(max-width:1100px){ .main{grid-template-columns:1fr;} }
+
+/* ═══ LEFT: Market Table + Scenario Focus ═══ */
+.left-col { display:flex; flex-direction:column; gap:4px; min-height:0; overflow:hidden; }
+
+/* Market Table */
+.tbl-wrap { flex:1; overflow-y:auto; min-height:0; }
+.tbl-wrap::-webkit-scrollbar { width:3px; }
+.tbl-wrap::-webkit-scrollbar-thumb { background:var(--db-border-hi); border-radius:1px; }
+.tbl-wrap::-webkit-scrollbar-track { background:var(--db-deep); }
+
+table.t { width:100%; border-collapse:separate; border-spacing:0; }
+table.t th {
+    position:sticky; top:0; z-index:2;
+    background:var(--db-dark); font-size:8px; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--db-gray); padding:4px 6px; text-align:left;
+    border-bottom:1px solid var(--db-border-hi); font-weight:400;
+}
+table.t th.r, table.t td.r { text-align:right; }
+table.t td { padding:3px 6px; border-bottom:1px solid var(--db-dark); vertical-align:middle; white-space:nowrap; }
+table.t tr { transition:background .1s; }
+table.t tr:hover { background:var(--db-navy); }
+
+/* Critical rows glow */
+table.t tr.row-crit {
+    background:var(--crit-bg);
+    box-shadow:inset 3px 0 0 var(--crit);
+}
+table.t tr.row-crit:hover { background:#ff1a4018; }
+table.t tr.row-warn { background:var(--warn-bg); box-shadow:inset 3px 0 0 var(--warn); }
+table.t tr.row-warn:hover { background:#ff950014; }
+
+/* Selected row — Bloomberg cursor */
+table.t tr.row-sel {
+    background:var(--db-mid)!important;
+    box-shadow:inset 3px 0 0 var(--db-accent)!important;
+    outline:1px solid var(--db-accent);
+    outline-offset:-1px;
+}
+table.t tr.row-sel td:first-child::before {
+    content:'▸'; color:var(--db-accent); font-size:10px; margin-right:2px;
+}
+
+/* ═══ MARKET DETAIL PANEL ═══ */
+.detail-panel { display:none; }
+.detail-panel.active { display:block; }
+.dp-hdr { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.dp-hdr .dp-back { background:none; border:1px solid var(--db-border); color:var(--db-accent); padding:2px 8px; font-size:9px; font-family:var(--mono); cursor:pointer; }
+.dp-hdr .dp-back:hover { background:var(--db-mid); }
+.dp-hdr .dp-q { font-size:12px; font-weight:500; flex:1; }
+.dp-hdr .dp-prob { font-size:22px; font-weight:700; font-variant-numeric:tabular-nums; }
+.dp-hdr .dp-delta { font-size:11px; font-weight:600; margin-left:4px; }
+
+.dp-body { display:grid; grid-template-columns:1fr 200px; gap:8px; }
+.dp-chart { background:var(--db-deep); border:1px solid var(--db-border); padding:6px; min-height:120px; }
+.dp-chart canvas { width:100%!important; height:120px!important; }
+
+.dp-stats { display:flex; flex-direction:column; gap:4px; }
+.dp-stat-row { display:flex; justify-content:space-between; padding:3px 6px; border-bottom:1px solid var(--db-dark); font-size:9px; }
+.dp-stat-row .dp-sl { color:var(--db-gray); font-weight:300; }
+.dp-stat-row .dp-sv { font-weight:600; font-variant-numeric:tabular-nums; }
+
+.dp-params { margin-top:6px; }
+.dp-params h4 { font-size:7px; text-transform:uppercase; letter-spacing:.1em; color:var(--db-gray); font-weight:300; margin-bottom:3px; }
+.dp-param-row { display:flex; align-items:center; gap:4px; height:14px; }
+.dp-param-row .dp-pl { flex:0 0 130px; text-align:right; font-size:8px; color:var(--db-gray); font-weight:300; }
+.dp-param-row .dp-pt { flex:1; height:5px; background:var(--db-deep); border-radius:1px; overflow:hidden; }
+.dp-param-row .dp-pf { height:100%; border-radius:1px; }
+.dp-param-row .dp-pv { flex:0 0 50px; text-align:right; font-size:8px; font-weight:600; font-variant-numeric:tabular-nums; }
+
+.dp-alerts { margin-top:6px; }
+.dp-alerts h4 { font-size:7px; text-transform:uppercase; letter-spacing:.1em; color:var(--db-gray); font-weight:300; margin-bottom:3px; }
+.dp-al { padding:2px 6px; margin-bottom:1px; font-size:8px; border-left:2px solid var(--db-border); }
+.dp-al.crit { border-left-color:var(--crit); background:var(--crit-bg); }
+.dp-al.warn { border-left-color:var(--warn); background:var(--warn-bg); }
+.dp-al .dp-at { font-size:7px; color:var(--db-gray); }
+
+.tag { font-size:8px; padding:1px 5px; border-radius:2px; text-transform:uppercase; letter-spacing:.04em; font-weight:600; }
+.q-text { max-width:300px; overflow:hidden; text-overflow:ellipsis; font-size:10px; font-weight:300; }
+.pv { font-size:14px; font-weight:700; font-variant-numeric:tabular-nums; }
+.dv { font-size:9px; font-weight:600; }
+.dv.up { color:var(--crit); }
+.dv.dn { color:var(--ok); }
+.dv.fl { color:var(--db-gray); }
+.tp { font-size:7px; padding:1px 4px; border-radius:2px; font-weight:700; letter-spacing:.06em; }
+.tp-r { background:#ff1a4022; color:#ff6b80; }
+.tp-f { background:#00e67616; color:#6effa0; }
+.tp-s { background:var(--db-navy); color:var(--db-gray); }
+.tp-v { background:#ff950018; color:#ffb84d; }
+.spark { display:flex; align-items:flex-end; gap:1px; height:16px; }
+.spark .b { width:2px; border-radius:1px; transition:height .2s; }
+.mm { font-size:8px; color:var(--db-gray); font-variant-numeric:tabular-nums; }
+
+/* ═══ SCENARIO IMPACT ZONE ═══ */
+.sc-zone {
+    background:var(--db-dark);
+    border:1px solid var(--db-border);
+    border-top:2px solid var(--db-blue);
+    padding:8px 10px;
+    flex-shrink:0;
+}
+.sc-hdr { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+.sc-hdr h3 { font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--db-accent); }
+.sc-hdr .bdg { font-size:7px; padding:1px 6px; border-radius:2px; background:var(--db-blue); color:white; font-weight:600; }
+.sc-hdr .rsn { font-size:8px; color:var(--db-gray); margin-left:auto; font-weight:300; }
+.sc-hdr .n-lbl { font-size:8px; color:var(--db-gray); }
+
+/* Scenario top row: gauge + stats + disruption chips */
+.sc-top { display:flex; gap:12px; align-items:center; margin-bottom:6px; }
+.sc-gauge canvas { width:70px!important; height:44px!important; }
+.sc-stats { display:flex; gap:14px; }
+.sc-stat { text-align:center; }
+.sc-stat .lbl { font-size:7px; text-transform:uppercase; letter-spacing:.1em; color:var(--db-gray); font-weight:300; }
+.sc-stat .val { font-size:18px; font-weight:700; font-variant-numeric:tabular-nums; }
+.sc-chips { display:flex; flex-wrap:wrap; gap:3px; margin-left:auto; }
+.sc-chip { font-size:8px; padding:1px 5px; border-radius:2px; font-weight:600; display:flex; align-items:center; gap:3px; }
+.sc-chip .pct { font-variant-numeric:tabular-nums; opacity:.8; }
+
+/* Impact bar mini row */
+.sc-bars { display:grid; grid-template-columns:1fr 1fr; gap:2px 12px; margin-bottom:6px; }
+.sc-bars h4 { grid-column:1/-1; font-size:7px; text-transform:uppercase; letter-spacing:.1em; color:var(--db-gray); font-weight:300; margin-bottom:0; }
+.sb-row { display:flex; align-items:center; gap:4px; height:13px; }
+.sb-lbl { flex:0 0 100px; text-align:right; font-size:8px; color:var(--db-gray); overflow:hidden; text-overflow:ellipsis; font-weight:300; }
+.sb-track { flex:1; height:6px; background:var(--db-deep); border-radius:1px; overflow:hidden; position:relative; }
+.sb-fill { height:100%; border-radius:1px; }
+.sb-fill-o { position:absolute; top:0; height:100%; border-radius:1px; opacity:.3; }
+.sb-val { flex:0 0 32px; text-align:right; font-size:8px; font-weight:600; font-variant-numeric:tabular-nums; }
+
+/* ═══ STRESS SCENARIOS — CRITICAL FOCUS ═══ */
+.stress-focus {
+    display:flex; gap:4px; overflow-x:auto; padding:2px 0;
+}
+.stress-focus::-webkit-scrollbar { height:2px; }
+.stress-focus::-webkit-scrollbar-thumb { background:var(--db-border-hi); }
+.sf-card {
+    flex:0 0 160px;
+    background:var(--db-deep);
+    border:1px solid var(--db-border);
+    border-top:2px solid var(--warn);
+    padding:6px 8px;
+    font-size:8px;
+    transition:border-color .3s, box-shadow .3s;
+}
+.sf-card.hi-crit {
+    border-top-color:var(--crit);
+    box-shadow:var(--crit-glow);
+    background:linear-gradient(180deg, #ff1a4008, var(--db-deep) 40%);
+}
+.sf-card .sf-sev { font-size:14px; font-weight:700; font-variant-numeric:tabular-nums; }
+.sf-card .sf-tags { display:flex; flex-wrap:wrap; gap:2px; margin:2px 0; }
+.sf-card .sf-tags span { font-size:6px; padding:0 3px; border-radius:1px; text-transform:uppercase; letter-spacing:.04em; }
+.sf-card .sf-evts { color:var(--db-gray); line-height:1.3; font-weight:300; }
+
+/* ═══ RIGHT PANEL: Alert Feed ═══ */
+.rpanel {
+    display:flex; flex-direction:column; min-height:0; overflow:hidden;
+    background:var(--db-dark);
+    border:1px solid var(--db-border);
+    border-left:2px solid var(--db-border-hi);
+}
+.rp-hdr {
+    display:flex; align-items:center; gap:6px; padding:6px 10px;
+    background:var(--db-dark); border-bottom:1px solid var(--db-border);
+    position:sticky; top:0; z-index:1;
+}
+.rp-hdr h3 { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:var(--db-gray); }
+.rp-cnt { font-size:7px; padding:1px 6px; border-radius:2px; font-weight:700; }
+.rp-filter { margin-left:auto; display:flex; gap:2px; }
+.rp-filter button { background:none; border:1px solid var(--db-border); color:var(--db-gray); padding:1px 5px; font-size:7px; font-family:var(--mono); cursor:pointer; }
+.rp-filter button.on { background:var(--db-mid); color:var(--db-white); border-color:var(--db-mid); }
+
+.alog { flex:1; overflow-y:auto; padding:4px 6px; }
+.alog::-webkit-scrollbar { width:2px; }
+.alog::-webkit-scrollbar-thumb { background:var(--db-border-hi); }
+
+.al {
+    padding:4px 6px; margin-bottom:2px;
+    border-left:2px solid var(--db-border);
+    font-size:9px; font-weight:300;
+    background:transparent;
+    transition:background .15s;
+}
+.al:hover { background:var(--db-navy); }
+.al.crit { border-left-color:var(--crit); background:var(--crit-bg); }
+.al.warn { border-left-color:var(--warn); background:var(--warn-bg); }
+.al.info { border-left-color:var(--info); }
+.al-top { display:flex; gap:6px; align-items:center; }
+.al-time { font-size:7px; color:var(--db-gray); font-variant-numeric:tabular-nums; }
+.al-tp { font-size:6px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; }
+.al-msg { margin-top:1px; font-weight:400; }
+.al-mkt { font-size:7px; color:var(--db-gray); margin-top:1px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:300px; font-weight:300; font-style:italic; }
+
+/* ═══ FOOTER ═══ */
+footer {
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:7px; color:var(--db-gray); padding:3px 8px; font-weight:300;
+    border-top:1px solid var(--db-border);
+}
+footer .f-tag { letter-spacing:.15em; text-transform:uppercase; }
+
+/* ═══ WHAT-IF SIMULATOR ═══ */
+.wi-active table.t th:nth-child(4) { min-width:160px; }
+.wi-bar { display:flex; align-items:center; gap:3px; }
+.wi-bar input[type=range] {
+    -webkit-appearance:none; appearance:none; width:60px; height:4px; border-radius:2px;
+    background:var(--db-border); outline:none; cursor:pointer;
+}
+.wi-bar input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance:none; width:10px; height:10px; border-radius:50%;
+    background:var(--db-accent); cursor:grab;
+}
+.wi-bar .wi-orig { font-size:7px; color:var(--db-gray); text-decoration:line-through; margin-right:2px; }
+.wi-delta { font-size:7px; padding:0 3px; border-radius:1px; font-weight:600; }
+.wi-delta.pos { color:var(--crit); background:#ff1a4012; }
+.wi-delta.neg { color:var(--ok); background:#00e67612; }
+.wi-banner {
+    display:none; padding:4px 10px; background:linear-gradient(90deg,#00d2ff08,#00d2ff18,#00d2ff08);
+    border:1px solid #00d2ff33; border-left:3px solid var(--db-accent);
+    font-size:9px; color:var(--db-accent);
+}
+.wi-banner.active { display:flex; align-items:center; gap:8px; }
+.wi-banner .wi-tag { font-size:8px; font-weight:700; letter-spacing:.1em; padding:1px 6px; border:1px solid #00d2ff44; background:#00d2ff10; }
+.wi-banner .wi-stats { display:flex; gap:12px; flex:1; }
+.wi-banner .wi-s { display:flex; gap:4px; align-items:center; }
+.wi-banner .wi-sl { font-size:7px; color:var(--db-gray); text-transform:uppercase; }
+.wi-banner .wi-sv { font-size:12px; font-weight:700; font-variant-numeric:tabular-nums; }
+.wi-banner button { background:none; border:1px solid var(--db-border); color:var(--db-gray); padding:2px 8px; font-size:8px; font-family:var(--mono); cursor:pointer; }
+.wi-banner button:hover { border-color:var(--db-accent); color:var(--db-accent); }
+
+/* ═══ COMMAND BAR ═══ */
+.cmd-bar {
+    display:none; position:fixed; bottom:0; left:0; right:0; z-index:9998;
+    background:var(--db-dark); border-top:2px solid var(--db-accent);
+    padding:6px 12px; gap:8px; align-items:center;
+}
+.cmd-bar.active { display:flex; }
+.cmd-bar .cmd-prompt { color:var(--db-accent); font-size:12px; font-weight:700; }
+.cmd-bar input {
+    flex:1; background:transparent; border:none; color:var(--db-white);
+    font-family:var(--mono); font-size:12px; outline:none; caret-color:var(--db-accent);
+}
+.cmd-bar .cmd-hint { font-size:8px; color:var(--db-gray); font-weight:300; }
+.cmd-bar .cmd-result {
+    position:absolute; bottom:100%; left:0; right:0;
+    background:var(--db-dark); border:1px solid var(--db-border); border-bottom:none;
+    max-height:200px; overflow-y:auto; padding:6px 12px; font-size:9px;
+    display:none;
+}
+.cmd-bar .cmd-result.show { display:block; }
+.cmd-bar .cmd-result .cr-line { padding:2px 0; border-bottom:1px solid var(--db-deep); }
+.cmd-bar .cmd-result .cr-cmd { color:var(--db-accent); font-weight:600; }
+.cmd-bar .cmd-result .cr-desc { color:var(--db-gray); font-weight:300; }
+
+/* ═══ CASCADE GRAPH ═══ */
+.graph-overlay {
+    display:none; position:fixed; inset:0; z-index:9997;
+    background:rgba(0,10,24,0.92);
+}
+.graph-overlay.active { display:flex; flex-direction:column; }
+.graph-hdr {
+    display:flex; align-items:center; gap:10px; padding:8px 14px;
+    border-bottom:1px solid var(--db-border);
+}
+.graph-hdr h3 { font-size:11px; font-weight:600; color:var(--db-accent); text-transform:uppercase; letter-spacing:.08em; }
+.graph-hdr .g-hint { font-size:8px; color:var(--db-gray); font-weight:300; margin-left:auto; }
+.graph-hdr button { background:none; border:1px solid var(--db-border); color:var(--db-gray); padding:2px 8px; font-size:9px; font-family:var(--mono); cursor:pointer; }
+.graph-hdr button:hover { color:var(--db-accent); border-color:var(--db-accent); }
+.graph-canvas { flex:1; cursor:grab; }
+.graph-legend {
+    display:flex; gap:8px; padding:6px 14px; border-top:1px solid var(--db-border);
+    flex-wrap:wrap;
+}
+.graph-legend .gl-item { display:flex; align-items:center; gap:4px; font-size:8px; color:var(--db-gray); }
+.graph-legend .gl-dot { width:8px; height:8px; border-radius:50%; }
+.graph-detail {
+    position:absolute; top:50px; right:12px; width:280px;
+    background:var(--db-dark); border:1px solid var(--db-border);
+    border-top:2px solid var(--db-accent); padding:0;
+    font-size:9px; z-index:9998; display:none; max-height:calc(100vh - 100px);
+    overflow-y:auto;
+}
+.graph-detail.active { display:block; }
+.graph-detail .gd-hdr {
+    display:flex; align-items:center; gap:6px; padding:8px 10px;
+    border-bottom:1px solid var(--db-border); background:var(--db-deep);
+}
+.graph-detail .gd-hdr .gd-tag { font-size:8px; padding:1px 5px; border-radius:2px; font-weight:600; }
+.graph-detail .gd-hdr .gd-title { flex:1; font-size:9px; color:var(--db-white); font-weight:500; line-height:1.3; }
+.graph-detail .gd-hdr .gd-close { background:none; border:none; color:var(--db-gray); cursor:pointer; font-size:11px; font-family:var(--mono); padding:0 2px; }
+.graph-detail .gd-hdr .gd-close:hover { color:var(--crit); }
+.graph-detail .gd-prob {
+    display:flex; align-items:baseline; gap:6px; padding:10px;
+    border-bottom:1px solid var(--db-border);
+}
+.graph-detail .gd-prob .gd-val { font-size:22px; font-weight:700; }
+.graph-detail .gd-prob .gd-lbl { font-size:8px; color:var(--db-gray); text-transform:uppercase; letter-spacing:.05em; }
+.graph-detail .gd-stats { padding:8px 10px; border-bottom:1px solid var(--db-border); }
+.graph-detail .gd-row { display:flex; justify-content:space-between; padding:2px 0; }
+.graph-detail .gd-row .gd-k { color:var(--db-gray); }
+.graph-detail .gd-row .gd-v { color:var(--db-white); font-weight:500; }
+.graph-detail .gd-corr { padding:8px 10px; }
+.graph-detail .gd-corr h5 { font-size:8px; color:var(--db-accent); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; font-weight:600; }
+.graph-detail .gd-edge { display:flex; align-items:center; gap:6px; padding:2px 0; }
+.graph-detail .gd-edge .gd-bar-track { flex:1; height:4px; background:var(--db-deep); border-radius:2px; overflow:hidden; }
+.graph-detail .gd-edge .gd-bar-fill { height:100%; border-radius:2px; }
+.graph-detail .gd-edge .gd-elbl { min-width:50px; color:var(--db-gray); }
+.graph-detail .gd-edge .gd-eval { min-width:28px; text-align:right; font-weight:500; }
+.graph-detail .gd-params { padding:8px 10px; border-top:1px solid var(--db-border); }
+.graph-detail .gd-params h5 { font-size:8px; color:var(--db-accent); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; font-weight:600; }
+.graph-detail .gd-param { display:flex; justify-content:space-between; padding:2px 0; }
+.graph-detail .gd-param .gd-pn { color:var(--db-gray); }
+.graph-detail .gd-param .gd-pv { font-weight:500; }
+
+/* ═══ AUTH GATE ═══ */
+.auth-gate {
+    position:fixed; inset:0; z-index:10000;
+    background:var(--db-deep);
+    display:flex; align-items:center; justify-content:center;
+}
+.auth-gate.hidden { display:none; }
+.auth-box {
+    background:var(--db-dark); border:1px solid var(--db-border);
+    border-top:3px solid var(--db-blue); padding:32px 40px;
+    text-align:center; max-width:340px; width:100%;
+}
+.auth-box .ab-brand { font-size:8px; letter-spacing:.25em; text-transform:uppercase; color:var(--db-gray); margin-bottom:4px; }
+.auth-box .ab-title { font-size:16px; font-weight:700; color:var(--db-accent); margin-bottom:20px; }
+.auth-box input {
+    width:100%; background:var(--db-deep); border:1px solid var(--db-border);
+    color:var(--db-white); padding:8px 12px; font-family:var(--mono); font-size:12px;
+    text-align:center; letter-spacing:.1em; outline:none;
+}
+.auth-box input:focus { border-color:var(--db-accent); }
+.auth-box input::placeholder { color:var(--db-gray); font-size:10px; letter-spacing:.05em; }
+.auth-box .ab-err { font-size:9px; color:var(--crit); margin-top:8px; min-height:14px; }
+.auth-box .ab-hint { font-size:8px; color:var(--db-gray); margin-top:16px; font-weight:300; }
+</style>
+</head>
+<body>
+
+<!-- ═══ AUTH GATE ═══ -->
+<div class="auth-gate" id="authGate">
+    <div class="auth-box">
+        <div class="ab-brand">Risk Terminal</div>
+        <div class="ab-title">PROVIDER</div>
+        <input type="password" id="authPw" placeholder="Passwort eingeben" autofocus>
+        <div class="ab-err" id="authErr"></div>
+        <div class="ab-hint">Zugang nur fuer autorisierte Nutzer</div>
+    </div>
+</div>
+
+<div class="app" id="appMain" style="display:none">
+
+<!-- ═══ HEADER ═══ -->
+<div class="hdr">
+    <div class="hdr-brand">
+        RISK TERMINAL
+        <b>PROVIDER</b>
+    </div>
+    <span class="hdr-dot live" id="hDot"></span>
+    <span class="hdr-status"><span id="hStat">LIVE</span> <span class="hdr-sep">│</span> Poll #<span id="hPoll">0</span> <span class="hdr-sep">│</span> <span id="hTime">--:--:--</span></span>
+
+    <div class="hdr-kpis">
+        <div class="hk"><span class="hk-l">Risk</span><span class="hk-v" id="kRisk">—</span></div>
+        <div class="hk"><span class="hk-l">Märkte</span><span class="hk-v" id="kMkt">12</span></div>
+        <div class="hk"><span class="hk-l">Max</span><span class="hk-v" id="kMax">—</span></div>
+        <div class="hk"><span class="hk-l">Alerts</span><span class="hk-v" id="kAl">0</span></div>
+        <div class="hk"><span class="hk-l">Severity</span><span class="hk-v" id="kSev">—</span></div>
+    </div>
+
+    <div class="hdr-ctrl">
+        <button id="btnMode" onclick="switchMode(mode==='live'?'demo':'live')">DEMO</button>
+        <button id="btnWI" onclick="toggleWhatIf()" title="What-If Simulator (W)">W-IF</button>
+        <button id="btnGraph" onclick="toggleGraph()" title="Cascade Graph (G)">⬡</button>
+        <button id="btnRefresh" onclick="manualRefresh()" title="Daten manuell aktualisieren (R)">↻</button>
+        <button id="btnP" onclick="togglePause()">⏸</button>
+        <button onclick="setSpeed(1)">1×</button>
+        <button class="on" onclick="setSpeed(3)">3×</button>
+        <button onclick="setSpeed(10)">10×</button>
+    </div>
+</div>
+
+<!-- ═══ WHAT-IF BANNER ═══ -->
+<div class="wi-banner" id="wiBanner">
+    <span class="wi-tag">WHAT-IF</span>
+    <div class="wi-stats">
+        <div class="wi-s"><span class="wi-sl">Original</span><span class="wi-sv" id="wiOrig">—</span></div>
+        <div class="wi-s"><span class="wi-sl">→</span></div>
+        <div class="wi-s"><span class="wi-sl">Simuliert</span><span class="wi-sv" id="wiSim">—</span></div>
+        <div class="wi-s"><span class="wi-sl">Δ Severity</span><span class="wi-sv" id="wiDelta">—</span></div>
+    </div>
+    <button onclick="resetWhatIf()">Reset</button>
+    <button onclick="toggleWhatIf()">Schließen</button>
+</div>
+
+<!-- ═══ CRITICAL SCENARIO BANNER ═══ -->
+<div class="crit-banner" id="critBanner">
+    <div class="crit-hdr">
+        <span class="crit-label">▲ CRITICAL</span>
+        <span class="crit-count" id="critCount"></span>
+        <button class="crit-dismiss" onclick="this.parentElement.parentElement.classList.remove('active')">&times;</button>
+    </div>
+    <div class="crit-items" id="critItems"></div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+    <div class="left-col">
+        <!-- Market Table -->
+        <div class="tbl-wrap">
+            <table class="t">
+                <thead><tr>
+                    <th style="width:2px"></th>
+                    <th>Typ</th>
+                    <th>Markt</th>
+                    <th class="r">P(Ja)</th>
+                    <th class="r">Δ</th>
+                    <th>Trend</th>
+                    <th>History</th>
+                    <th class="r">H/T</th>
+                    <th class="r">EU-Rel.</th>
+                </tr></thead>
+                <tbody id="mtb"></tbody>
+            </table>
+        </div>
+
+        <!-- Scenario Impact Zone -->
+        <div class="sc-zone" id="scZone">
+            <div class="sc-hdr">
+                <h3>Scenario Engine</h3>
+                <span class="bdg" id="rBdg">#0</span>
+                <span class="n-lbl" id="rN">n=500</span>
+                <span class="rsn" id="rRsn"></span>
+            </div>
+            <div class="sc-top">
+                <div class="sc-gauge"><canvas id="gC" width="70" height="44"></canvas></div>
+                <div class="sc-stats">
+                    <div class="sc-stat"><span class="lbl">P5</span><span class="val" id="sP5">—</span></div>
+                    <div class="sc-stat"><span class="lbl">Mean</span><span class="val" id="sM">—</span></div>
+                    <div class="sc-stat"><span class="lbl">P95</span><span class="val" id="sP95">—</span></div>
+                </div>
+                <div class="sc-chips" id="dfChips"></div>
+            </div>
+            <div class="sc-bars" id="scBars"><h4>Parameter Impact (P95)</h4></div>
+            <div class="stress-focus" id="stFocus"></div>
+        </div>
+
+        <!-- Market Detail Panel (replaces sc-zone on Enter) -->
+        <div class="sc-zone detail-panel" id="detailPanel">
+            <div class="dp-hdr">
+                <button class="dp-back" onclick="closeDetail()">ESC ← Zurück</button>
+                <span class="dp-q" id="dpQ"></span>
+                <span class="dp-prob" id="dpProb"></span>
+                <span class="dp-delta" id="dpDelta"></span>
+            </div>
+            <div class="dp-body">
+                <div>
+                    <div class="dp-chart"><canvas id="dpChart"></canvas></div>
+                    <div class="dp-params" id="dpParams"></div>
+                </div>
+                <div>
+                    <div class="dp-stats" id="dpStats"></div>
+                    <div class="dp-alerts" id="dpAlerts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Feed -->
+    <div class="rpanel">
+        <div class="rp-hdr">
+            <h3>Alert Feed</h3>
+            <span class="rp-cnt" id="aCnt" style="background:var(--db-navy);color:var(--db-gray)">0</span>
+            <div class="rp-filter">
+                <button class="on" onclick="setFilter('all',this)">ALL</button>
+                <button onclick="setFilter('critical',this)">CRIT</button>
+                <button onclick="setFilter('warning',this)">WARN</button>
+            </div>
+        </div>
+        <div class="alog" id="aList"></div>
+    </div>
+</div>
+
+<footer>
+    <span class="f-tag">Provider Risk Terminal v3.0</span>
+    <span id="fSrc">Datenquelle: Polymarket (Simulated Demo) │ Monte Carlo n=500 │ Gaussian Copula</span>
+    <span id="fTime"></span>
+</footer>
+</div>
+
+<!-- ═══ COMMAND BAR (fixed bottom) ═══ -->
+<div class="cmd-bar" id="cmdBar">
+    <div class="cmd-result" id="cmdResult"></div>
+    <span class="cmd-prompt">/</span>
+    <input type="text" id="cmdInput" placeholder="Befehl eingeben... (help für Übersicht)" spellcheck="false">
+    <span class="cmd-hint">ESC schließen</span>
+</div>
+
+<!-- ═══ CASCADE GRAPH (overlay) ═══ -->
+<div class="graph-overlay" id="graphOverlay">
+    <div class="graph-hdr">
+        <h3>Cascade Network</h3>
+        <span class="g-hint">Knoten = Märkte │ Kanten = Korrelation │ Größe = P(Ja)</span>
+        <button onclick="closeGraph()">ESC ← Schließen</button>
+    </div>
+    <canvas class="graph-canvas" id="graphCanvas"></canvas>
+    <div class="graph-detail" id="graphDetail"></div>
+    <div class="graph-legend" id="graphLegend"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// TYPE SYSTEM — Deutsche Bank Terminal Colors
+// ═══════════════════════════════════════════════════════════════
+const TC = {
+    geopolitical_conflict: { c:'#ff4d6a', bg:'#ff4d6a18', l:'GEO' },
+    energy_supply:         { c:'#ff9500', bg:'#ff950018', l:'ENERGY' },
+    trade_restriction:     { c:'#ff6b35', bg:'#ff6b3518', l:'TRADE' },
+    transport_disruption:  { c:'#00d2ff', bg:'#00d2ff18', l:'LOGISTIK' },
+    agricultural_shock:    { c:'#00e676', bg:'#00e67618', l:'AGRAR' },
+    financial_crisis:      { c:'#b388ff', bg:'#b388ff18', l:'FINANZ' },
+    pandemic:              { c:'#ff80ab', bg:'#ff80ab18', l:'PANDEMIE' },
+    climate_event:         { c:'#448aff', bg:'#448aff18', l:'KLIMA' },
+    tech_disruption:       { c:'#7c4dff', bg:'#7c4dff18', l:'TECH' },
+    political_instability: { c:'#ea80fc', bg:'#ea80fc18', l:'POL.STAB.' },
+};
+
+// ═══════════════════════════════════════════════════════════════
+// MARKETS
+// ═══════════════════════════════════════════════════════════════
+const MARKETS = [
+    { id:'ew_ukraine',     q:'Russia-Ukraine ceasefire by end of 2026?',          type:'geopolitical_conflict', rel:1.0,  base:0.44 },
+    { id:'ew_china_taiwan',q:'Will China invade Taiwan before 2027?',             type:'geopolitical_conflict', rel:0.9,  base:0.13 },
+    { id:'ew_eu_tariff',   q:'30% EU tariff in effect by August 2026?',           type:'trade_restriction',     rel:1.0,  base:0.35 },
+    { id:'ew_recession',   q:'US recession by end of 2026?',                      type:'financial_crisis',      rel:0.9,  base:0.25 },
+    { id:'ew_pandemic',    q:'New WHO-declared pandemic in 2026?',                type:'pandemic',              rel:0.9,  base:0.08 },
+    { id:'ew_oil',         q:'Oil price above $80/barrel by June 2026?',          type:'energy_supply',         rel:0.9,  base:0.40 },
+    { id:'ew_disaster',    q:'Major natural disaster ($50B+) in 2026?',           type:'climate_event',         rel:0.7,  base:0.30 },
+    { id:'ew_rare_earth',  q:'Ukraine rare earth deal before April 2026?',        type:'tech_disruption',       rel:0.8,  base:0.55 },
+    { id:'ew_brazil',      q:'Brazil agricultural export restrictions 2026?',     type:'agricultural_shock',    rel:0.9,  base:0.12 },
+    { id:'ew_red_sea',     q:'Red Sea shipping disruptions through 2026?',        type:'transport_disruption',  rel:0.9,  base:0.60 },
+    { id:'ew_ecb',         q:'ECB cuts rates below 2% by end of 2026?',           type:'financial_crisis',      rel:1.0,  base:0.35 },
+    { id:'ew_argentina',   q:'Argentina sovereign default in 2026?',              type:'political_instability', rel:0.7,  base:0.15 },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+let S = {};
+let alerts = [];
+let pollCount = 0;
+let paused = false;
+let speed = 3;
+let timer = null;
+let aId = 0;
+let alertFilter = 'all';
+let mode = 'demo'; // 'live' or 'demo'
+let liveFetchFails = 0;
+let selIdx = -1;         // selected row index (-1 = none)
+let detailView = false;  // detail panel open?
+let sortedIds = [];      // market IDs in current sort order
+let detailChart = null;  // Chart.js instance for detail view
+const HLEN = 40, WARN = 0.40, CRIT = 0.60;
+const POLL_MS = { 1: 5000, 3: 3000, 10: 1000 };
+
+function initState() {
+    MARKETS.forEach(m => {
+        S[m.id] = { ...m, prob:m.base, prev:m.base, history:[m.base], hi:m.base, lo:m.base, trend:'stable', level:'normal' };
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LIVE DATA — Pipeline Fetch
+// ═══════════════════════════════════════════════════════════════
+function mapPipelineData(data) {
+    S = {};
+    data.markets.forEach(m => {
+        S[m.market_id] = {
+            id: m.market_id,
+            q: m.question,
+            type: m.disruption_type,
+            rel: m.eu_relevance,
+            base: m.probability_history.length > 0 ? m.probability_history[0] : m.current_probability,
+            prob: m.current_probability,
+            prev: m.previous_probability,
+            history: m.probability_history.slice(-HLEN),
+            hi: m.all_time_high,
+            lo: m.all_time_low,
+            trend: m.trend,
+            level: m.alert_level === 'watch' ? 'normal' : m.alert_level,
+        };
+    });
+
+    // Alerts — merge active + history, deduplicate by id
+    const seen = new Set();
+    const allAlerts = [...(data.alerts.active || []), ...(data.alerts.history || [])];
+    alerts = allAlerts.filter(a => { if (seen.has(a.id)) return false; seen.add(a.id); return true; }).map(a => ({
+        id: a.id, time: new Date(a.timestamp), level: a.level, type: a.type,
+        mid: a.market_id, q: a.question, dtype: a.disruption_type, msg: a.message,
+        tick: data.meta.poll_count,
+    }));
+    alerts.sort((a, b) => b.time - a.time);
+
+    // Scenarios
+    if (data.scenarios && data.scenarios.severity) {
+        const sc = data.scenarios;
+        const freqs = {};
+        for (const [t, v] of Object.entries(sc.disruption_frequency || {})) {
+            freqs[t] = Math.round(v * 1000) / 10;
+        }
+        const pStats = {};
+        for (const [k, v] of Object.entries(sc.parameter_distributions || {})) {
+            pStats[k] = { mean: Math.round(v.mean * 10) / 10, p95: Math.round(v.p95 * 10) / 10 };
+        }
+        scStats = {
+            mean: sc.severity.mean, p5: sc.severity.p5, p50: sc.severity.p50, p95: sc.severity.p95,
+            freqs, pStats, N: sc.n_samples,
+        };
+        resCnt = data.meta.resample_count;
+        lastReason = sc.resample_reason || data.meta.last_resample_reason || '';
+    }
+
+    // Stress scenarios
+    if (data.stress_scenarios) {
+        stressScens = data.stress_scenarios.slice(0, 8).map(sc => ({
+            sev: sc.severity_score,
+            types: sc.disruption_types,
+            qs: (sc.triggered_questions || []).slice(0, 3),
+            params: sc.parameters,
+        }));
+    }
+
+    pollCount = data.meta.poll_count;
+    document.getElementById('kMkt').textContent = data.meta.markets_monitored || Object.keys(S).length;
+}
+
+async function fetchPipelineState() {
+    try {
+        const resp = await fetch('pipeline_state.json?t=' + Date.now());
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        const data = await resp.json();
+        if (!data.meta || !data.markets) throw new Error('Invalid format');
+        mapPipelineData(data);
+        liveFetchFails = 0;
+        render();
+        return true;
+    } catch (e) {
+        liveFetchFails++;
+        console.warn('[LIVE] Fetch failed (' + liveFetchFails + '):', e.message);
+        if (liveFetchFails >= 3 && mode === 'live') {
+            console.warn('[LIVE] Falling back to DEMO mode');
+            switchMode('demo');
+        }
+        return false;
+    }
+}
+
+function switchMode(newMode) {
+    clearInterval(timer);
+    mode = newMode;
+    const dot = document.getElementById('hDot');
+    const stat = document.getElementById('hStat');
+    const mBtn = document.getElementById('btnMode');
+    if (mode === 'live') {
+        dot.className = 'hdr-dot live';
+        stat.textContent = 'LIVE';
+        mBtn.textContent = 'LIVE';
+        mBtn.classList.add('on');
+        liveFetchFails = 0;
+        fetchPipelineState();
+        timer = setInterval(fetchPipelineState, POLL_MS[speed] || 3000);
+    } else {
+        dot.className = 'hdr-dot paused';
+        stat.textContent = 'DEMO';
+        mBtn.textContent = 'DEMO';
+        mBtn.classList.remove('on');
+        S = {}; alerts = []; pollCount = 0; scStats = null; stressScens = []; resCnt = 0;
+        initState(); simTick();
+        timer = setInterval(simTick, Math.max(200, 2000 / speed));
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SIMULATION (Demo Mode)
+// ═══════════════════════════════════════════════════════════════
+function simTick() {
+    pollCount++;
+    for (const id in S) {
+        const s = S[id];
+        s.prev = s.prob;
+        const drift = (s.base - s.prob) * 0.02;
+        let noise = randn() * 0.015;
+        if (Math.random() < 0.05) noise += (Math.random() < 0.5 ? -1 : 1) * (0.05 + Math.random() * 0.12);
+        if (s.type === 'energy_supply') { const u=S['ew_ukraine']; if(u) noise += (u.prob-u.base)*0.3*randn()*0.4; }
+        if (s.type === 'trade_restriction') { const r=S['ew_recession']; if(r) noise += (r.prob-r.base)*0.2*randn()*0.3; }
+        s.prob = Math.max(0.01, Math.min(0.99, s.prob + drift + noise));
+        s.history.push(s.prob);
+        if (s.history.length > HLEN) s.history.shift();
+        s.hi = Math.max(s.hi, s.prob);
+        s.lo = Math.min(s.lo, s.prob);
+        s.trend = classifyTrend(s.history);
+        s.level = s.prob >= CRIT ? 'critical' : s.prob >= WARN ? 'warning' : s.prob >= 0.25 ? 'watch' : 'normal';
+
+        const pL = s.prev >= CRIT ? 'critical' : s.prev >= WARN ? 'warning' : 'normal';
+        if (s.level !== pL) {
+            if (s.level === 'critical') addAlert('critical','THRESHOLD',s.id,s.q,s.type,`KRITISCH: P > ${(CRIT*100)|0}% → ${(s.prob*100).toFixed(1)}%`);
+            else if (s.level === 'warning' && pL === 'normal') addAlert('warning','THRESHOLD',s.id,s.q,s.type,`WARNUNG: P > ${(WARN*100)|0}% → ${(s.prob*100).toFixed(1)}%`);
+        }
+        const chg = Math.abs(s.prob - s.prev);
+        if (chg >= 0.08) addAlert('warning','RAPID_SHIFT',s.id,s.q,s.type,`Rapid Shift ${(chg*100).toFixed(1)}% ${s.prob>s.prev?'↑':'↓'}`);
+        if (s.prob >= s.hi && s.history.length > 10 && s.prob > s.base * 1.3 && Math.random()<0.3) addAlert('info','NEW_HIGH',s.id,s.q,s.type,`ATH: ${(s.prob*100).toFixed(1)}%`);
+    }
+
+    const reason = shouldResample();
+    if (reason) { runScenarios(500); lastReason = reason; }
+
+    render();
+}
+
+function addAlert(level,type,mid,q,dtype,msg) {
+    aId++;
+    alerts.unshift({ id:aId, time:new Date(), level,type,mid,q,dtype,msg,tick:pollCount });
+    if (alerts.length > 80) alerts.length = 80;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════
+function render() {
+    const now = new Date();
+    const ms = Object.values(S);
+    const crits = ms.filter(m=>m.level==='critical');
+    const nW = ms.filter(m=>m.level==='warning').length;
+    const maxP = Math.max(...ms.map(m=>m.prob));
+    const nA = alerts.filter(a=>a.level!=='info').length;
+
+    // Header
+    document.getElementById('hPoll').textContent = pollCount;
+    document.getElementById('hTime').textContent = now.toLocaleTimeString('de-DE');
+
+    // KPIs
+    const kR = document.getElementById('kRisk');
+    if (crits.length>0) { kR.textContent='▲ CRITICAL'; kR.style.color='var(--crit)'; }
+    else if (nW>0) { kR.textContent='● WARNING'; kR.style.color='var(--warn)'; }
+    else { kR.textContent='○ NORMAL'; kR.style.color='var(--ok)'; }
+    document.getElementById('kMax').textContent = (maxP*100).toFixed(1)+'%';
+    document.getElementById('kMax').style.color = maxP>=CRIT?'var(--crit)':maxP>=WARN?'var(--warn)':'var(--db-white)';
+    document.getElementById('kAl').textContent = nA;
+    document.getElementById('kAl').style.color = nA>5?'var(--crit)':nA>0?'var(--warn)':'var(--db-white)';
+    if (scStats) {
+        const sEl = document.getElementById('kSev');
+        sEl.textContent = (scStats.mean*100).toFixed(1)+'%';
+        sEl.style.color = scStats.mean>0.6?'var(--crit)':scStats.mean>0.4?'var(--warn)':'var(--ok)';
+    }
+
+    // Critical banner — THE FOCUS
+    renderCriticalBanner(crits);
+
+    // Market table
+    renderTable(ms);
+
+    // Scenario panel or detail panel
+    if (detailView && selIdx >= 0 && sortedIds[selIdx]) {
+        document.getElementById('scZone').style.display = 'none';
+        document.getElementById('detailPanel').classList.add('active');
+        renderMarketDetail(sortedIds[selIdx]);
+    } else {
+        document.getElementById('scZone').style.display = '';
+        document.getElementById('detailPanel').classList.remove('active');
+        renderScenarioPanel();
+    }
+
+    // Alert log
+    renderAlertLog(nA);
+
+    // Footer
+    document.getElementById('fTime').textContent = now.toLocaleString('de-DE');
+    const nMkt = Object.keys(S).length;
+    const nSc = scStats ? scStats.N : 0;
+    document.getElementById('fSrc').textContent = mode === 'live'
+        ? `Datenquelle: Polymarket (Live Pipeline) │ ${nMkt} Märkte │ Monte Carlo n=${nSc} │ Gaussian Copula`
+        : `Datenquelle: Polymarket (Simulated Demo) │ ${nMkt} Märkte │ Monte Carlo n=${nSc || 500} │ Gaussian Copula`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CRITICAL BANNER — Primary user focus
+// ═══════════════════════════════════════════════════════════════
+function renderCriticalBanner(crits) {
+    const banner = document.getElementById('critBanner');
+    if (crits.length === 0) { banner.classList.remove('active'); return; }
+    banner.classList.add('active');
+
+    document.getElementById('critCount').textContent = `${crits.length} Markt${crits.length>1?'e':''} im kritischen Bereich`;
+
+    const sorted = [...crits].sort((a,b) => b.prob - a.prob);
+    document.getElementById('critItems').innerHTML = sorted.map(m => {
+        const tc = TC[m.type]||{c:'#ff4d6a',bg:'#ff4d6a18',l:m.type};
+        const chg = m.prob - m.prev;
+        const chgCl = chg>0.005?'up':chg<-0.005?'dn':'';
+        const chgStr = chg>0.005?`▲ +${(chg*100).toFixed(1)}%`:chg<-0.005?`▼ ${(chg*100).toFixed(1)}%`:'—';
+        return `<div class="crit-item">
+            <span class="ci-prob">${(m.prob*100).toFixed(1)}%</span>
+            <span class="ci-q">${m.q}</span>
+            <span class="ci-type" style="background:${tc.bg};color:${tc.c}">${tc.l}</span>
+            <span class="ci-delta ${chgCl}">${chgStr}</span>
+        </div>`;
+    }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MARKET TABLE
+// ═══════════════════════════════════════════════════════════════
+function renderTable(ms) {
+    // Apply command bar filter
+    let filtered = cmdTypeFilter === 'all' ? ms : ms.filter(m => m.type === cmdTypeFilter);
+    // Apply sort
+    const sortFn = {
+        prob: (a,b) => b.prob - a.prob,
+        delta: (a,b) => Math.abs(b.prob-b.prev) - Math.abs(a.prob-a.prev),
+        type: (a,b) => a.type.localeCompare(b.type),
+        trend: (a,b) => a.trend.localeCompare(b.trend),
+        name: (a,b) => a.q.localeCompare(b.q),
+    };
+    const sorted = [...filtered].sort(sortFn[cmdSortField] || sortFn.prob);
+    sortedIds = sorted.map(m => m.id);
+    const tbody = document.getElementById('mtb');
+    tbody.textContent = '';
+    sorted.forEach((m, idx) => {
+        const tc = TC[m.type]||{c:'#7c4dff',bg:'#7c4dff18',l:m.type};
+        const chg = m.prob-m.prev;
+        const chgAbs = (Math.abs(chg)*100).toFixed(1);
+        const chgCl = chg>0.005?'up':chg<-0.005?'dn':'fl';
+        const chgArr = chg>0.005?'\u25B2':chg<-0.005?'\u25BC':'\u00B7';
+        const pCol = m.prob>=CRIT?'var(--crit)':m.prob>=WARN?'var(--warn)':'var(--db-white)';
+        const tCl = {rising:'tp-r',falling:'tp-f',stable:'tp-s',volatile:'tp-v'}[m.trend]||'tp-s';
+        const tLbl = {rising:'\u25B2 RISE',falling:'\u25BC FALL',stable:'\u2014 STAB',volatile:'~ VOLT'}[m.trend]||'\u2014';
+        const levelDot = m.level==='critical'?'\u25CF':m.level==='warning'?'\u25D0':'\u25CB';
+        const levelCol = m.level==='critical'?'var(--crit)':m.level==='warning'?'var(--warn)':'var(--db-gray)';
+
+        const tr = document.createElement('tr');
+        const classes = [];
+        if (m.level==='critical') classes.push('row-crit');
+        else if (m.level==='warning') classes.push('row-warn');
+        if (idx===selIdx) classes.push('row-sel');
+        tr.className = classes.join(' ');
+        tr.dataset.idx = idx;
+        tr.addEventListener('click', () => selectRow(idx));
+
+        const cells = [
+            {cls:'',style:`color:${levelCol};font-size:8px;padding:0 3px`,text:levelDot},
+            {cls:'',html:`<span class="tag" style="background:${tc.bg};color:${tc.c}">${tc.l}</span>`},
+            {cls:'q-text',text:m.q,title:m.q},
+            {cls:'r',html: whatIfMode
+                ? `<div class="wi-bar">${whatIfOrig[m.id]!==undefined&&Math.abs(m.prob-whatIfOrig[m.id])>0.005?`<span class="wi-orig">${(whatIfOrig[m.id]*100).toFixed(0)}</span>`:''}<span class="pv" style="color:${pCol}">${(m.prob*100).toFixed(1)}%</span><input type="range" min="1" max="99" value="${(m.prob*100).toFixed(0)}" oninput="onWhatIfSlider('${m.id}',this.value/100)">${whatIfOrig[m.id]!==undefined&&Math.abs(m.prob-whatIfOrig[m.id])>0.01?`<span class="wi-delta ${m.prob>whatIfOrig[m.id]?'pos':'neg'}">${m.prob>whatIfOrig[m.id]?'+':''}${((m.prob-whatIfOrig[m.id])*100).toFixed(0)}</span>`:''}</div>`
+                : `<span class="pv" style="color:${pCol}">${(m.prob*100).toFixed(1)}%</span>`},
+            {cls:'r',html:`<span class="dv ${chgCl}">${chgArr}${chgAbs}</span>`},
+            {cls:'',html:`<span class="tp ${tCl}">${tLbl}</span>`},
+            {cls:'',spark:m.history},
+            {cls:'r mm',text:`${(m.hi*100).toFixed(0)}/${(m.lo*100).toFixed(0)}`},
+            {cls:'r',style:'font-size:8px;color:var(--db-gray)',text:`${(m.rel*100)|0}%`},
+        ];
+        cells.forEach(c => {
+            const td = document.createElement('td');
+            if (c.cls) td.className = c.cls;
+            if (c.style) td.setAttribute('style', c.style);
+            if (c.title) td.title = c.title;
+            if (c.text) td.textContent = c.text;
+            else if (c.spark) {
+                const div = document.createElement('div');
+                div.className = 'spark';
+                c.spark.forEach((p,i) => {
+                    const b = document.createElement('div');
+                    b.className = 'b';
+                    const h = Math.max(1,p*16);
+                    const col = p>=CRIT?'var(--crit)':p>=WARN?'var(--warn)':'var(--ok)';
+                    const o = 0.2+(i/c.spark.length)*0.8;
+                    b.setAttribute('style',`height:${h}px;background:${col};opacity:${o}`);
+                    div.appendChild(b);
+                });
+                td.appendChild(div);
+            } else if (c.html) {
+                // Safe: all values derived from internal state, not user input
+                td.innerHTML = c.html;
+            }
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    });
+
+    if (selIdx >= 0) {
+        const row = document.querySelector(`tr[data-idx="${selIdx}"]`);
+        if (row) row.scrollIntoView({ block:'nearest' });
+    }
+}
+
+function selectRow(idx) {
+    selIdx = idx;
+    if (!detailView) render();
+    else openDetail();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MARKET DETAIL — Bloomberg-style drill-down
+// ═══════════════════════════════════════════════════════════════
+function openDetail() {
+    if (selIdx < 0 || !sortedIds[selIdx]) return;
+    detailView = true;
+    render();
+}
+
+function closeDetail() {
+    detailView = false;
+    if (detailChart) { detailChart.destroy(); detailChart = null; }
+    render();
+}
+
+function renderMarketDetail(mid) {
+    const m = S[mid];
+    if (!m) return;
+    const tc = TC[m.type] || { c:'#7c4dff', bg:'#7c4dff18', l:m.type };
+
+    // Header
+    document.getElementById('dpQ').textContent = m.q;
+    const probEl = document.getElementById('dpProb');
+    probEl.textContent = (m.prob * 100).toFixed(1) + '%';
+    probEl.style.color = m.prob >= CRIT ? 'var(--crit)' : m.prob >= WARN ? 'var(--warn)' : 'var(--db-white)';
+
+    const chg = m.prob - m.prev;
+    const dEl = document.getElementById('dpDelta');
+    if (Math.abs(chg) > 0.005) {
+        dEl.textContent = (chg > 0 ? '\u25B2 +' : '\u25BC ') + (chg * 100).toFixed(1) + '%';
+        dEl.style.color = chg > 0 ? 'var(--crit)' : 'var(--ok)';
+    } else {
+        dEl.textContent = '\u2014';
+        dEl.style.color = 'var(--db-gray)';
+    }
+
+    // History chart
+    if (detailChart) detailChart.destroy();
+    const ctx = document.getElementById('dpChart').getContext('2d');
+    const labels = m.history.map((_, i) => i + 1);
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, 120);
+    bgGrad.addColorStop(0, tc.c + '33');
+    bgGrad.addColorStop(1, tc.c + '00');
+    detailChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                data: m.history.map(p => Math.round(p * 1000) / 10),
+                borderColor: tc.c, backgroundColor: bgGrad,
+                borderWidth: 1.5, pointRadius: 0, fill: true, tension: 0.3,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+                x: { display: false },
+                y: {
+                    min: 0, max: 100, grid: { color: '#0a2e5244' },
+                    ticks: { color: '#5a7090', font: { size: 8, family: 'JetBrains Mono' }, callback: v => v + '%' },
+                },
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: true, callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '%' } },
+                annotation: {
+                    annotations: {
+                        warnLine: { type:'line', yMin:WARN*100, yMax:WARN*100, borderColor:'#ff950044', borderWidth:1, borderDash:[4,2] },
+                        critLine: { type:'line', yMin:CRIT*100, yMax:CRIT*100, borderColor:'#ff1a4044', borderWidth:1, borderDash:[4,2] },
+                    }
+                }
+            },
+        }
+    });
+
+    // Stats panel
+    const trendL = { rising:'\u25B2 Steigend', falling:'\u25BC Fallend', stable:'\u2014 Stabil', volatile:'~ Volatil' };
+    const levelL = { critical:'KRITISCH', warning:'WARNUNG', watch:'BEOBACHTUNG', normal:'NORMAL' };
+    const levelC = { critical:'var(--crit)', warning:'var(--warn)', watch:'var(--db-accent)', normal:'var(--ok)' };
+    const statsEl = document.getElementById('dpStats');
+    statsEl.textContent = '';
+    const rows = [
+        ['Typ', tc.l, tc.c],
+        ['Alert-Level', levelL[m.level] || m.level, levelC[m.level] || 'var(--db-white)'],
+        ['Trend', trendL[m.trend] || m.trend, null],
+        ['Aktuell', (m.prob * 100).toFixed(1) + '%', null],
+        ['Vorher', (m.prev * 100).toFixed(1) + '%', null],
+        ['All-Time High', (m.hi * 100).toFixed(1) + '%', null],
+        ['All-Time Low', (m.lo * 100).toFixed(1) + '%', null],
+        ['Basis', ((m.base || m.history[0] || 0) * 100).toFixed(1) + '%', null],
+        ['EU-Relevanz', (m.rel * 100).toFixed(0) + '%', null],
+        ['History', m.history.length + ' Datenpunkte', null],
+    ];
+    rows.forEach(([label, val, col]) => {
+        const div = document.createElement('div');
+        div.className = 'dp-stat-row';
+        const sl = document.createElement('span');
+        sl.className = 'dp-sl';
+        sl.textContent = label;
+        const sv = document.createElement('span');
+        sv.className = 'dp-sv';
+        sv.textContent = val;
+        if (col) sv.style.color = col;
+        div.appendChild(sl);
+        div.appendChild(sv);
+        statsEl.appendChild(div);
+    });
+
+    // Disruption parameters
+    const profile = DISRUPTION_PROFILES[m.type] || [];
+    const paramsEl = document.getElementById('dpParams');
+    paramsEl.textContent = '';
+    if (profile.length) {
+        const h4 = document.createElement('h4');
+        h4.textContent = 'Disruption-Parameter (' + tc.l + ')';
+        paramsEl.appendChild(h4);
+        const maxB = Math.max(...profile.map(p => Math.abs(p.b)));
+        profile.forEach(p => {
+            const row = document.createElement('div');
+            row.className = 'dp-param-row';
+            const pl = document.createElement('span');
+            pl.className = 'dp-pl';
+            pl.textContent = p.n;
+            const pt = document.createElement('div');
+            pt.className = 'dp-pt';
+            const pf = document.createElement('div');
+            pf.className = 'dp-pf';
+            const scaled = m.prob * (Math.abs(p.b) / maxB) * 100;
+            pf.style.width = scaled + '%';
+            pf.style.background = tc.c;
+            pt.appendChild(pf);
+            const pv = document.createElement('span');
+            pv.className = 'dp-pv';
+            const impact = p.u === 'x' ? (1 + (p.b - 1) * m.prob).toFixed(2) + 'x' :
+                           p.u === 'd' ? Math.round(p.b * m.prob) + 'd' :
+                           (p.b * m.prob).toFixed(1) + '%';
+            pv.textContent = impact;
+            pv.style.color = tc.c;
+            row.appendChild(pl);
+            row.appendChild(pt);
+            row.appendChild(pv);
+            paramsEl.appendChild(row);
+        });
+    }
+
+    // Related alerts
+    const mAlerts = alerts.filter(a => a.mid === mid).slice(0, 8);
+    const alertsEl = document.getElementById('dpAlerts');
+    alertsEl.textContent = '';
+    const ah = document.createElement('h4');
+    ah.textContent = 'Alerts (' + mAlerts.length + ')';
+    alertsEl.appendChild(ah);
+    if (mAlerts.length === 0) {
+        const none = document.createElement('div');
+        none.className = 'dp-al';
+        none.textContent = 'Keine Alerts';
+        none.style.color = 'var(--db-gray)';
+        alertsEl.appendChild(none);
+    }
+    mAlerts.forEach(a => {
+        const div = document.createElement('div');
+        div.className = 'dp-al ' + (a.level === 'critical' ? 'crit' : a.level === 'warning' ? 'warn' : '');
+        const timeSpan = document.createElement('span');
+        timeSpan.className = 'dp-at';
+        timeSpan.textContent = a.time.toLocaleTimeString('de-DE', { hour:'2-digit', minute:'2-digit', second:'2-digit' }) + ' ';
+        div.appendChild(timeSpan);
+        div.appendChild(document.createTextNode(a.msg));
+        alertsEl.appendChild(div);
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ALERT LOG
+// ═══════════════════════════════════════════════════════════════
+function renderAlertLog(nA) {
+    const cEl = document.getElementById('aCnt');
+    cEl.textContent = nA;
+    cEl.style.background = nA>5?'var(--crit)':nA>0?'var(--warn)':'var(--db-navy)';
+    cEl.style.color = nA>0?'white':'var(--db-gray)';
+
+    const typeL = { THRESHOLD:'SCHWELLE', RAPID_SHIFT:'SHIFT', NEW_HIGH:'ATH', CASCADE_RISK:'KASKADE' };
+    const filtered = alertFilter==='all' ? alerts : alerts.filter(a=>a.level===alertFilter);
+    document.getElementById('aList').innerHTML = filtered.slice(0,30).map(a => {
+        const tCol = a.level==='critical'?'var(--crit)':a.level==='warning'?'var(--warn)':'var(--info)';
+        return `<div class="al ${a.level==='critical'?'crit':a.level==='warning'?'warn':'info'}">
+            <div class="al-top">
+                <span class="al-time">${a.time.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}</span>
+                <span class="al-tp" style="color:${tCol}">${typeL[a.type]||a.type}</span>
+            </div>
+            <div class="al-msg">${a.msg}</div>
+            <div class="al-mkt">${a.q}</div>
+        </div>`;
+    }).join('');
+}
+
+function setFilter(f,el) {
+    alertFilter=f;
+    document.querySelectorAll('.rp-filter button').forEach(b=>b.classList.remove('on'));
+    el.classList.add('on');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SCENARIO ENGINE (Monte Carlo)
+// ═══════════════════════════════════════════════════════════════
+const DISRUPTION_PROFILES = {
+    geopolitical_conflict: [{n:'trade_corridor',b:-50,u:'%'},{n:'sanctions_impact',b:-25,u:'%'},{n:'uncertainty_index',b:2.0,u:'x'},{n:'energy_supply_risk',b:-30,u:'%'}],
+    energy_supply: [{n:'energy_cost',b:1.8,u:'x'},{n:'gas_availability',b:-40,u:'%'},{n:'transport_fuel_cost',b:1.5,u:'x'}],
+    trade_restriction: [{n:'import_cost',b:1.3,u:'x'},{n:'export_volume',b:-20,u:'%'},{n:'diversification_delay',b:90,u:'d'}],
+    transport_disruption: [{n:'shipping_lead_time',b:2.5,u:'x'},{n:'freight_cost',b:3.0,u:'x'},{n:'route_availability',b:-30,u:'%'}],
+    agricultural_shock: [{n:'soy_availability',b:-40,u:'%'},{n:'grain_price',b:1.7,u:'x'},{n:'feed_cost',b:1.6,u:'x'}],
+    financial_crisis: [{n:'credit_availability',b:-30,u:'%'},{n:'demand_shock',b:-15,u:'%'},{n:'currency_volatility',b:1.5,u:'x'}],
+    pandemic: [{n:'workforce_availability',b:-20,u:'%'},{n:'border_closure',b:-40,u:'%'},{n:'demand_volatility',b:2.0,u:'x'}],
+    climate_event: [{n:'agricultural_yield',b:-25,u:'%'},{n:'infrastructure_damage',b:-15,u:'%'},{n:'water_availability',b:-30,u:'%'}],
+    tech_disruption: [{n:'semiconductor_supply',b:-35,u:'%'},{n:'critical_mineral_cost',b:2.0,u:'x'},{n:'it_system_downtime',b:14,u:'d'}],
+    political_instability: [{n:'supplier_country_risk',b:1.5,u:'x'},{n:'export_policy_unc.',b:-15,u:'%'},{n:'investment_freeze',b:-20,u:'%'}],
+};
+
+const CORR_MAP = {
+    'geopolitical_conflict|energy_supply':0.7, 'geopolitical_conflict|trade_restriction':0.6,
+    'geopolitical_conflict|transport_disruption':0.5, 'geopolitical_conflict|financial_crisis':0.4,
+    'energy_supply|financial_crisis':0.5, 'trade_restriction|financial_crisis':0.5,
+    'pandemic|transport_disruption':0.6, 'pandemic|financial_crisis':0.5,
+    'climate_event|agricultural_shock':0.7, 'climate_event|transport_disruption':0.4,
+    'tech_disruption|trade_restriction':0.4, 'political_instability|trade_restriction':0.5,
+    'political_instability|agricultural_shock':0.4,
+};
+function gc(a,b){return a===b?1:CORR_MAP[a+'|'+b]||CORR_MAP[b+'|'+a]||0.05;}
+
+let scStats=null, stressScens=[], resCnt=0, lastResTick=0, lastSP={}, lastReason='';
+
+function shouldResample(){
+    if(resCnt===0) return 'Init';
+    if(alerts.find(a=>a.level==='critical'&&(pollCount-a.tick)<2)) return 'Crit. Alert';
+    let md=0; for(const id in S) if(id in lastSP) md=Math.max(md,Math.abs(S[id].prob-lastSP[id]));
+    if(md>=0.06) return `Drift ${(md*100).toFixed(1)}%`;
+    if((pollCount-lastResTick)>=8) return 'Periodic';
+    return null;
+}
+
+function runScenarios(N){
+    const ms=Object.values(S),n=ms.length; if(!n)return;
+    const probs=ms.map(m=>m.prob),types=ms.map(m=>m.type);
+    const C=Array.from({length:n},()=>Array(n).fill(0));
+    for(let i=0;i<n;i++)for(let j=0;j<n;j++)C[i][j]=i===j?1:types[i]===types[j]?0.8:gc(types[i],types[j]);
+    const L=Array.from({length:n},()=>Array(n).fill(0));
+    for(let i=0;i<n;i++)for(let j=0;j<=i;j++){let s=0;for(let k=0;k<j;k++)s+=L[i][k]*L[j][k];L[i][j]=i===j?Math.sqrt(Math.max(C[i][i]-s,0.001)):(C[i][j]-s)/(L[j][j]||0.001);}
+
+    const sevs=[],tCounts={},pSums={},stBuf=[];
+    for(let sc=0;sc<N;sc++){
+        const z=Array(n).fill(0).map(()=>randn()),cz=Array(n).fill(0);
+        for(let i=0;i<n;i++)for(let j=0;j<=i;j++)cz[i]+=L[i][j]*z[j];
+        const u=cz.map(v=>0.5*(1+erf(v/Math.SQRT2)));
+        const trig=u.map((ui,i)=>ui<probs[i]);
+        const params={},aT=new Set(),aQ=[];
+        trig.forEach((t,i)=>{if(!t)return;aT.add(ms[i].type);aQ.push(ms[i].q);(DISRUPTION_PROFILES[ms[i].type]||[]).forEach(p=>{if(p.u==='x')params[p.n]=(params[p.n]||1)*p.b;else if(p.u==='%')params[p.n]=Math.max((params[p.n]||0)+p.b,-95);else params[p.n]=Math.max(params[p.n]||0,p.b);});});
+        const pv=Object.entries(params);
+        let ss=pv.map(([nm,val])=>{if(nm.includes('cost')||nm.includes('index')||nm.includes('volatility')||nm.includes('lead')||nm.includes('price'))return Math.min((Math.abs(val)-1)/2,1);if(nm.includes('delay')||nm.includes('downtime'))return Math.min(val/30,1);return Math.min(Math.abs(val)/50,1);}).filter(v=>v>0);
+        const sev=Math.min(ss.length>0?(ss.reduce((a,b)=>a+b,0)/ss.length)+Math.min(aT.size*0.05,0.3):0,1);
+        sevs.push(sev);
+        aT.forEach(t=>{tCounts[t]=(tCounts[t]||0)+1;});
+        for(const[k,v]of Object.entries(params)){if(!pSums[k])pSums[k]=[];pSums[k].push(Math.abs(v));}
+        if(sev>=0.45)stBuf.push({sev:Math.round(sev*1000)/1000,types:[...aT],qs:aQ.slice(0,3),params});
+    }
+    sevs.sort((a,b)=>a-b);
+    const mean=sevs.reduce((a,b)=>a+b,0)/N;
+    const freqs={};for(const[t,c]of Object.entries(tCounts))freqs[t]=Math.round(c/N*1000)/10;
+    const pStats={};for(const[k,vals]of Object.entries(pSums)){vals.sort((a,b)=>a-b);pStats[k]={mean:Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*10)/10,p95:Math.round(vals[Math.floor(vals.length*0.95)]*10)/10};}
+    stBuf.sort((a,b)=>b.sev-a.sev);
+    stressScens=stBuf.slice(0,8);
+    scStats={mean,p5:sevs[Math.floor(N*0.05)],p50:sevs[Math.floor(N*0.5)],p95:sevs[Math.floor(N*0.95)],freqs,pStats,N};
+    lastSP={};for(const id in S)lastSP[id]=S[id].prob;
+    lastResTick=pollCount;resCnt++;
+}
+
+function erf(x){const a1=.254829592,a2=-.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=.3275911;const sg=x<0?-1:1;x=Math.abs(x);const t=1/(1+p*x);return sg*(1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x));}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER SCENARIO PANEL
+// ═══════════════════════════════════════════════════════════════
+let gChart=null;
+
+function renderScenarioPanel(){
+    if(!scStats)return;
+    const s=scStats;
+    document.getElementById('rBdg').textContent=`#${resCnt}`;
+    document.getElementById('rRsn').textContent=lastReason;
+    document.getElementById('rN').textContent=`n=${s.N}`;
+    document.getElementById('sP5').textContent=(s.p5*100).toFixed(1)+'%';
+    const mEl=document.getElementById('sM');
+    mEl.textContent=(s.mean*100).toFixed(1)+'%';
+    mEl.style.color=s.mean>0.6?'var(--crit)':s.mean>0.4?'var(--warn)':'var(--ok)';
+    document.getElementById('sP95').textContent=(s.p95*100).toFixed(1)+'%';
+    document.getElementById('sP95').style.color=s.p95>0.7?'var(--crit)':s.p95>0.5?'var(--warn)':'var(--ok)';
+
+    renderGauge(s.mean);
+
+    // Disruption chips
+    const freqs=Object.entries(s.freqs).sort((a,b)=>b[1]-a[1]);
+    document.getElementById('dfChips').innerHTML=freqs.map(([t,pct])=>{
+        const tc=TC[t]||{c:'var(--db-accent)',bg:'var(--db-navy)',l:t};
+        return `<span class="sc-chip" style="background:${tc.bg};color:${tc.c}">${tc.l} <span class="pct">${pct}%</span></span>`;
+    }).join('');
+
+    // Impact bars (2-column, top 8)
+    const params=Object.entries(s.pStats).sort((a,b)=>b[1].p95-a[1].p95).slice(0,8);
+    const mx=Math.max(...params.map(([,v])=>v.p95),1);
+    let bH='<h4>Parameter Impact (P95)</h4>';
+    params.forEach(([nm,v])=>{
+        const pct=(v.p95/mx)*100,pm=(v.mean/mx)*100;
+        const col=v.p95>40?'var(--crit)':v.p95>20?'var(--warn)':'var(--ok)';
+        bH+=`<div class="sb-row"><span class="sb-lbl" title="${nm}">${nm}</span><div class="sb-track"><div class="sb-fill" style="width:${pm}%;background:${col};opacity:.35"></div><div class="sb-fill-o" style="width:${pct}%;background:${col};left:0"></div></div><span class="sb-val" style="color:${col}">${v.p95}</span></div>`;
+    });
+    document.getElementById('scBars').innerHTML=bH;
+
+    // Stress scenarios — CRITICAL HIGHLIGHT
+    document.getElementById('stFocus').innerHTML=stressScens.map(sc=>{
+        const isCrit=sc.sev>=0.65;
+        const col=isCrit?'var(--crit)':'var(--warn)';
+        const tags=sc.types.map(t=>{const tc=TC[t]||{c:'#7c4dff',bg:'#7c4dff18',l:t};return`<span style="background:${tc.bg};color:${tc.c}">${tc.l}</span>`;}).join('');
+        const evts=sc.qs.map(q=>q.length>28?q.substring(0,27)+'…':q).join('<br>');
+        return `<div class="sf-card ${isCrit?'hi-crit':''}">
+            <div class="sf-sev" style="color:${col}">${(sc.sev*100).toFixed(1)}%</div>
+            <div class="sf-tags">${tags}</div>
+            <div class="sf-evts">${evts}</div>
+        </div>`;
+    }).join('');
+}
+
+function renderGauge(val){
+    if(gChart)gChart.destroy();
+    const ctx=document.getElementById('gC').getContext('2d');
+    const col=val>0.6?'#ff1a40':val>0.4?'#ff9500':'#00e676';
+    gChart=new Chart(ctx,{
+        type:'doughnut',
+        data:{datasets:[{data:[val,1-val],backgroundColor:[col,'#001e3c44'],borderWidth:0,circumference:180,rotation:270}]},
+        options:{responsive:false,cutout:'70%',plugins:{legend:{display:false},tooltip:{enabled:false}}},
+        plugins:[{id:'gt',afterDraw(ch){const{ctx:c,chartArea:a}=ch;c.save();c.fillStyle=col;c.font='bold 13px "JetBrains Mono",monospace';c.textAlign='center';c.fillText((val*100).toFixed(1)+'%',a.width/2+a.left,a.height-1);c.font='6px "JetBrains Mono",monospace';c.fillStyle='#5a7090';c.fillText('SEVERITY',a.width/2+a.left,a.height+7);c.restore();}}]
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CONTROLS
+// ═══════════════════════════════════════════════════════════════
+function togglePause(){
+    paused=!paused;
+    const btn=document.getElementById('btnP'),dot=document.getElementById('hDot');
+    if(paused){
+        clearInterval(timer);
+        btn.textContent='▶'; btn.classList.add('on');
+        dot.className='hdr-dot paused';
+        document.getElementById('hStat').textContent='PAUSED';
+    } else {
+        btn.textContent='⏸'; btn.classList.remove('on');
+        dot.className='hdr-dot live';
+        document.getElementById('hStat').textContent=mode==='live'?'LIVE':'DEMO';
+        startLoop();
+    }
+}
+function setSpeed(s){
+    speed=s;
+    document.querySelectorAll('.hdr-ctrl button:not(#btnP):not(#btnMode)').forEach(b=>b.classList.remove('on'));
+    event.target.classList.add('on');
+    if(!paused){clearInterval(timer);startLoop();}
+}
+function startLoop(){
+    if(mode==='live') timer=setInterval(fetchPipelineState, POLL_MS[speed]||3000);
+    else timer=setInterval(simTick, Math.max(200,2000/speed));
+}
+
+async function manualRefresh(){
+    const btn = document.getElementById('btnRefresh');
+    btn.classList.add('spin');
+    const ok = await fetchPipelineState();
+    if (!ok && mode === 'demo') { simTick(); }
+    setTimeout(() => btn.classList.remove('spin'), 600);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════
+function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+function classifyTrend(h){if(h.length<3)return'stable';const r=h.slice(-5),d=[];for(let i=1;i<r.length;i++)d.push(r[i]-r[i-1]);const avg=d.reduce((a,b)=>a+b,0)/d.length;const vol=Math.sqrt(d.reduce((a,v)=>a+v*v,0)/d.length);if(vol>0.04)return'volatile';if(avg>0.008)return'rising';if(avg<-0.008)return'falling';return'stable';}
+
+// ═══════════════════════════════════════════════════════════════
+// FEATURE 1: WHAT-IF SIMULATOR
+// ═══════════════════════════════════════════════════════════════
+let whatIfMode = false;
+let whatIfOrig = {};  // original probabilities before what-if
+let whatIfStats = null;
+
+function toggleWhatIf() {
+    whatIfMode = !whatIfMode;
+    const btn = document.getElementById('btnWI');
+    const banner = document.getElementById('wiBanner');
+    if (whatIfMode) {
+        btn.classList.add('on');
+        banner.classList.add('active');
+        document.querySelector('.app').classList.add('wi-active');
+        whatIfOrig = {};
+        for (const id in S) whatIfOrig[id] = S[id].prob;
+        runWhatIfScenarios();
+    } else {
+        btn.classList.remove('on');
+        banner.classList.remove('active');
+        document.querySelector('.app').classList.remove('wi-active');
+        for (const id in whatIfOrig) S[id].prob = whatIfOrig[id];
+        whatIfOrig = {};
+        whatIfStats = null;
+    }
+    render();
+}
+
+function resetWhatIf() {
+    for (const id in whatIfOrig) S[id].prob = whatIfOrig[id];
+    runWhatIfScenarios();
+    render();
+}
+
+function onWhatIfSlider(mid, val) {
+    S[mid].prob = val;
+    runWhatIfScenarios();
+    render();
+}
+
+function runWhatIfScenarios() {
+    const ms = Object.values(S), n = ms.length;
+    if (!n) return;
+    const probs = ms.map(m => m.prob), types = ms.map(m => m.type);
+    const N = 300;
+    const C = Array.from({length:n}, () => Array(n).fill(0));
+    for (let i=0;i<n;i++) for (let j=0;j<n;j++) C[i][j]=i===j?1:types[i]===types[j]?0.8:gc(types[i],types[j]);
+    const L = Array.from({length:n}, () => Array(n).fill(0));
+    for (let i=0;i<n;i++) for (let j=0;j<=i;j++) { let s=0; for(let k=0;k<j;k++) s+=L[i][k]*L[j][k]; L[i][j]=i===j?Math.sqrt(Math.max(C[i][i]-s,0.001)):(C[i][j]-s)/(L[j][j]||0.001); }
+    const sevs = [];
+    for (let sc=0;sc<N;sc++) {
+        const z=Array(n).fill(0).map(()=>randn()), cz=Array(n).fill(0);
+        for(let i=0;i<n;i++) for(let j=0;j<=i;j++) cz[i]+=L[i][j]*z[j];
+        const u=cz.map(v=>0.5*(1+erf(v/Math.SQRT2)));
+        const trig=u.map((ui,i)=>ui<probs[i]);
+        const params={}, aT=new Set();
+        trig.forEach((t,i)=>{if(!t)return;aT.add(ms[i].type);(DISRUPTION_PROFILES[ms[i].type]||[]).forEach(p=>{if(p.u==='x')params[p.n]=(params[p.n]||1)*p.b;else if(p.u==='%')params[p.n]=Math.max((params[p.n]||0)+p.b,-95);else params[p.n]=Math.max(params[p.n]||0,p.b);});});
+        const pv=Object.entries(params);
+        let ss=pv.map(([nm,val])=>{if(nm.includes('cost')||nm.includes('index')||nm.includes('volatility')||nm.includes('lead')||nm.includes('price'))return Math.min((Math.abs(val)-1)/2,1);if(nm.includes('delay')||nm.includes('downtime'))return Math.min(val/30,1);return Math.min(Math.abs(val)/50,1);}).filter(v=>v>0);
+        sevs.push(Math.min(ss.length>0?(ss.reduce((a,b)=>a+b,0)/ss.length)+Math.min(aT.size*0.05,0.3):0,1));
+    }
+    sevs.sort((a,b)=>a-b);
+    whatIfStats = { mean:sevs.reduce((a,b)=>a+b,0)/N, p95:sevs[Math.floor(N*0.95)] };
+    renderWhatIfBanner();
+}
+
+function renderWhatIfBanner() {
+    if (!whatIfMode || !whatIfStats || !scStats) return;
+    const orig = scStats.mean;
+    const sim = whatIfStats.mean;
+    const delta = sim - orig;
+    document.getElementById('wiOrig').textContent = (orig*100).toFixed(1)+'%';
+    document.getElementById('wiOrig').style.color = orig>0.6?'var(--crit)':orig>0.4?'var(--warn)':'var(--ok)';
+    document.getElementById('wiSim').textContent = (sim*100).toFixed(1)+'%';
+    document.getElementById('wiSim').style.color = sim>0.6?'var(--crit)':sim>0.4?'var(--warn)':'var(--ok)';
+    const dEl = document.getElementById('wiDelta');
+    dEl.textContent = (delta>0?'+':'') + (delta*100).toFixed(1) + '%';
+    dEl.style.color = delta>0.02?'var(--crit)':delta<-0.02?'var(--ok)':'var(--db-gray)';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FEATURE 2: COMMAND BAR
+// ═══════════════════════════════════════════════════════════════
+let cmdOpen = false;
+const CMD_HELP = [
+    { cmd:'filter <typ>', desc:'Maerkte filtern (geo, energy, trade, agrar, finanz, all)' },
+    { cmd:'sort <feld>', desc:'Sortierung: prob, delta, type, trend, name' },
+    { cmd:'whatif', desc:'What-If Simulator oeffnen/schliessen' },
+    { cmd:'graph', desc:'Cascade Network Graph oeffnen/schliessen' },
+    { cmd:'export', desc:'Aktuellen State als JSON exportieren' },
+    { cmd:'pause', desc:'Pause/Resume umschalten' },
+    { cmd:'speed <1|3|10>', desc:'Geschwindigkeit setzen' },
+    { cmd:'refresh', desc:'Daten manuell aktualisieren' },
+    { cmd:'help', desc:'Diese Hilfe anzeigen' },
+];
+let cmdTypeFilter = 'all';
+let cmdSortField = 'prob';
+
+function openCmdBar() {
+    cmdOpen = true;
+    document.getElementById('cmdBar').classList.add('active');
+    document.getElementById('cmdInput').value = '';
+    document.getElementById('cmdInput').focus();
+    document.getElementById('cmdResult').classList.remove('show');
+}
+
+function closeCmdBar() {
+    cmdOpen = false;
+    document.getElementById('cmdBar').classList.remove('active');
+    document.getElementById('cmdResult').classList.remove('show');
+}
+
+function showCmdResult(lines) {
+    const el = document.getElementById('cmdResult');
+    el.textContent = '';
+    lines.forEach(l => {
+        const div = document.createElement('div');
+        div.className = 'cr-line';
+        div.textContent = l;
+        el.appendChild(div);
+    });
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+function showCmdHelp() {
+    const el = document.getElementById('cmdResult');
+    el.textContent = '';
+    CMD_HELP.forEach(h => {
+        const div = document.createElement('div');
+        div.className = 'cr-line';
+        const cmd = document.createElement('span');
+        cmd.className = 'cr-cmd';
+        cmd.textContent = '/' + h.cmd + '  ';
+        const desc = document.createElement('span');
+        desc.className = 'cr-desc';
+        desc.textContent = h.desc;
+        div.appendChild(cmd);
+        div.appendChild(desc);
+        el.appendChild(div);
+    });
+    el.classList.add('show');
+}
+
+function execCmd(raw) {
+    const parts = raw.trim().toLowerCase().split(/\s+/);
+    const cmd = parts[0];
+    const arg = parts.slice(1).join(' ');
+
+    if (cmd === 'help' || cmd === '?') {
+        showCmdHelp(); return;
+    }
+    if (cmd === 'filter') {
+        const typeMap = {geo:'geopolitical_conflict',energy:'energy_supply',trade:'trade_restriction',
+            logistik:'transport_disruption',agrar:'agricultural_shock',finanz:'financial_crisis',
+            pandemie:'pandemic',klima:'climate_event',tech:'tech_disruption',pol:'political_instability'};
+        if (arg === 'all' || !arg) { cmdTypeFilter = 'all'; showCmdResult(['Filter: ALLE Maerkte']); }
+        else if (typeMap[arg]) { cmdTypeFilter = typeMap[arg]; showCmdResult(['Filter: ' + arg.toUpperCase()]); }
+        else showCmdResult(['Unbekannter Typ. Verfuegbar: ' + Object.keys(typeMap).join(', ') + ', all']);
+        render(); return;
+    }
+    if (cmd === 'sort') {
+        if (['prob','delta','type','trend','name'].includes(arg)) {
+            cmdSortField = arg;
+            showCmdResult(['Sortierung: ' + arg.toUpperCase()]);
+            render();
+        } else showCmdResult(['Verfuegbar: prob, delta, type, trend, name']);
+        return;
+    }
+    if (cmd === 'whatif') { toggleWhatIf(); closeCmdBar(); return; }
+    if (cmd === 'graph') { toggleGraph(); closeCmdBar(); return; }
+    if (cmd === 'pause') { togglePause(); closeCmdBar(); return; }
+    if (cmd === 'refresh') { manualRefresh(); closeCmdBar(); return; }
+    if (cmd === 'speed' && ['1','3','10'].includes(arg)) { setSpeed(parseInt(arg)); showCmdResult(['Speed: ' + arg + 'x']); return; }
+    if (cmd === 'export') {
+        const data = { meta:{mode,pollCount,resCnt}, markets:Object.values(S).map(m=>({id:m.id,q:m.q,type:m.type,prob:m.prob})), scenarios:scStats };
+        const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'provider_export_' + new Date().toISOString().slice(0,19).replace(/:/g,'-') + '.json';
+        a.click();
+        showCmdResult(['Export: ' + a.download]);
+        return;
+    }
+    showCmdResult(['Unbekannter Befehl: /' + cmd + ' — /help fuer Uebersicht']);
+}
+
+document.getElementById('cmdInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { execCmd(e.target.value); e.target.value = ''; }
+    if (e.key === 'Escape') closeCmdBar();
+    e.stopPropagation();
+});
+
+// ═══════════════════════════════════════════════════════════════
+// FEATURE 3: CASCADE GRAPH
+// ═══════════════════════════════════════════════════════════════
+let graphOpen = false;
+let graphAnim = null;
+let graphNodes = [];
+let graphEdges = [];
+let graphHover = -1;   // index of hovered node (-1 = none)
+let graphSelected = -1; // index of selected/clicked node
+let graphDrag = -1;    // index of dragged node
+let graphDragStart = false;
+
+function toggleGraph() {
+    graphOpen ? closeGraph() : openGraph();
+}
+
+function openGraph() {
+    graphOpen = true;
+    document.getElementById('graphOverlay').classList.add('active');
+    document.getElementById('btnGraph').classList.add('on');
+    initGraph();
+}
+
+function closeGraph() {
+    graphOpen = false;
+    graphSelected = -1; graphHover = -1; graphDrag = -1;
+    document.getElementById('graphOverlay').classList.remove('active');
+    document.getElementById('btnGraph').classList.remove('on');
+    document.getElementById('graphDetail').classList.remove('active');
+    if (graphAnim) cancelAnimationFrame(graphAnim);
+}
+
+function hitTestNode(mx, my) {
+    for (let i = graphNodes.length - 1; i >= 0; i--) {
+        const n = graphNodes[i];
+        const dx = mx - n.x, dy = my - n.y;
+        if (dx*dx + dy*dy <= (n.radius + 4) * (n.radius + 4)) return i;
+    }
+    return -1;
+}
+
+function renderGraphDetail(idx) {
+    const panel = document.getElementById('graphDetail');
+    if (idx < 0 || !graphNodes[idx]) { panel.classList.remove('active'); return; }
+    const n = graphNodes[idx];
+    const m = S[n.id];
+    const tc = TC[n.type] || { c:'#7c4dff', bg:'#7c4dff18', l:n.type };
+    const levelL = { critical:'KRITISCH', warning:'WARNUNG', watch:'BEOBACHTUNG', normal:'NORMAL' };
+    const levelC = { critical:'var(--crit)', warning:'var(--warn)', watch:'var(--db-accent)', normal:'var(--ok)' };
+    const trendL = { rising:'\u25B2 Steigend', falling:'\u25BC Fallend', stable:'\u2014 Stabil', volatile:'~ Volatil' };
+    const probCol = n.prob >= CRIT ? 'var(--crit)' : n.prob >= WARN ? 'var(--warn)' : 'var(--ok)';
+
+    // Find connected edges sorted by correlation strength
+    const connected = graphEdges
+        .filter(e => e.a === idx || e.b === idx)
+        .map(e => ({ idx: e.a === idx ? e.b : e.a, w: e.w }))
+        .sort((a, b) => b.w - a.w);
+
+    panel.textContent = '';
+
+    // Header
+    const hdr = document.createElement('div');
+    hdr.className = 'gd-hdr';
+    const tag = document.createElement('span');
+    tag.className = 'gd-tag';
+    tag.style.background = tc.bg; tag.style.color = tc.c;
+    tag.textContent = tc.l;
+    const title = document.createElement('span');
+    title.className = 'gd-title';
+    title.textContent = n.q;
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'gd-close';
+    closeBtn.textContent = '\u2715';
+    closeBtn.onclick = () => { graphSelected = -1; panel.classList.remove('active'); };
+    hdr.appendChild(tag);
+    hdr.appendChild(title);
+    hdr.appendChild(closeBtn);
+    panel.appendChild(hdr);
+
+    // Probability
+    const probSec = document.createElement('div');
+    probSec.className = 'gd-prob';
+    const probVal = document.createElement('span');
+    probVal.className = 'gd-val';
+    probVal.style.color = probCol;
+    probVal.textContent = (n.prob * 100).toFixed(1) + '%';
+    const probLbl = document.createElement('span');
+    probLbl.className = 'gd-lbl';
+    probLbl.textContent = 'Eintrittswahrscheinlichkeit';
+    probSec.appendChild(probVal);
+    probSec.appendChild(probLbl);
+    panel.appendChild(probSec);
+
+    // Stats
+    const stats = document.createElement('div');
+    stats.className = 'gd-stats';
+    const statRows = m ? [
+        ['Alert-Level', levelL[m.level] || m.level, levelC[m.level]],
+        ['Trend', trendL[m.trend] || m.trend, null],
+        ['All-Time High', (m.hi * 100).toFixed(1) + '%', null],
+        ['All-Time Low', (m.lo * 100).toFixed(1) + '%', null],
+        ['EU-Relevanz', (m.rel * 100).toFixed(0) + '%', null],
+    ] : [['Typ', tc.l, tc.c]];
+    statRows.forEach(([k, v, col]) => {
+        const row = document.createElement('div');
+        row.className = 'gd-row';
+        const kEl = document.createElement('span'); kEl.className = 'gd-k'; kEl.textContent = k;
+        const vEl = document.createElement('span'); vEl.className = 'gd-v'; vEl.textContent = v;
+        if (col) vEl.style.color = col;
+        row.appendChild(kEl); row.appendChild(vEl);
+        stats.appendChild(row);
+    });
+    panel.appendChild(stats);
+
+    // Correlations
+    if (connected.length > 0) {
+        const corrSec = document.createElement('div');
+        corrSec.className = 'gd-corr';
+        const ch = document.createElement('h5');
+        ch.textContent = 'Korrelationen (' + connected.length + ' Verbindungen)';
+        corrSec.appendChild(ch);
+        connected.forEach(c => {
+            const cn = graphNodes[c.idx];
+            const ctc = TC[cn.type] || { c:'#7c4dff', l:cn.type };
+            const edge = document.createElement('div');
+            edge.className = 'gd-edge';
+            edge.style.cursor = 'pointer';
+            edge.onclick = () => { graphSelected = c.idx; renderGraphDetail(c.idx); };
+            const lbl = document.createElement('span');
+            lbl.className = 'gd-elbl';
+            lbl.textContent = ctc.l;
+            lbl.style.color = ctc.c;
+            const track = document.createElement('div');
+            track.className = 'gd-bar-track';
+            const fill = document.createElement('div');
+            fill.className = 'gd-bar-fill';
+            fill.style.width = (c.w * 100) + '%';
+            fill.style.background = ctc.c;
+            track.appendChild(fill);
+            const val = document.createElement('span');
+            val.className = 'gd-eval';
+            val.textContent = (c.w * 100).toFixed(0) + '%';
+            val.style.color = c.w >= 0.6 ? 'var(--crit)' : c.w >= 0.4 ? 'var(--warn)' : 'var(--db-gray)';
+            edge.appendChild(lbl); edge.appendChild(track); edge.appendChild(val);
+            corrSec.appendChild(edge);
+        });
+        panel.appendChild(corrSec);
+    }
+
+    // Disruption parameters
+    const profile = DISRUPTION_PROFILES[n.type] || [];
+    if (profile.length) {
+        const paramSec = document.createElement('div');
+        paramSec.className = 'gd-params';
+        const ph = document.createElement('h5');
+        ph.textContent = 'Disruption-Parameter';
+        paramSec.appendChild(ph);
+        profile.forEach(p => {
+            const row = document.createElement('div');
+            row.className = 'gd-param';
+            const pn = document.createElement('span');
+            pn.className = 'gd-pn';
+            pn.textContent = p.n;
+            const pv = document.createElement('span');
+            pv.className = 'gd-pv';
+            const impact = p.u === 'x' ? (1 + (p.b - 1) * n.prob).toFixed(2) + 'x' :
+                           p.u === 'd' ? Math.round(p.b * n.prob) + 'd' :
+                           (p.b * n.prob).toFixed(1) + '%';
+            pv.textContent = impact;
+            pv.style.color = tc.c;
+            row.appendChild(pn); row.appendChild(pv);
+            paramSec.appendChild(row);
+        });
+        panel.appendChild(paramSec);
+    }
+
+    panel.classList.add('active');
+}
+
+function initGraph() {
+    const canvas = document.getElementById('graphCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    const W = canvas.width, H = canvas.height;
+    graphSelected = -1; graphHover = -1; graphDrag = -1;
+    document.getElementById('graphDetail').classList.remove('active');
+
+    // Build nodes from current markets
+    const ms = Object.values(S);
+    graphNodes = ms.map((m, i) => {
+        const tc = TC[m.type] || { c:'#7c4dff', l:m.type };
+        const angle = (2 * Math.PI * i) / ms.length;
+        const r = Math.min(W, H) * 0.3;
+        return {
+            id: m.id, type: m.type, q: m.q, prob: m.prob, level: m.level,
+            color: tc.c, label: tc.l,
+            x: W/2 + r * Math.cos(angle) + (Math.random()-0.5)*40,
+            y: H/2 + r * Math.sin(angle) + (Math.random()-0.5)*40,
+            vx: 0, vy: 0,
+            radius: 8 + m.prob * 22,
+        };
+    });
+
+    // Build edges from CORR_MAP
+    graphEdges = [];
+    for (let i = 0; i < graphNodes.length; i++) {
+        for (let j = i+1; j < graphNodes.length; j++) {
+            const corr = gc(graphNodes[i].type, graphNodes[j].type);
+            if (corr > 0.1) {
+                graphEdges.push({ a:i, b:j, w:corr });
+            }
+        }
+    }
+
+    // Legend
+    const legend = document.getElementById('graphLegend');
+    legend.textContent = '';
+    const seen = new Set();
+    graphNodes.forEach(n => {
+        if (seen.has(n.type)) return;
+        seen.add(n.type);
+        const item = document.createElement('div');
+        item.className = 'gl-item';
+        const dot = document.createElement('span');
+        dot.className = 'gl-dot';
+        dot.style.background = n.color;
+        item.appendChild(dot);
+        item.appendChild(document.createTextNode(n.label));
+        legend.appendChild(item);
+    });
+
+    // ═══ Mouse interaction ═══
+    canvas.onmousemove = (ev) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = ev.clientX - rect.left, my = ev.clientY - rect.top;
+        if (graphDrag >= 0) {
+            const n = graphNodes[graphDrag];
+            n.x = mx; n.y = my; n.vx = 0; n.vy = 0;
+            canvas.style.cursor = 'grabbing';
+            return;
+        }
+        const hit = hitTestNode(mx, my);
+        graphHover = hit;
+        canvas.style.cursor = hit >= 0 ? 'pointer' : 'grab';
+    };
+
+    canvas.onmousedown = (ev) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = ev.clientX - rect.left, my = ev.clientY - rect.top;
+        const hit = hitTestNode(mx, my);
+        if (hit >= 0) {
+            graphDrag = hit;
+            graphDragStart = true;
+            canvas.style.cursor = 'grabbing';
+            ev.preventDefault();
+        }
+    };
+
+    canvas.onmouseup = (ev) => {
+        if (graphDrag >= 0 && graphDragStart) {
+            const rect = canvas.getBoundingClientRect();
+            const mx = ev.clientX - rect.left, my = ev.clientY - rect.top;
+            const n = graphNodes[graphDrag];
+            const dx = mx - n.x, dy = my - n.y;
+            // If barely moved, treat as click
+            if (dx*dx + dy*dy < 25) {
+                graphSelected = graphDrag;
+                renderGraphDetail(graphSelected);
+            }
+        }
+        graphDrag = -1;
+        graphDragStart = false;
+        canvas.style.cursor = 'grab';
+    };
+
+    canvas.onmouseleave = () => {
+        graphHover = -1;
+        if (graphDrag >= 0) { graphDrag = -1; graphDragStart = false; }
+    };
+
+    // Force simulation
+    let frame = 0;
+    function simulate() {
+        frame++;
+        const cooling = Math.max(0.1, 1 - frame/200);
+
+        // Repulsion
+        for (let i = 0; i < graphNodes.length; i++) {
+            if (i === graphDrag) continue;
+            for (let j = i+1; j < graphNodes.length; j++) {
+                if (j === graphDrag) continue;
+                const a = graphNodes[i], b = graphNodes[j];
+                let dx = a.x - b.x, dy = a.y - b.y;
+                let d = Math.sqrt(dx*dx + dy*dy) || 1;
+                const force = 3000 / (d * d) * cooling;
+                const fx = (dx/d) * force, fy = (dy/d) * force;
+                a.vx += fx; a.vy += fy;
+                b.vx -= fx; b.vy -= fy;
+            }
+        }
+
+        // Attraction (edges)
+        graphEdges.forEach(e => {
+            if (e.a === graphDrag || e.b === graphDrag) return;
+            const a = graphNodes[e.a], b = graphNodes[e.b];
+            let dx = b.x - a.x, dy = b.y - a.y;
+            let d = Math.sqrt(dx*dx + dy*dy) || 1;
+            const force = (d - 120) * 0.01 * e.w * cooling;
+            const fx = (dx/d)*force, fy = (dy/d)*force;
+            a.vx += fx; a.vy += fy;
+            b.vx -= fx; b.vy -= fy;
+        });
+
+        // Center gravity
+        graphNodes.forEach((n, i) => {
+            if (i === graphDrag) return;
+            n.vx += (W/2 - n.x) * 0.002;
+            n.vy += (H/2 - n.y) * 0.002;
+            n.vx *= 0.85; n.vy *= 0.85;
+            n.x += n.vx; n.y += n.vy;
+            n.x = Math.max(n.radius, Math.min(W - n.radius, n.x));
+            n.y = Math.max(n.radius, Math.min(H - n.radius, n.y));
+            n.prob = S[n.id] ? S[n.id].prob : n.prob;
+            n.radius = 8 + n.prob * 22;
+        });
+
+        // Draw
+        ctx.clearRect(0, 0, W, H);
+
+        // Edges -- highlight connected to selected/hovered
+        const activeIdx = graphSelected >= 0 ? graphSelected : graphHover;
+        graphEdges.forEach(e => {
+            const a = graphNodes[e.a], b = graphNodes[e.b];
+            const isActive = activeIdx >= 0 && (e.a === activeIdx || e.b === activeIdx);
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            if (isActive) {
+                ctx.strokeStyle = `rgba(0,210,255,${0.3 + e.w * 0.5})`;
+                ctx.lineWidth = e.w * 5;
+            } else if (activeIdx >= 0) {
+                ctx.strokeStyle = `rgba(0,210,255,${e.w * 0.08})`;
+                ctx.lineWidth = e.w * 2;
+            } else {
+                ctx.strokeStyle = `rgba(0,210,255,${e.w * 0.3})`;
+                ctx.lineWidth = e.w * 3;
+            }
+            ctx.stroke();
+        });
+
+        // Correlation labels on highlighted edges
+        if (activeIdx >= 0) {
+            graphEdges.forEach(e => {
+                if (e.a !== activeIdx && e.b !== activeIdx) return;
+                const a = graphNodes[e.a], b = graphNodes[e.b];
+                const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+                ctx.fillStyle = 'rgba(0,10,24,0.8)';
+                ctx.fillRect(mx - 14, my - 6, 28, 12);
+                ctx.fillStyle = '#00d2ff';
+                ctx.font = 'bold 8px JetBrains Mono';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText((e.w * 100).toFixed(0) + '%', mx, my);
+            });
+        }
+
+        // Nodes
+        graphNodes.forEach((n, i) => {
+            const isSel = i === graphSelected;
+            const isHov = i === graphHover;
+            const isConnected = activeIdx >= 0 && graphEdges.some(e => (e.a === activeIdx || e.b === activeIdx) && (e.a === i || e.b === i));
+            const dimmed = activeIdx >= 0 && !isSel && !isHov && !isConnected && i !== activeIdx;
+
+            // Glow for critical or selected
+            if (n.prob >= CRIT || isSel) {
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.radius + (isSel ? 10 : 6), 0, Math.PI*2);
+                ctx.fillStyle = isSel ? n.color + '33' : n.color + '22';
+                ctx.fill();
+            }
+            // Hover ring
+            if (isHov && !isSel) {
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.radius + 4, 0, Math.PI*2);
+                ctx.strokeStyle = '#ffffff44';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+            // Node circle
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.radius, 0, Math.PI*2);
+            ctx.fillStyle = dimmed ? n.color + '15' : n.color + '44';
+            ctx.fill();
+            ctx.strokeStyle = dimmed ? n.color + '40' : n.color;
+            ctx.lineWidth = isSel ? 3 : n.prob >= CRIT ? 2.5 : 1.5;
+            ctx.stroke();
+            // Selection indicator
+            if (isSel) {
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.radius + 2, 0, Math.PI*2);
+                ctx.strokeStyle = '#ffffff88';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([3, 3]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+            // Probability text
+            ctx.fillStyle = dimmed ? '#5a7090' : '#e8edf4';
+            ctx.font = `bold ${Math.max(9, n.radius*0.6)}px JetBrains Mono`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText((n.prob*100).toFixed(0)+'%', n.x, n.y);
+            // Label below
+            ctx.fillStyle = dimmed ? n.color + '40' : n.color;
+            ctx.font = '7px JetBrains Mono';
+            ctx.fillText(n.label, n.x, n.y + n.radius + 9);
+            // Question
+            ctx.fillStyle = dimmed ? '#2a3a50' : '#5a7090';
+            ctx.font = '6px JetBrains Mono';
+            const shortQ = n.q.length > 30 ? n.q.substring(0,29) + '\u2026' : n.q;
+            ctx.fillText(shortQ, n.x, n.y + n.radius + 18);
+        });
+
+        // Update detail panel live if selected
+        if (graphSelected >= 0 && frame % 30 === 0) {
+            const n = graphNodes[graphSelected];
+            if (n) {
+                n.prob = S[n.id] ? S[n.id].prob : n.prob;
+                const probEl = document.querySelector('#graphDetail .gd-val');
+                if (probEl) {
+                    probEl.textContent = (n.prob * 100).toFixed(1) + '%';
+                    probEl.style.color = n.prob >= CRIT ? 'var(--crit)' : n.prob >= WARN ? 'var(--warn)' : 'var(--ok)';
+                }
+            }
+        }
+
+        graphAnim = requestAnimationFrame(simulate);
+    }
+    simulate();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// KEYBOARD HANDLER (updated with all features)
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('keydown',e=>{
+    // Command bar captures its own input
+    if (cmdOpen && e.target.id === 'cmdInput') return;
+
+    const n = sortedIds.length;
+    if(e.key==='/') { e.preventDefault(); openCmdBar(); }
+    else if(e.key==='Escape'){
+        if (cmdOpen) closeCmdBar();
+        else if (graphOpen) closeGraph();
+        else if (detailView) closeDetail();
+        else if (selIdx >= 0) { selIdx = -1; render(); }
+    }
+    else if(e.key==='ArrowDown'){
+        e.preventDefault();
+        selIdx = n === 0 ? -1 : selIdx < 0 ? 0 : Math.min(selIdx + 1, n - 1);
+        if (detailView) openDetail(); else render();
+    } else if(e.key==='ArrowUp'){
+        e.preventDefault();
+        selIdx = n === 0 ? -1 : selIdx <= 0 ? 0 : selIdx - 1;
+        if (detailView) openDetail(); else render();
+    } else if(e.key==='Enter'){
+        e.preventDefault();
+        if(selIdx >= 0) openDetail();
+    } else if(e.key===' '){e.preventDefault();togglePause();}
+    else if(e.key==='w'||e.key==='W')toggleWhatIf();
+    else if(e.key==='g'||e.key==='G')toggleGraph();
+    else if(e.key==='1')setSpeed(1);
+    else if(e.key==='2')setSpeed(3);
+    else if(e.key==='3')setSpeed(10);
+    else if(e.key==='r'||e.key==='R')manualRefresh();
+    else if(e.key==='m'||e.key==='M')switchMode(mode==='live'?'demo':'live');
+});
+
+// ═══════════════════════════════════════════════════════════════
+// AUTH GATE — SHA-256 hash check
+// ═══════════════════════════════════════════════════════════════
+const AUTH_KEY = 'provider_auth';
+// Password hash computed at init (base64-encoded to avoid plaintext in source)
+const _PK = [80,82,79,86,73,68,69,82,45,82,105,115,107,84,101,114,109,105,110,97,108];
+let AUTH_HASH = null;
+
+async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+(async () => { AUTH_HASH = await sha256(String.fromCharCode(..._PK)); })();
+
+async function checkAuth(pw) {
+    if (!AUTH_HASH) AUTH_HASH = await sha256(String.fromCharCode(..._PK));
+    return (await sha256(pw)) === AUTH_HASH;
+}
+
+function unlockApp() {
+    document.getElementById('authGate').classList.add('hidden');
+    document.getElementById('appMain').style.display = '';
+    sessionStorage.setItem(AUTH_KEY, '1');
+    boot();
+}
+
+document.getElementById('authPw').addEventListener('keydown', async (e) => {
+    if (e.key !== 'Enter') return;
+    const pw = e.target.value;
+    if (await checkAuth(pw)) {
+        unlockApp();
+    } else {
+        document.getElementById('authErr').textContent = 'Falsches Passwort';
+        e.target.value = '';
+        e.target.style.borderColor = 'var(--crit)';
+        setTimeout(() => e.target.style.borderColor = '', 1000);
+    }
+});
+
+// Skip gate if already authenticated this session
+if (sessionStorage.getItem(AUTH_KEY) === '1') {
+    unlockApp();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BOOT — Auto-detect: pipeline_state.json → LIVE, otherwise DEMO
+// ═══════════════════════════════════════════════════════════════
+async function boot() {
+    const ok = await fetchPipelineState();
+    if (ok) {
+        mode = 'live';
+        document.getElementById('hStat').textContent = 'LIVE';
+        document.getElementById('hDot').className = 'hdr-dot live';
+        document.getElementById('btnMode').textContent = 'LIVE';
+        document.getElementById('btnMode').classList.add('on');
+        timer = setInterval(fetchPipelineState, POLL_MS[speed] || 3000);
+        render();
+    } else {
+        mode = 'demo';
+        document.getElementById('hStat').textContent = 'DEMO';
+        document.getElementById('btnMode').textContent = 'DEMO';
+        initState();
+        simTick();
+        startLoop();
+    }
+}
+</script>
+</body>
+</html>
