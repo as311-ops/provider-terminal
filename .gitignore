@@ -3,7 +3,6 @@ __pycache__/
 .venv/
 venv/
 monitor_state.json
-pipeline_state.json
 scenarios_output/
 *.tar.gz
 .DS_Store

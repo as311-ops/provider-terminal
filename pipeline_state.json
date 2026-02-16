@@ -1,0 +1,4692 @@
+{
+  "meta": {
+    "last_updated": "2026-02-15T11:15:18.962963+00:00",
+    "poll_count": 1,
+    "resample_count": 1,
+    "last_resample_reason": "Erster Lauf",
+    "markets_monitored": 194
+  },
+  "markets": [
+    {
+      "market_id": "1013523",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.9805,
+      "previous_probability": 0.9805,
+      "probability_history": [
+        0.9805
+      ],
+      "all_time_high": 0.9805,
+      "all_time_low": 0.9805,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "1013522",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.979,
+      "previous_probability": 0.979,
+      "probability_history": [
+        0.979
+      ],
+      "all_time_high": 0.979,
+      "all_time_low": 0.979,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "1013524",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.977,
+      "previous_probability": 0.977,
+      "probability_history": [
+        0.977
+      ],
+      "all_time_high": 0.977,
+      "all_time_low": 0.977,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "964477",
+      "question": "Will the ECB announce no change at the March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.957,
+      "previous_probability": 0.957,
+      "probability_history": [
+        0.957
+      ],
+      "all_time_high": 0.957,
+      "all_time_low": 0.957,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "664911",
+      "question": "Will the Fed Cut–Pause–Pause in the next three decisions (Dec–Jan–Mar)?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.925,
+      "previous_probability": 0.925,
+      "probability_history": [
+        0.925
+      ],
+      "all_time_high": 0.925,
+      "all_time_low": 0.925,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "654414",
+      "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.925,
+      "previous_probability": 0.925,
+      "probability_history": [
+        0.925
+      ],
+      "all_time_high": 0.925,
+      "all_time_low": 0.925,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "1013525",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.913,
+      "previous_probability": 0.913,
+      "probability_history": [
+        0.913
+      ],
+      "all_time_high": 0.913,
+      "all_time_low": 0.913,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "608410",
+      "question": "Will Anthropic not IPO by June 30, 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.905,
+      "previous_probability": 0.905,
+      "probability_history": [
+        0.905
+      ],
+      "all_time_high": 0.905,
+      "all_time_low": 0.905,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "690221",
+      "question": "Will the Fed’s lower bound reach 3.25% or lower before 2027?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.905,
+      "previous_probability": 0.905,
+      "probability_history": [
+        0.905
+      ],
+      "all_time_high": 0.905,
+      "all_time_low": 0.905,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "576880",
+      "question": "Will US GDP growth in 2025 be between 2.0% and 2.5%?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.9,
+      "previous_probability": 0.9,
+      "probability_history": [
+        0.9
+      ],
+      "all_time_high": 0.9,
+      "all_time_low": 0.9,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "517311",
+      "question": "Will Trump deport 250,000-500,000 people?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.8,
+      "current_probability": 0.8685,
+      "previous_probability": 0.8685,
+      "probability_history": [
+        0.8685
+      ],
+      "all_time_high": 0.8685,
+      "all_time_low": 0.8685,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "991022",
+      "question": "No change in Bank of Japan's interest rates after March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.855,
+      "previous_probability": 0.855,
+      "probability_history": [
+        0.855
+      ],
+      "all_time_high": 0.855,
+      "all_time_low": 0.855,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "690220",
+      "question": "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.835,
+      "previous_probability": 0.835,
+      "probability_history": [
+        0.835
+      ],
+      "all_time_high": 0.835,
+      "all_time_low": 0.835,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "1013526",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $8 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.8115,
+      "previous_probability": 0.8115,
+      "probability_history": [
+        0.8115
+      ],
+      "all_time_high": 0.8115,
+      "all_time_low": 0.8115,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "949495",
+      "question": "Fed rate cut by June 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.755,
+      "previous_probability": 0.755,
+      "probability_history": [
+        0.755
+      ],
+      "all_time_high": 0.755,
+      "all_time_low": 0.755,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "669662",
+      "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.74,
+      "previous_probability": 0.74,
+      "probability_history": [
+        0.74
+      ],
+      "all_time_high": 0.74,
+      "all_time_low": 0.74,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "562186",
+      "question": "Will Ken Paxton win the 2026 Texas Republican Primary?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 0.8,
+      "current_probability": 0.68,
+      "previous_probability": 0.68,
+      "probability_history": [
+        0.68
+      ],
+      "all_time_high": 0.68,
+      "all_time_low": 0.68,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "690215",
+      "question": "Will the Fed’s lower bound reach 2.75% or lower before 2027?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.63,
+      "previous_probability": 0.63,
+      "probability_history": [
+        0.63
+      ],
+      "all_time_high": 0.63,
+      "all_time_low": 0.63,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "1320800",
+      "question": "Will Russia capture all of Pokrovsk by March 31?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.625,
+      "previous_probability": 0.625,
+      "probability_history": [
+        0.625
+      ],
+      "all_time_high": 0.625,
+      "all_time_low": 0.625,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "787477",
+      "question": "Will CDU win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.625,
+      "previous_probability": 0.625,
+      "probability_history": [
+        0.625
+      ],
+      "all_time_high": 0.625,
+      "all_time_low": 0.625,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "critical"
+    },
+    {
+      "market_id": "540816",
+      "question": "Russia-Ukraine Ceasefire before GTA VI?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 1.0,
+      "current_probability": 0.595,
+      "previous_probability": 0.595,
+      "probability_history": [
+        0.595
+      ],
+      "all_time_high": 0.595,
+      "all_time_low": 0.595,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "950853",
+      "question": "Will Gold have the best performance in 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.585,
+      "previous_probability": 0.585,
+      "probability_history": [
+        0.585
+      ],
+      "all_time_high": 0.585,
+      "all_time_low": 0.585,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "1013527",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $10 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.585,
+      "previous_probability": 0.585,
+      "probability_history": [
+        0.585
+      ],
+      "all_time_high": 0.585,
+      "all_time_low": 0.585,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "999108",
+      "question": "ECB rate cut in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.545,
+      "previous_probability": 0.545,
+      "probability_history": [
+        0.545
+      ],
+      "all_time_high": 0.545,
+      "all_time_low": 0.545,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "958427",
+      "question": "Israel x Iran ceasefire broken by June 30, 2026?",
+      "disruption_type": "energy_supply",
+      "eu_relevance": 0.9,
+      "current_probability": 0.53,
+      "previous_probability": 0.53,
+      "probability_history": [
+        0.53
+      ],
+      "all_time_high": 0.53,
+      "all_time_low": 0.53,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "540843",
+      "question": "Will China invades Taiwan before GTA VI?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 0.9,
+      "current_probability": 0.515,
+      "previous_probability": 0.515,
+      "probability_history": [
+        0.515
+      ],
+      "all_time_high": 0.515,
+      "all_time_low": 0.515,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "906973",
+      "question": "Will the Fed decrease interest rates by 25 bps after the June 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.51,
+      "previous_probability": 0.51,
+      "probability_history": [
+        0.51
+      ],
+      "all_time_high": 0.51,
+      "all_time_low": 0.51,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "540844",
+      "question": "Will bitcoin hit $1m before GTA VI?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.485,
+      "previous_probability": 0.485,
+      "probability_history": [
+        0.485
+      ],
+      "all_time_high": 0.485,
+      "all_time_low": 0.485,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "608368",
+      "question": "Will OpenAI not IPO by December 31, 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.455,
+      "previous_probability": 0.455,
+      "probability_history": [
+        0.455
+      ],
+      "all_time_high": 0.455,
+      "all_time_low": 0.455,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "1249981",
+      "question": "Bank of Japan increases interest rates by 25 bps after the April 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.455,
+      "previous_probability": 0.455,
+      "probability_history": [
+        0.455
+      ],
+      "all_time_high": 0.455,
+      "all_time_low": 0.455,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "1343082",
+      "question": "Will USD/KRW hit 1500 (High) in 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.43,
+      "previous_probability": 0.43,
+      "probability_history": [
+        0.43
+      ],
+      "all_time_high": 0.43,
+      "all_time_low": 0.43,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "567687",
+      "question": "Russia x Ukraine ceasefire by end of 2026?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.415,
+      "previous_probability": 0.415,
+      "probability_history": [
+        0.415
+      ],
+      "all_time_high": 0.415,
+      "all_time_low": 0.415,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "670098",
+      "question": "Canada recession before 2027?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.9,
+      "current_probability": 0.415,
+      "previous_probability": 0.415,
+      "probability_history": [
+        0.415
+      ],
+      "all_time_high": 0.415,
+      "all_time_low": 0.415,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "678687",
+      "question": "Will 2026 be the second-hottest year on record?",
+      "disruption_type": "climate_event",
+      "eu_relevance": 0.7,
+      "current_probability": 0.41,
+      "previous_probability": 0.41,
+      "probability_history": [
+        0.41
+      ],
+      "all_time_high": 0.41,
+      "all_time_low": 0.41,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "warning"
+    },
+    {
+      "market_id": "906974",
+      "question": "Will there be no change in Fed interest rates after the June 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.375,
+      "previous_probability": 0.375,
+      "probability_history": [
+        0.375
+      ],
+      "all_time_high": 0.375,
+      "all_time_low": 0.375,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "787480",
+      "question": "Will SPD win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.365,
+      "previous_probability": 0.365,
+      "probability_history": [
+        0.365
+      ],
+      "all_time_high": 0.365,
+      "all_time_low": 0.365,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "677356",
+      "question": "Will India strike Pakistan by December 31, 2026?",
+      "disruption_type": "energy_supply",
+      "eu_relevance": 0.9,
+      "current_probability": 0.355,
+      "previous_probability": 0.355,
+      "probability_history": [
+        0.355
+      ],
+      "all_time_high": 0.355,
+      "all_time_low": 0.355,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "1138161",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $12 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.345,
+      "previous_probability": 0.345,
+      "probability_history": [
+        0.345
+      ],
+      "all_time_high": 0.345,
+      "all_time_low": 0.345,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "608398",
+      "question": "Will Discord’s market cap be less than $15B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.32,
+      "previous_probability": 0.32,
+      "probability_history": [
+        0.32
+      ],
+      "all_time_high": 0.32,
+      "all_time_low": 0.32,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "680949",
+      "question": "Will inflation reach more than 3% in 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.32,
+      "previous_probability": 0.32,
+      "probability_history": [
+        0.32
+      ],
+      "all_time_high": 0.32,
+      "all_time_low": 0.32,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "666696",
+      "question": "Israel x Iran ceasefire broken by March 31, 2026?",
+      "disruption_type": "energy_supply",
+      "eu_relevance": 0.9,
+      "current_probability": 0.315,
+      "previous_probability": 0.315,
+      "probability_history": [
+        0.315
+      ],
+      "all_time_high": 0.315,
+      "all_time_low": 0.315,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "663583",
+      "question": "Will the Iranian regime fall before 2027?",
+      "disruption_type": "political_instability",
+      "eu_relevance": 0.8,
+      "current_probability": 0.315,
+      "previous_probability": 0.315,
+      "probability_history": [
+        0.315
+      ],
+      "all_time_high": 0.315,
+      "all_time_low": 0.315,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "666823",
+      "question": "U.S. agrees to a new trade deal with \"Argentina\" before 2027?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.285,
+      "previous_probability": 0.285,
+      "probability_history": [
+        0.285
+      ],
+      "all_time_high": 0.285,
+      "all_time_low": 0.285,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "949494",
+      "question": "Fed rate cut by April 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.275,
+      "previous_probability": 0.275,
+      "probability_history": [
+        0.275
+      ],
+      "all_time_high": 0.275,
+      "all_time_low": 0.275,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "1006892",
+      "question": "Will Russia capture Lyman by March 31, 2026?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.27,
+      "previous_probability": 0.27,
+      "probability_history": [
+        0.27
+      ],
+      "all_time_high": 0.27,
+      "all_time_low": 0.27,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "666822",
+      "question": "U.S. agrees to a new trade deal with \"Indonesia\" before 2027?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.265,
+      "previous_probability": 0.265,
+      "probability_history": [
+        0.265
+      ],
+      "all_time_high": 0.265,
+      "all_time_low": 0.265,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "616904",
+      "question": "Will 2 Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.265,
+      "previous_probability": 0.265,
+      "probability_history": [
+        0.265
+      ],
+      "all_time_high": 0.265,
+      "all_time_low": 0.265,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "950852",
+      "question": "Will Bitcoin have the best performance in 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.265,
+      "previous_probability": 0.265,
+      "probability_history": [
+        0.265
+      ],
+      "all_time_high": 0.265,
+      "all_time_low": 0.265,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "586301",
+      "question": "Supreme Court rules in favor of Trump's tariffs?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.255,
+      "previous_probability": 0.255,
+      "probability_history": [
+        0.255
+      ],
+      "all_time_high": 0.255,
+      "all_time_low": 0.255,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "678689",
+      "question": "Will 2026 be the fourth-hottest year on record?",
+      "disruption_type": "climate_event",
+      "eu_relevance": 0.7,
+      "current_probability": 0.255,
+      "previous_probability": 0.255,
+      "probability_history": [
+        0.255
+      ],
+      "all_time_high": 0.255,
+      "all_time_low": 0.255,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "watch"
+    },
+    {
+      "market_id": "616905",
+      "question": "Will 3 Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.24,
+      "previous_probability": 0.24,
+      "probability_history": [
+        0.24
+      ],
+      "all_time_high": 0.24,
+      "all_time_low": 0.24,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608363",
+      "question": "Will OpenAI’s market cap be between $500B and $750B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.2355,
+      "previous_probability": 0.2355,
+      "probability_history": [
+        0.2355
+      ],
+      "all_time_high": 0.2355,
+      "all_time_low": 0.2355,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "690214",
+      "question": "Will the Fed’s lower bound reach 2.5% or lower before 2027?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.235,
+      "previous_probability": 0.235,
+      "probability_history": [
+        0.235
+      ],
+      "all_time_high": 0.235,
+      "all_time_low": 0.235,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "562187",
+      "question": "Will John Cornyn win the 2026 Texas Republican Primary?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.9,
+      "current_probability": 0.23,
+      "previous_probability": 0.23,
+      "probability_history": [
+        0.23
+      ],
+      "all_time_high": 0.23,
+      "all_time_low": 0.23,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "609655",
+      "question": "US recession by end of 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.9,
+      "current_probability": 0.23,
+      "previous_probability": 0.23,
+      "probability_history": [
+        0.23
+      ],
+      "all_time_high": 0.23,
+      "all_time_low": 0.23,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "666818",
+      "question": "U.S. agrees to a new trade deal with \"India\" before 2027?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.22,
+      "previous_probability": 0.22,
+      "probability_history": [
+        0.22
+      ],
+      "all_time_high": 0.22,
+      "all_time_low": 0.22,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "666827",
+      "question": "U.S. agrees to a new trade deal with \"South Korea\" before 2027?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.22,
+      "previous_probability": 0.22,
+      "probability_history": [
+        0.22
+      ],
+      "all_time_high": 0.22,
+      "all_time_low": 0.22,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "669661",
+      "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.22,
+      "previous_probability": 0.22,
+      "probability_history": [
+        0.22
+      ],
+      "all_time_high": 0.22,
+      "all_time_low": 0.22,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "666829",
+      "question": "U.S. agrees to a new trade deal with \"Pakistan\" before 2027?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.205,
+      "previous_probability": 0.205,
+      "probability_history": [
+        0.205
+      ],
+      "all_time_high": 0.205,
+      "all_time_low": 0.205,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "677147",
+      "question": "Fed emergency rate cut before 2027?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.205,
+      "previous_probability": 0.205,
+      "probability_history": [
+        0.205
+      ],
+      "all_time_high": 0.205,
+      "all_time_low": 0.205,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1114183",
+      "question": "Will Russia capture Rodynske by February 28?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.2,
+      "previous_probability": 0.2,
+      "probability_history": [
+        0.2
+      ],
+      "all_time_high": 0.2,
+      "all_time_low": 0.2,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "691340",
+      "question": "AI Industry Downturn by December 31, 2026?",
+      "disruption_type": "tech_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.198,
+      "previous_probability": 0.198,
+      "probability_history": [
+        0.198
+      ],
+      "all_time_high": 0.198,
+      "all_time_low": 0.198,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "678686",
+      "question": "Will 2026 be the hottest year on record?",
+      "disruption_type": "climate_event",
+      "eu_relevance": 0.7,
+      "current_probability": 0.195,
+      "previous_probability": 0.195,
+      "probability_history": [
+        0.195
+      ],
+      "all_time_high": 0.195,
+      "all_time_low": 0.195,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1032260",
+      "question": "Will Gold (GC) settle at $5,000-$5,400 in June?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.1945,
+      "previous_probability": 0.1945,
+      "probability_history": [
+        0.1945
+      ],
+      "all_time_high": 0.1945,
+      "all_time_low": 0.1945,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1176221",
+      "question": "U.S. agrees to a new trade deal with \"Taiwan\" before 2027?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.178,
+      "previous_probability": 0.178,
+      "probability_history": [
+        0.178
+      ],
+      "all_time_high": 0.178,
+      "all_time_low": 0.178,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1126854",
+      "question": "Will the Court Force Trump to Refund Tariffs?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.175,
+      "previous_probability": 0.175,
+      "probability_history": [
+        0.175
+      ],
+      "all_time_high": 0.175,
+      "all_time_low": 0.175,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608399",
+      "question": "Will Discord’s market cap be between $15B and $20B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.172,
+      "previous_probability": 0.172,
+      "probability_history": [
+        0.172
+      ],
+      "all_time_high": 0.172,
+      "all_time_low": 0.172,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1259282",
+      "question": "Tariff increase on Canada in effect by June 30?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.165,
+      "previous_probability": 0.165,
+      "probability_history": [
+        0.165
+      ],
+      "all_time_high": 0.165,
+      "all_time_low": 0.165,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616903",
+      "question": "Will 1 Fed rate cut happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.165,
+      "previous_probability": 0.165,
+      "probability_history": [
+        0.165
+      ],
+      "all_time_high": 0.165,
+      "all_time_low": 0.165,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "950854",
+      "question": "Will the S&P 500 have the best performance in 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.165,
+      "previous_probability": 0.165,
+      "probability_history": [
+        0.165
+      ],
+      "all_time_high": 0.165,
+      "all_time_low": 0.165,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1032261",
+      "question": "Will Gold (GC) settle at $5,400-$5,800 in June?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.165,
+      "previous_probability": 0.165,
+      "probability_history": [
+        0.165
+      ],
+      "all_time_high": 0.165,
+      "all_time_low": 0.165,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608400",
+      "question": "Will Discord’s market cap be between $20B and $25B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.16,
+      "previous_probability": 0.16,
+      "probability_history": [
+        0.16
+      ],
+      "all_time_high": 0.16,
+      "all_time_low": 0.16,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1007579",
+      "question": "Will Russia capture Sumy by March 31, 2027?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.155,
+      "previous_probability": 0.155,
+      "probability_history": [
+        0.155
+      ],
+      "all_time_high": 0.155,
+      "all_time_low": 0.155,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "704240",
+      "question": "2k+ container ship transits of Suez Canal in H1 2026?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.155,
+      "previous_probability": 0.155,
+      "probability_history": [
+        0.155
+      ],
+      "all_time_high": 0.155,
+      "all_time_low": 0.155,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1032259",
+      "question": "Will Gold (GC) settle at $4,600-$5,000 in June?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.155,
+      "previous_probability": 0.155,
+      "probability_history": [
+        0.155
+      ],
+      "all_time_high": 0.155,
+      "all_time_low": 0.155,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1007260",
+      "question": "Will Russia capture all of Pokrovsk by February 28?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.15,
+      "previous_probability": 0.15,
+      "probability_history": [
+        0.15
+      ],
+      "all_time_high": 0.15,
+      "all_time_low": 0.15,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "690212",
+      "question": "Will the Fed’s lower bound reach 2.25% or lower before 2027?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.15,
+      "previous_probability": 0.15,
+      "probability_history": [
+        0.15
+      ],
+      "all_time_high": 0.15,
+      "all_time_low": 0.15,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "999095",
+      "question": "ECB rate hike in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.145,
+      "previous_probability": 0.145,
+      "probability_history": [
+        0.145
+      ],
+      "all_time_high": 0.145,
+      "all_time_low": 0.145,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "991023",
+      "question": "Bank of Japan increases interest rates by 25 bps after March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.14,
+      "previous_probability": 0.14,
+      "probability_history": [
+        0.14
+      ],
+      "all_time_high": 0.14,
+      "all_time_low": 0.14,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1032263",
+      "question": "Will Gold (GC) settle at >$6,200 in June?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.1395,
+      "previous_probability": 0.1395,
+      "probability_history": [
+        0.1395
+      ],
+      "all_time_high": 0.1395,
+      "all_time_low": 0.1395,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608403",
+      "question": "Will Discord not IPO by June 30, 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.135,
+      "previous_probability": 0.135,
+      "probability_history": [
+        0.135
+      ],
+      "all_time_high": 0.135,
+      "all_time_low": 0.135,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "955825",
+      "question": "Nuclear weapon detonation by December 31?",
+      "disruption_type": "energy_supply",
+      "eu_relevance": 0.7,
+      "current_probability": 0.135,
+      "previous_probability": 0.135,
+      "probability_history": [
+        0.135
+      ],
+      "all_time_high": 0.135,
+      "all_time_low": 0.135,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616906",
+      "question": "Will 4 Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.125,
+      "previous_probability": 0.125,
+      "probability_history": [
+        0.125
+      ],
+      "all_time_high": 0.125,
+      "all_time_low": 0.125,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1032257",
+      "question": "Will Gold (GC) settle at $4,200-$4,600 in June?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.1195,
+      "previous_probability": 0.1195,
+      "probability_history": [
+        0.1195
+      ],
+      "all_time_high": 0.1195,
+      "all_time_low": 0.1195,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "680601",
+      "question": "Negative GDP growth in 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.116,
+      "previous_probability": 0.116,
+      "probability_history": [
+        0.116
+      ],
+      "all_time_high": 0.116,
+      "all_time_low": 0.116,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "663472",
+      "question": "Will Trump meet with Putin by March 31, 2026?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.115,
+      "previous_probability": 0.115,
+      "probability_history": [
+        0.115
+      ],
+      "all_time_high": 0.115,
+      "all_time_low": 0.115,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608402",
+      "question": "Will Discord’s market cap be $30B or greater at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.115,
+      "previous_probability": 0.115,
+      "probability_history": [
+        0.115
+      ],
+      "all_time_high": 0.115,
+      "all_time_low": 0.115,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "908713",
+      "question": "Fed rate hike in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.115,
+      "previous_probability": 0.115,
+      "probability_history": [
+        0.115
+      ],
+      "all_time_high": 0.115,
+      "all_time_low": 0.115,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1013528",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $15 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.11,
+      "previous_probability": 0.11,
+      "probability_history": [
+        0.11
+      ],
+      "all_time_high": 0.11,
+      "all_time_low": 0.11,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "670370",
+      "question": "OpenAI receives federal backstop for infrastructure before July?",
+      "disruption_type": "tech_disruption",
+      "eu_relevance": 0.7,
+      "current_probability": 0.11,
+      "previous_probability": 0.11,
+      "probability_history": [
+        0.11
+      ],
+      "all_time_high": 0.11,
+      "all_time_low": 0.11,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "567621",
+      "question": "Will China invade Taiwan by end of 2026?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 0.9,
+      "current_probability": 0.105,
+      "previous_probability": 0.105,
+      "probability_history": [
+        0.105
+      ],
+      "all_time_high": 0.105,
+      "all_time_low": 0.105,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "680950",
+      "question": "Will inflation reach more than 4% in 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.105,
+      "previous_probability": 0.105,
+      "probability_history": [
+        0.105
+      ],
+      "all_time_high": 0.105,
+      "all_time_low": 0.105,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1342933",
+      "question": "Will GBP/USD hit 1.60 (High) in 2026?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.105,
+      "previous_probability": 0.105,
+      "probability_history": [
+        0.105
+      ],
+      "all_time_high": 0.105,
+      "all_time_low": 0.105,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "576881",
+      "question": "Will US GDP growth in 2025 be greater than 2.5%?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0965,
+      "previous_probability": 0.0965,
+      "probability_history": [
+        0.0965
+      ],
+      "all_time_high": 0.0965,
+      "all_time_low": 0.0965,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1259129",
+      "question": "100% tariff on Canada in effect by June 30?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.095,
+      "previous_probability": 0.095,
+      "probability_history": [
+        0.095
+      ],
+      "all_time_high": 0.095,
+      "all_time_low": 0.095,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1032262",
+      "question": "Will Gold (GC) settle at $5,800-$6,200 in June?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0935,
+      "previous_probability": 0.0935,
+      "probability_history": [
+        0.0935
+      ],
+      "all_time_high": 0.0935,
+      "all_time_low": 0.0935,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608401",
+      "question": "Will Discord’s market cap be between $25B and $30B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.09,
+      "previous_probability": 0.09,
+      "probability_history": [
+        0.09
+      ],
+      "all_time_high": 0.09,
+      "all_time_low": 0.09,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608364",
+      "question": "Will OpenAI’s market cap be between $750B and $1T at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.088,
+      "previous_probability": 0.088,
+      "probability_history": [
+        0.088
+      ],
+      "all_time_high": 0.088,
+      "all_time_low": 0.088,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "559651",
+      "question": "Xi Jinping out before 2027?",
+      "disruption_type": "political_instability",
+      "eu_relevance": 0.7,
+      "current_probability": 0.085,
+      "previous_probability": 0.085,
+      "probability_history": [
+        0.085
+      ],
+      "all_time_high": 0.085,
+      "all_time_low": 0.085,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608365",
+      "question": "Will OpenAI’s market cap be between $1T and $1.25T at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.082,
+      "previous_probability": 0.082,
+      "probability_history": [
+        0.082
+      ],
+      "all_time_high": 0.082,
+      "all_time_low": 0.082,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "906972",
+      "question": "Will the Fed decrease interest rates by 50+ bps after the June 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.08,
+      "previous_probability": 0.08,
+      "probability_history": [
+        0.08
+      ],
+      "all_time_high": 0.08,
+      "all_time_low": 0.08,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "562190",
+      "question": "Will Wesley Hunt win the 2026 Texas Republican Primary?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 0.8,
+      "current_probability": 0.078,
+      "previous_probability": 0.078,
+      "probability_history": [
+        0.078
+      ],
+      "all_time_high": 0.078,
+      "all_time_low": 0.078,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "610379",
+      "question": "Ukraine recognizes Russian sovereignty over its territory by June 30, 2026?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.075,
+      "previous_probability": 0.075,
+      "probability_history": [
+        0.075
+      ],
+      "all_time_high": 0.075,
+      "all_time_low": 0.075,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "949493",
+      "question": "Fed rate cut by March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.075,
+      "previous_probability": 0.075,
+      "probability_history": [
+        0.075
+      ],
+      "all_time_high": 0.075,
+      "all_time_low": 0.075,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1136710",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $16 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.075,
+      "previous_probability": 0.075,
+      "probability_history": [
+        0.075
+      ],
+      "all_time_high": 0.075,
+      "all_time_low": 0.075,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "592882",
+      "question": "Nuclear weapon detonation by June 30?",
+      "disruption_type": "energy_supply",
+      "eu_relevance": 0.7,
+      "current_probability": 0.075,
+      "previous_probability": 0.075,
+      "probability_history": [
+        0.075
+      ],
+      "all_time_high": 0.075,
+      "all_time_low": 0.075,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "678688",
+      "question": "Will 2026 be the third-hottest year on record?",
+      "disruption_type": "climate_event",
+      "eu_relevance": 0.7,
+      "current_probability": 0.0745,
+      "previous_probability": 0.0745,
+      "probability_history": [
+        0.0745
+      ],
+      "all_time_high": 0.0745,
+      "all_time_low": 0.0745,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1032256",
+      "question": "Will Gold (GC) settle at $3,800-$4,200 in June?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.074,
+      "previous_probability": 0.074,
+      "probability_history": [
+        0.074
+      ],
+      "all_time_high": 0.074,
+      "all_time_low": 0.074,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "664912",
+      "question": "Will the Fed Cut–Pause–Cut in the next three decisions (Dec–Jan–Mar)?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.065,
+      "previous_probability": 0.065,
+      "probability_history": [
+        0.065
+      ],
+      "all_time_high": 0.065,
+      "all_time_low": 0.065,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "654413",
+      "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.065,
+      "previous_probability": 0.065,
+      "probability_history": [
+        0.065
+      ],
+      "all_time_high": 0.065,
+      "all_time_low": 0.065,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1032255",
+      "question": "Will Gold (GC) settle at <$3,800 in June?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.064,
+      "previous_probability": 0.064,
+      "probability_history": [
+        0.064
+      ],
+      "all_time_high": 0.064,
+      "all_time_low": 0.064,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1136711",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $17 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0635,
+      "previous_probability": 0.0635,
+      "probability_history": [
+        0.0635
+      ],
+      "all_time_high": 0.0635,
+      "all_time_low": 0.0635,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608367",
+      "question": "Will OpenAI’s market cap be $1.5T or greater at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0625,
+      "previous_probability": 0.0625,
+      "probability_history": [
+        0.0625
+      ],
+      "all_time_high": 0.0625,
+      "all_time_low": 0.0625,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616902",
+      "question": "Will no Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0625,
+      "previous_probability": 0.0625,
+      "probability_history": [
+        0.0625
+      ],
+      "all_time_high": 0.0625,
+      "all_time_low": 0.0625,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "956942",
+      "question": "Will Russia capture Kostyantynivka by February 28?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.055,
+      "previous_probability": 0.055,
+      "probability_history": [
+        0.055
+      ],
+      "all_time_high": 0.055,
+      "all_time_low": 0.055,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "561829",
+      "question": "Russia x Ukraine ceasefire by March 31, 2026?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 1.0,
+      "current_probability": 0.055,
+      "previous_probability": 0.055,
+      "probability_history": [
+        0.055
+      ],
+      "all_time_high": 0.055,
+      "all_time_low": 0.055,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "604470",
+      "question": "Will China blockade Taiwan by June 30?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.9,
+      "current_probability": 0.055,
+      "previous_probability": 0.055,
+      "probability_history": [
+        0.055
+      ],
+      "all_time_high": 0.055,
+      "all_time_low": 0.055,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "704239",
+      "question": "1k+ container ship transits of Suez Canal in Q1 2026?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.055,
+      "previous_probability": 0.055,
+      "probability_history": [
+        0.055
+      ],
+      "all_time_high": 0.055,
+      "all_time_low": 0.055,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608366",
+      "question": "Will OpenAI’s market cap be between $1.25T and $1.5T at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.055,
+      "previous_probability": 0.055,
+      "probability_history": [
+        0.055
+      ],
+      "all_time_high": 0.055,
+      "all_time_low": 0.055,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616907",
+      "question": "Will 5 Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.055,
+      "previous_probability": 0.055,
+      "probability_history": [
+        0.055
+      ],
+      "all_time_high": 0.055,
+      "all_time_low": 0.055,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "517310",
+      "question": "Will Trump deport less than 250,000?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0525,
+      "previous_probability": 0.0525,
+      "probability_history": [
+        0.0525
+      ],
+      "all_time_high": 0.0525,
+      "all_time_low": 0.0525,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "610256",
+      "question": "Will Russia invade a NATO country by June 30, 2026?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0465,
+      "previous_probability": 0.0465,
+      "probability_history": [
+        0.0465
+      ],
+      "all_time_high": 0.0465,
+      "all_time_low": 0.0465,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1136712",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $18 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0435,
+      "previous_probability": 0.0435,
+      "probability_history": [
+        0.0435
+      ],
+      "all_time_high": 0.0435,
+      "all_time_low": 0.0435,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "677406",
+      "question": "Russian strike on Poland by June 30?",
+      "disruption_type": "energy_supply",
+      "eu_relevance": 0.9,
+      "current_probability": 0.043,
+      "previous_probability": 0.043,
+      "probability_history": [
+        0.043
+      ],
+      "all_time_high": 0.043,
+      "all_time_low": 0.043,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "665728",
+      "question": "US defaults on debt by 2027?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.043,
+      "previous_probability": 0.043,
+      "probability_history": [
+        0.043
+      ],
+      "all_time_high": 0.043,
+      "all_time_low": 0.043,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "897530",
+      "question": "Israel strike on Damascus by March 31, 2026?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0425,
+      "previous_probability": 0.0425,
+      "probability_history": [
+        0.0425
+      ],
+      "all_time_high": 0.0425,
+      "all_time_low": 0.0425,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "648872",
+      "question": "US x Russia military clash by June 30, 2026?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 1.0,
+      "current_probability": 0.041,
+      "previous_probability": 0.041,
+      "probability_history": [
+        0.041
+      ],
+      "all_time_high": 0.041,
+      "all_time_low": 0.041,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "629267",
+      "question": "Will any country leave NATO by June 30, 2026?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 0.8,
+      "current_probability": 0.041,
+      "previous_probability": 0.041,
+      "probability_history": [
+        0.041
+      ],
+      "all_time_high": 0.041,
+      "all_time_low": 0.041,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "517313",
+      "question": "Will Trump deport 500,000-750,000- people?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.8,
+      "current_probability": 0.038,
+      "previous_probability": 0.038,
+      "probability_history": [
+        0.038
+      ],
+      "all_time_high": 0.038,
+      "all_time_low": 0.038,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "678691",
+      "question": "Will 2026 rank as the sixth-hottest year on record or lower?",
+      "disruption_type": "climate_event",
+      "eu_relevance": 0.7,
+      "current_probability": 0.037,
+      "previous_probability": 0.037,
+      "probability_history": [
+        0.037
+      ],
+      "all_time_high": 0.037,
+      "all_time_low": 0.037,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608362",
+      "question": "Will OpenAI’s market cap be less than $500B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0365,
+      "previous_probability": 0.0365,
+      "probability_history": [
+        0.0365
+      ],
+      "all_time_high": 0.0365,
+      "all_time_low": 0.0365,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "628935",
+      "question": "NATO x Russia military clash by March 31, 2026?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 1.0,
+      "current_probability": 0.036,
+      "previous_probability": 0.036,
+      "probability_history": [
+        0.036
+      ],
+      "all_time_high": 0.036,
+      "all_time_low": 0.036,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "929425",
+      "question": "Will Russia capture all of Kupiansk by March 31?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.036,
+      "previous_probability": 0.036,
+      "probability_history": [
+        0.036
+      ],
+      "all_time_high": 0.036,
+      "all_time_low": 0.036,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1249612",
+      "question": "Will Russia capture Lyman by February 28, 2026?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.035,
+      "previous_probability": 0.035,
+      "probability_history": [
+        0.035
+      ],
+      "all_time_high": 0.035,
+      "all_time_low": 0.035,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "610236",
+      "question": "NATO/EU troops fighting in Ukraine in June 30, 2026?",
+      "disruption_type": "energy_supply",
+      "eu_relevance": 0.9,
+      "current_probability": 0.0345,
+      "previous_probability": 0.0345,
+      "probability_history": [
+        0.0345
+      ],
+      "all_time_high": 0.0345,
+      "all_time_low": 0.0345,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "517321",
+      "question": "Will Trump deport 750,000 or more people in 2025?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0335,
+      "previous_probability": 0.0335,
+      "probability_history": [
+        0.0335
+      ],
+      "all_time_high": 0.0335,
+      "all_time_low": 0.0335,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "610376",
+      "question": "Will Ukraine recapture Crimean territory by June 30, 2026?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 1.0,
+      "current_probability": 0.032,
+      "previous_probability": 0.032,
+      "probability_history": [
+        0.032
+      ],
+      "all_time_high": 0.032,
+      "all_time_low": 0.032,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "677352",
+      "question": "Will India strike Pakistan by March 31?",
+      "disruption_type": "energy_supply",
+      "eu_relevance": 0.9,
+      "current_probability": 0.032,
+      "previous_probability": 0.032,
+      "probability_history": [
+        0.032
+      ],
+      "all_time_high": 0.032,
+      "all_time_low": 0.032,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "822267",
+      "question": "Russian strike on a NATO member by March 31?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0295,
+      "previous_probability": 0.0295,
+      "probability_history": [
+        0.0295
+      ],
+      "all_time_high": 0.0295,
+      "all_time_low": 0.0295,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "955824",
+      "question": "Nuclear weapon detonation by March 31?",
+      "disruption_type": "energy_supply",
+      "eu_relevance": 0.7,
+      "current_probability": 0.0285,
+      "previous_probability": 0.0285,
+      "probability_history": [
+        0.0285
+      ],
+      "all_time_high": 0.0285,
+      "all_time_low": 0.0285,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "691336",
+      "question": "AI Industry Downturn by March 31, 2026?",
+      "disruption_type": "tech_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.028,
+      "previous_probability": 0.028,
+      "probability_history": [
+        0.028
+      ],
+      "all_time_high": 0.028,
+      "all_time_low": 0.028,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "528820",
+      "question": "Senator Eichorn guilty of soliciting a child?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 0.8,
+      "current_probability": 0.027,
+      "previous_probability": 0.027,
+      "probability_history": [
+        0.027
+      ],
+      "all_time_high": 0.027,
+      "all_time_low": 0.027,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "1138152",
+      "question": "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $20 million?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0255,
+      "previous_probability": 0.0255,
+      "probability_history": [
+        0.0255
+      ],
+      "all_time_high": 0.0255,
+      "all_time_low": 0.0255,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "669660",
+      "question": "Will the Fed decrease interest rates by 50+ bps after the April 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0245,
+      "previous_probability": 0.0245,
+      "probability_history": [
+        0.0245
+      ],
+      "all_time_high": 0.0245,
+      "all_time_low": 0.0245,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616908",
+      "question": "Will 6 Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0235,
+      "previous_probability": 0.0235,
+      "probability_history": [
+        0.0235
+      ],
+      "all_time_high": 0.0235,
+      "all_time_low": 0.0235,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608409",
+      "question": "Will Anthropic’s market cap be $600B or greater at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.021,
+      "previous_probability": 0.021,
+      "probability_history": [
+        0.021
+      ],
+      "all_time_high": 0.021,
+      "all_time_low": 0.021,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "964476",
+      "question": "Will the ECB announce a 25 bps decrease at the March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0205,
+      "previous_probability": 0.0205,
+      "probability_history": [
+        0.0205
+      ],
+      "all_time_high": 0.0205,
+      "all_time_low": 0.0205,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "690199",
+      "question": "Will the Fed’s upper bound reach 5.25% or higher before 2027?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0195,
+      "previous_probability": 0.0195,
+      "probability_history": [
+        0.0195
+      ],
+      "all_time_high": 0.0195,
+      "all_time_low": 0.0195,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616914",
+      "question": "Will 12 or more Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.019,
+      "previous_probability": 0.019,
+      "probability_history": [
+        0.019
+      ],
+      "all_time_high": 0.019,
+      "all_time_low": 0.019,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "906976",
+      "question": "Will the Fed increase interest rates by 50+ bps after the June 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.019,
+      "previous_probability": 0.019,
+      "probability_history": [
+        0.019
+      ],
+      "all_time_high": 0.019,
+      "all_time_low": 0.019,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "678690",
+      "question": "Will 2026 be the fifth-hottest year on record?",
+      "disruption_type": "climate_event",
+      "eu_relevance": 0.7,
+      "current_probability": 0.019,
+      "previous_probability": 0.019,
+      "probability_history": [
+        0.019
+      ],
+      "all_time_high": 0.019,
+      "all_time_low": 0.019,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "906975",
+      "question": "Will the Fed increase interest rates by 25 bps after the June 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0185,
+      "previous_probability": 0.0185,
+      "probability_history": [
+        0.0185
+      ],
+      "all_time_high": 0.0185,
+      "all_time_low": 0.0185,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "517314",
+      "question": "Will Trump deport 750,000-1,000,000 people?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0175,
+      "previous_probability": 0.0175,
+      "probability_history": [
+        0.0175
+      ],
+      "all_time_high": 0.0175,
+      "all_time_low": 0.0175,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608408",
+      "question": "Will Anthropic’s market cap be between $400B and $600B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0155,
+      "previous_probability": 0.0155,
+      "probability_history": [
+        0.0155
+      ],
+      "all_time_high": 0.0155,
+      "all_time_low": 0.0155,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608407",
+      "question": "Will Anthropic’s market cap be between $300B and $400B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.014,
+      "previous_probability": 0.014,
+      "probability_history": [
+        0.014
+      ],
+      "all_time_high": 0.014,
+      "all_time_low": 0.014,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "787478",
+      "question": "Will AfD win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.0135,
+      "previous_probability": 0.0135,
+      "probability_history": [
+        0.0135
+      ],
+      "all_time_high": 0.0135,
+      "all_time_low": 0.0135,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608406",
+      "question": "Will Anthropic’s market cap be between $200B and $300B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0125,
+      "previous_probability": 0.0125,
+      "probability_history": [
+        0.0125
+      ],
+      "all_time_high": 0.0125,
+      "all_time_low": 0.0125,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "669663",
+      "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0115,
+      "previous_probability": 0.0115,
+      "probability_history": [
+        0.0115
+      ],
+      "all_time_high": 0.0115,
+      "all_time_low": 0.0115,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608405",
+      "question": "Will Anthropic’s market cap be between $100B and $200B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0105,
+      "previous_probability": 0.0105,
+      "probability_history": [
+        0.0105
+      ],
+      "all_time_high": 0.0105,
+      "all_time_low": 0.0105,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "517318",
+      "question": "Will Trump deport 1,750,000-2,000,000 people?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0095,
+      "previous_probability": 0.0095,
+      "probability_history": [
+        0.0095
+      ],
+      "all_time_high": 0.0095,
+      "all_time_low": 0.0095,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "654412",
+      "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0095,
+      "previous_probability": 0.0095,
+      "probability_history": [
+        0.0095
+      ],
+      "all_time_high": 0.0095,
+      "all_time_low": 0.0095,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616910",
+      "question": "Will 8 Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.009,
+      "previous_probability": 0.009,
+      "probability_history": [
+        0.009
+      ],
+      "all_time_high": 0.009,
+      "all_time_low": 0.009,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "654422",
+      "question": "Negative GDP growth in Q4 2025?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.009,
+      "previous_probability": 0.009,
+      "probability_history": [
+        0.009
+      ],
+      "all_time_high": 0.009,
+      "all_time_low": 0.009,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616909",
+      "question": "Will 7 Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0085,
+      "previous_probability": 0.0085,
+      "probability_history": [
+        0.0085
+      ],
+      "all_time_high": 0.0085,
+      "all_time_low": 0.0085,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "576879",
+      "question": "Will US GDP growth in 2025 be between 1.5% and 2.0%?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.008,
+      "previous_probability": 0.008,
+      "probability_history": [
+        0.008
+      ],
+      "all_time_high": 0.008,
+      "all_time_low": 0.008,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "537490",
+      "question": "Will tariffs generate >$250b in 2025?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 1.0,
+      "current_probability": 0.0065,
+      "previous_probability": 0.0065,
+      "probability_history": [
+        0.0065
+      ],
+      "all_time_high": 0.0065,
+      "all_time_low": 0.0065,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608404",
+      "question": "Will Anthropic’s market cap be less than $100B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0065,
+      "previous_probability": 0.0065,
+      "probability_history": [
+        0.0065
+      ],
+      "all_time_high": 0.0065,
+      "all_time_low": 0.0065,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "654415",
+      "question": "Will the Fed increase interest rates by 25+ bps after the March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0065,
+      "previous_probability": 0.0065,
+      "probability_history": [
+        0.0065
+      ],
+      "all_time_high": 0.0065,
+      "all_time_low": 0.0065,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608388",
+      "question": "Will Databricks’ market cap be between $175B and $200B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.006,
+      "previous_probability": 0.006,
+      "probability_history": [
+        0.006
+      ],
+      "all_time_high": 0.006,
+      "all_time_low": 0.006,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608392",
+      "question": "Will Stripe’s market cap be less than $80B at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.006,
+      "previous_probability": 0.006,
+      "probability_history": [
+        0.006
+      ],
+      "all_time_high": 0.006,
+      "all_time_low": 0.006,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616911",
+      "question": "Will 9 Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0055,
+      "previous_probability": 0.0055,
+      "probability_history": [
+        0.0055
+      ],
+      "all_time_high": 0.0055,
+      "all_time_low": 0.0055,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "517315",
+      "question": "Will Trump deport 1,000,000-1,250,000 people?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0055,
+      "previous_probability": 0.0055,
+      "probability_history": [
+        0.0055
+      ],
+      "all_time_high": 0.0055,
+      "all_time_low": 0.0055,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "562188",
+      "question": "Will Dawn Buckingham win the 2026 Texas Republican Primary?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0055,
+      "previous_probability": 0.0055,
+      "probability_history": [
+        0.0055
+      ],
+      "all_time_high": 0.0055,
+      "all_time_low": 0.0055,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "533851",
+      "question": "Negative GDP growth in 2025?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0055,
+      "previous_probability": 0.0055,
+      "probability_history": [
+        0.0055
+      ],
+      "all_time_high": 0.0055,
+      "all_time_low": 0.0055,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616913",
+      "question": "Will 11 Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.005,
+      "previous_probability": 0.005,
+      "probability_history": [
+        0.005
+      ],
+      "all_time_high": 0.005,
+      "all_time_low": 0.005,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "664919",
+      "question": "Will the Fed decide differently in the next three decisions (Dec–Jan–Mar)?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.005,
+      "previous_probability": 0.005,
+      "probability_history": [
+        0.005
+      ],
+      "all_time_high": 0.005,
+      "all_time_low": 0.005,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "576877",
+      "question": "Will US GDP growth in 2025 be between 0.5% and 1.0%?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.005,
+      "previous_probability": 0.005,
+      "probability_history": [
+        0.005
+      ],
+      "all_time_high": 0.005,
+      "all_time_low": 0.005,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "616912",
+      "question": "Will 10 Fed rate cuts happen in 2026?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0045,
+      "previous_probability": 0.0045,
+      "probability_history": [
+        0.0045
+      ],
+      "all_time_high": 0.0045,
+      "all_time_low": 0.0045,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "991024",
+      "question": "Bank of Japan increases interest rates by 50+ bps after March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0045,
+      "previous_probability": 0.0045,
+      "probability_history": [
+        0.0045
+      ],
+      "all_time_high": 0.0045,
+      "all_time_low": 0.0045,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "608390",
+      "question": "Will Databricks’ market cap be $250B or greater at market close on IPO day?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.004,
+      "previous_probability": 0.004,
+      "probability_history": [
+        0.004
+      ],
+      "all_time_high": 0.004,
+      "all_time_low": 0.004,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "576876",
+      "question": "Will US GDP growth in 2025 be less than 0.5%?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.004,
+      "previous_probability": 0.004,
+      "probability_history": [
+        0.004
+      ],
+      "all_time_high": 0.004,
+      "all_time_low": 0.004,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "964478",
+      "question": "Will the ECB announce an increase at the March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.004,
+      "previous_probability": 0.004,
+      "probability_history": [
+        0.004
+      ],
+      "all_time_high": 0.004,
+      "all_time_low": 0.004,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "964475",
+      "question": "Will the ECB announce a 50+ bps decrease at the March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.004,
+      "previous_probability": 0.004,
+      "probability_history": [
+        0.004
+      ],
+      "all_time_high": 0.004,
+      "all_time_low": 0.004,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "517317",
+      "question": "Will Trump deport 1,500,000-1,750,000 people?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.8,
+      "current_probability": 0.003,
+      "previous_probability": 0.003,
+      "probability_history": [
+        0.003
+      ],
+      "all_time_high": 0.003,
+      "all_time_low": 0.003,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "517319",
+      "question": "Will Trump deport 2,000,000 or more people?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.8,
+      "current_probability": 0.003,
+      "previous_probability": 0.003,
+      "probability_history": [
+        0.003
+      ],
+      "all_time_high": 0.003,
+      "all_time_low": 0.003,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "562189",
+      "question": "Will Beth Van Duyne win the 2026 Texas Republican Primary?",
+      "disruption_type": "geopolitical_conflict",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0025,
+      "previous_probability": 0.0025,
+      "probability_history": [
+        0.0025
+      ],
+      "all_time_high": 0.0025,
+      "all_time_low": 0.0025,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "576878",
+      "question": "Will US GDP growth in 2025 be between 1.0% and 1.5%?",
+      "disruption_type": "agricultural_shock",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0025,
+      "previous_probability": 0.0025,
+      "probability_history": [
+        0.0025
+      ],
+      "all_time_high": 0.0025,
+      "all_time_low": 0.0025,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "991021",
+      "question": "Bank of Japan decreases interest rates after March 2026 meeting?",
+      "disruption_type": "financial_crisis",
+      "eu_relevance": 0.8,
+      "current_probability": 0.0025,
+      "previous_probability": 0.0025,
+      "probability_history": [
+        0.0025
+      ],
+      "all_time_high": 0.0025,
+      "all_time_low": 0.0025,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "787479",
+      "question": "Will Grüne win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.002,
+      "previous_probability": 0.002,
+      "probability_history": [
+        0.002
+      ],
+      "all_time_high": 0.002,
+      "all_time_low": 0.002,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "517316",
+      "question": "Will Trump deport 1,250,000-1,500,000 people?",
+      "disruption_type": "trade_restriction",
+      "eu_relevance": 0.8,
+      "current_probability": 0.002,
+      "previous_probability": 0.002,
+      "probability_history": [
+        0.002
+      ],
+      "all_time_high": 0.002,
+      "all_time_low": 0.002,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "787481",
+      "question": "Will FDP win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.0005,
+      "previous_probability": 0.0005,
+      "probability_history": [
+        0.0005
+      ],
+      "all_time_high": 0.0005,
+      "all_time_low": 0.0005,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "787483",
+      "question": "Will FW win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.0005,
+      "previous_probability": 0.0005,
+      "probability_history": [
+        0.0005
+      ],
+      "all_time_high": 0.0005,
+      "all_time_low": 0.0005,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "787482",
+      "question": "Will Linke win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.0005,
+      "previous_probability": 0.0005,
+      "probability_history": [
+        0.0005
+      ],
+      "all_time_high": 0.0005,
+      "all_time_low": 0.0005,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    },
+    {
+      "market_id": "787484",
+      "question": "Will BSW win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+      "disruption_type": "transport_disruption",
+      "eu_relevance": 0.9,
+      "current_probability": 0.0005,
+      "previous_probability": 0.0005,
+      "probability_history": [
+        0.0005
+      ],
+      "all_time_high": 0.0005,
+      "all_time_low": 0.0005,
+      "change_1h": 0.0,
+      "trend": "stable",
+      "alert_level": "normal"
+    }
+  ],
+  "alerts": {
+    "active": [],
+    "history": [],
+    "total_count": 0,
+    "active_critical": 0,
+    "active_warning": 0
+  },
+  "scenarios": {
+    "n_samples": 500,
+    "n_unique": 500,
+    "severity": {
+      "mean": 0.9806,
+      "std": 0.0338,
+      "p5": 0.9049,
+      "p50": 1.0,
+      "p95": 1.0
+    },
+    "disruption_frequency": {
+      "agricultural_shock": 1.0,
+      "financial_crisis": 1.0,
+      "trade_restriction": 0.972,
+      "geopolitical_conflict": 0.962,
+      "transport_disruption": 0.886,
+      "energy_supply": 0.804,
+      "climate_event": 0.67,
+      "political_instability": 0.344,
+      "tech_disruption": 0.314
+    },
+    "parameter_distributions": {
+      "soy_availability": {
+        "mean": -95.0,
+        "std": 0.0,
+        "p5": -95.0,
+        "p25": -95.0,
+        "p50": -95.0,
+        "p75": -95.0,
+        "p95": -95.0
+      },
+      "grain_price": {
+        "mean": 47204.6867,
+        "std": 338014.7804,
+        "p5": 69.7576,
+        "p25": 342.719,
+        "p50": 990.4578,
+        "p75": 4866.1192,
+        "p95": 71510.1516
+      },
+      "feed_cost": {
+        "mean": 9884.2756,
+        "std": 60229.8363,
+        "p5": 42.9497,
+        "p25": 175.9219,
+        "p50": 450.36,
+        "p75": 1844.6744,
+        "p95": 19923.0975
+      },
+      "food_price_index": {
+        "mean": 37.1562,
+        "std": 63.7316,
+        "p5": 5.9605,
+        "p25": 11.6415,
+        "p50": 18.1899,
+        "p75": 35.5271,
+        "p95": 109.7755
+      },
+      "credit_availability": {
+        "mean": -94.92,
+        "std": 1.5791,
+        "p5": -95.0,
+        "p25": -95.0,
+        "p50": -95.0,
+        "p75": -95.0,
+        "p95": -95.0
+      },
+      "demand_shock": {
+        "mean": -93.96,
+        "std": 5.4698,
+        "p5": -95.0,
+        "p25": -95.0,
+        "p50": -95.0,
+        "p75": -95.0,
+        "p95": -90.0
+      },
+      "currency_volatility": {
+        "mean": 1410.7852,
+        "std": 13323.3982,
+        "p5": 11.3906,
+        "p25": 57.665,
+        "p50": 129.7463,
+        "p75": 437.8939,
+        "p95": 2216.8378
+      },
+      "import_cost_factor": {
+        "mean": 2.5789,
+        "std": 1.4477,
+        "p5": 1.3,
+        "p25": 1.69,
+        "p50": 2.197,
+        "p75": 2.8561,
+        "p95": 4.8268
+      },
+      "export_volume": {
+        "mean": -58.2305,
+        "std": 26.1122,
+        "p5": -95.0,
+        "p25": -80.0,
+        "p50": -60.0,
+        "p75": -40.0,
+        "p95": -20.0
+      },
+      "supply_diversification_delay": {
+        "mean": 90.0,
+        "std": 0.0,
+        "p5": 90.0,
+        "p25": 90.0,
+        "p50": 90.0,
+        "p75": 90.0,
+        "p95": 90.0
+      },
+      "trade_corridor_disruption": {
+        "mean": -90.79,
+        "std": 13.1044,
+        "p5": -95.0,
+        "p25": -95.0,
+        "p50": -95.0,
+        "p75": -95.0,
+        "p95": -50.0
+      },
+      "sanctions_impact": {
+        "mean": -74.9584,
+        "std": 23.5758,
+        "p5": -95.0,
+        "p25": -95.0,
+        "p50": -75.0,
+        "p75": -50.0,
+        "p95": -25.0
+      },
+      "uncertainty_index": {
+        "mean": 49.2349,
+        "std": 182.3204,
+        "p5": 2.0,
+        "p25": 4.0,
+        "p50": 8.0,
+        "p75": 32.0,
+        "p95": 128.0
+      },
+      "energy_supply_risk": {
+        "mean": -80.7069,
+        "std": 21.1179,
+        "p5": -95.0,
+        "p25": -95.0,
+        "p50": -90.0,
+        "p75": -60.0,
+        "p95": -30.0
+      },
+      "shipping_lead_time": {
+        "mean": 12.7019,
+        "std": 18.8919,
+        "p5": 2.5,
+        "p25": 6.25,
+        "p50": 6.25,
+        "p75": 15.625,
+        "p95": 39.0625
+      },
+      "freight_cost": {
+        "mean": 24.1287,
+        "std": 49.7512,
+        "p5": 3.0,
+        "p25": 9.0,
+        "p50": 9.0,
+        "p75": 27.0,
+        "p95": 81.0
+      },
+      "route_availability": {
+        "mean": -63.7246,
+        "std": 23.744,
+        "p5": -95.0,
+        "p25": -90.0,
+        "p50": -60.0,
+        "p75": -60.0,
+        "p95": -30.0
+      },
+      "agricultural_yield": {
+        "mean": -38.7463,
+        "std": 17.2275,
+        "p5": -75.0,
+        "p25": -50.0,
+        "p50": -25.0,
+        "p75": -25.0,
+        "p95": -25.0
+      },
+      "infrastructure_damage": {
+        "mean": -23.3731,
+        "std": 10.8295,
+        "p5": -45.0,
+        "p25": -30.0,
+        "p50": -15.0,
+        "p75": -15.0,
+        "p95": -15.0
+      },
+      "water_availability": {
+        "mean": -46.2687,
+        "std": 20.025,
+        "p5": -90.0,
+        "p25": -60.0,
+        "p50": -30.0,
+        "p75": -30.0,
+        "p95": -30.0
+      },
+      "energy_cost_factor": {
+        "mean": 3.8147,
+        "std": 4.1791,
+        "p5": 1.8,
+        "p25": 1.8,
+        "p50": 3.24,
+        "p75": 3.24,
+        "p95": 10.4976
+      },
+      "gas_availability": {
+        "mean": -66.0945,
+        "std": 23.5747,
+        "p5": -95.0,
+        "p25": -80.0,
+        "p50": -80.0,
+        "p75": -40.0,
+        "p95": -40.0
+      },
+      "transport_fuel_cost": {
+        "mean": 2.377,
+        "std": 1.375,
+        "p5": 1.5,
+        "p25": 1.5,
+        "p50": 2.25,
+        "p75": 2.25,
+        "p95": 5.0625
+      },
+      "supplier_country_risk": {
+        "mean": 1.5785,
+        "std": 0.2296,
+        "p5": 1.5,
+        "p25": 1.5,
+        "p50": 1.5,
+        "p75": 1.5,
+        "p95": 2.25
+      },
+      "export_policy_uncertainty": {
+        "mean": -16.5698,
+        "std": 4.5916,
+        "p5": -30.0,
+        "p25": -15.0,
+        "p50": -15.0,
+        "p75": -15.0,
+        "p95": -15.0
+      },
+      "investment_freeze": {
+        "mean": -22.093,
+        "std": 6.1221,
+        "p5": -40.0,
+        "p25": -20.0,
+        "p50": -20.0,
+        "p75": -20.0,
+        "p95": -20.0
+      },
+      "semiconductor_supply": {
+        "mean": -40.7325,
+        "std": 13.3165,
+        "p5": -70.0,
+        "p25": -35.0,
+        "p50": -35.0,
+        "p75": -35.0,
+        "p95": -35.0
+      },
+      "critical_mineral_cost": {
+        "mean": 2.3439,
+        "std": 0.85,
+        "p5": 2.0,
+        "p25": 2.0,
+        "p50": 2.0,
+        "p75": 2.0,
+        "p95": 4.0
+      },
+      "it_system_downtime": {
+        "mean": 14.0,
+        "std": 0.0,
+        "p5": 14.0,
+        "p25": 14.0,
+        "p50": 14.0,
+        "p75": 14.0,
+        "p95": 14.0
+      }
+    },
+    "resample_tick": 1,
+    "resample_reason": "Erster Lauf"
+  },
+  "stress_scenarios": [
+    {
+      "scenario_id": 0,
+      "triggered_events": [
+        "1013523",
+        "1013522",
+        "1013524",
+        "964477",
+        "664911",
+        "654414",
+        "1013525",
+        "608410",
+        "576880",
+        "517311",
+        "991022",
+        "690220",
+        "1013526",
+        "1320800",
+        "949495",
+        "669662",
+        "787477",
+        "690215",
+        "958427",
+        "950853",
+        "1013527",
+        "540843",
+        "999108",
+        "906973",
+        "608368",
+        "1249981",
+        "906974",
+        "678687",
+        "666822",
+        "608398",
+        "680949",
+        "586301",
+        "663583",
+        "666818",
+        "666827",
+        "562187",
+        "608363",
+        "690214",
+        "1176221",
+        "1126854",
+        "1032260",
+        "678686",
+        "680601",
+        "1342933",
+        "608367",
+        "608392"
+      ],
+      "triggered_questions": [
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+        "Will the ECB announce no change at the March 2026 meeting?",
+        "Will the Fed Cut–Pause–Pause in the next three decisions (Dec–Jan–Mar)?",
+        "Will there be no change in Fed interest rates after the March 2026 meeting?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+        "Will Anthropic not IPO by June 30, 2026?",
+        "Will US GDP growth in 2025 be between 2.0% and 2.5%?",
+        "Will Trump deport 250,000-500,000 people?",
+        "No change in Bank of Japan's interest rates after March 2026 meeting?",
+        "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $8 million?",
+        "Will Russia capture all of Pokrovsk by March 31?",
+        "Fed rate cut by June 2026 meeting?",
+        "Will there be no change in Fed interest rates after the April 2026 meeting?",
+        "Will CDU win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+        "Will the Fed’s lower bound reach 2.75% or lower before 2027?",
+        "Israel x Iran ceasefire broken by June 30, 2026?",
+        "Will Gold have the best performance in 2026?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $10 million?",
+        "Will China invades Taiwan before GTA VI?",
+        "ECB rate cut in 2026?",
+        "Will the Fed decrease interest rates by 25 bps after the June 2026 meeting?",
+        "Will OpenAI not IPO by December 31, 2026?",
+        "Bank of Japan increases interest rates by 25 bps after the April 2026 meeting?",
+        "Will there be no change in Fed interest rates after the June 2026 meeting?",
+        "Will 2026 be the second-hottest year on record?",
+        "U.S. agrees to a new trade deal with \"Indonesia\" before 2027?",
+        "Will Discord’s market cap be less than $15B at market close on IPO day?",
+        "Will inflation reach more than 3% in 2026?",
+        "Supreme Court rules in favor of Trump's tariffs?",
+        "Will the Iranian regime fall before 2027?",
+        "U.S. agrees to a new trade deal with \"India\" before 2027?",
+        "U.S. agrees to a new trade deal with \"South Korea\" before 2027?",
+        "Will John Cornyn win the 2026 Texas Republican Primary?",
+        "Will OpenAI’s market cap be between $500B and $750B at market close on IPO day?",
+        "Will the Fed’s lower bound reach 2.5% or lower before 2027?",
+        "U.S. agrees to a new trade deal with \"Taiwan\" before 2027?",
+        "Will the Court Force Trump to Refund Tariffs?",
+        "Will Gold (GC) settle at $5,000-$5,400 in June?",
+        "Will 2026 be the hottest year on record?",
+        "Negative GDP growth in 2026?",
+        "Will GBP/USD hit 1.60 (High) in 2026?",
+        "Will OpenAI’s market cap be $1.5T or greater at market close on IPO day?",
+        "Will Stripe’s market cap be less than $80B at market close on IPO day?"
+      ],
+      "disruption_types": [
+        "agricultural_shock",
+        "climate_event",
+        "energy_supply",
+        "financial_crisis",
+        "geopolitical_conflict",
+        "political_instability",
+        "trade_restriction",
+        "transport_disruption"
+      ],
+      "parameters": {
+        "soy_availability": -95.0,
+        "grain_price": 23907.2436,
+        "feed_cost": 7555.7864,
+        "food_price_index": 69.3889,
+        "credit_availability": -95.0,
+        "demand_shock": -95.0,
+        "currency_volatility": 194.6195,
+        "import_cost_factor": 6.2749,
+        "export_volume": -95.0,
+        "supply_diversification_delay": 90.0,
+        "trade_corridor_disruption": -95.0,
+        "sanctions_impact": -50.0,
+        "uncertainty_index": 4.0,
+        "energy_supply_risk": -60.0,
+        "shipping_lead_time": 2.5,
+        "freight_cost": 3.0,
+        "route_availability": -30.0,
+        "energy_cost_factor": 1.8,
+        "gas_availability": -40.0,
+        "transport_fuel_cost": 1.5,
+        "agricultural_yield": -50.0,
+        "infrastructure_damage": -30.0,
+        "water_availability": -60.0,
+        "supplier_country_risk": 1.5,
+        "export_policy_uncertainty": -15.0,
+        "investment_freeze": -20.0
+      },
+      "severity_score": 1.0,
+      "description": ""
+    },
+    {
+      "scenario_id": 1,
+      "triggered_events": [
+        "1013523",
+        "1013522",
+        "1013524",
+        "964477",
+        "664911",
+        "654414",
+        "1013525",
+        "608410",
+        "690221",
+        "576880",
+        "517311",
+        "991022",
+        "690220",
+        "1013526",
+        "1320800",
+        "949495",
+        "540816",
+        "669662",
+        "562186",
+        "958427",
+        "950853",
+        "1013527",
+        "540843",
+        "999108",
+        "906973",
+        "540844",
+        "608368",
+        "1249981",
+        "906974",
+        "666696",
+        "1138161",
+        "680949",
+        "586301",
+        "949494",
+        "666827",
+        "616904",
+        "950852",
+        "609655",
+        "616905",
+        "690214",
+        "678689",
+        "1176221",
+        "1126854",
+        "1259282",
+        "1032260",
+        "950854",
+        "1032259",
+        "999095",
+        "1032263",
+        "1259129",
+        "567621",
+        "608402",
+        "680950",
+        "576881",
+        "670370",
+        "906972",
+        "1136710",
+        "559651",
+        "1032255",
+        "1136711",
+        "517321",
+        "678691"
+      ],
+      "triggered_questions": [
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+        "Will the ECB announce no change at the March 2026 meeting?",
+        "Will the Fed Cut–Pause–Pause in the next three decisions (Dec–Jan–Mar)?",
+        "Will there be no change in Fed interest rates after the March 2026 meeting?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+        "Will Anthropic not IPO by June 30, 2026?",
+        "Will the Fed’s lower bound reach 3.25% or lower before 2027?",
+        "Will US GDP growth in 2025 be between 2.0% and 2.5%?",
+        "Will Trump deport 250,000-500,000 people?",
+        "No change in Bank of Japan's interest rates after March 2026 meeting?",
+        "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $8 million?",
+        "Will Russia capture all of Pokrovsk by March 31?",
+        "Fed rate cut by June 2026 meeting?",
+        "Russia-Ukraine Ceasefire before GTA VI?",
+        "Will there be no change in Fed interest rates after the April 2026 meeting?",
+        "Will Ken Paxton win the 2026 Texas Republican Primary?",
+        "Israel x Iran ceasefire broken by June 30, 2026?",
+        "Will Gold have the best performance in 2026?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $10 million?",
+        "Will China invades Taiwan before GTA VI?",
+        "ECB rate cut in 2026?",
+        "Will the Fed decrease interest rates by 25 bps after the June 2026 meeting?",
+        "Will bitcoin hit $1m before GTA VI?",
+        "Will OpenAI not IPO by December 31, 2026?",
+        "Bank of Japan increases interest rates by 25 bps after the April 2026 meeting?",
+        "Will there be no change in Fed interest rates after the June 2026 meeting?",
+        "Israel x Iran ceasefire broken by March 31, 2026?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $12 million?",
+        "Will inflation reach more than 3% in 2026?",
+        "Supreme Court rules in favor of Trump's tariffs?",
+        "Fed rate cut by April 2026 meeting?",
+        "U.S. agrees to a new trade deal with \"South Korea\" before 2027?",
+        "Will 2 Fed rate cuts happen in 2026?",
+        "Will Bitcoin have the best performance in 2026?",
+        "US recession by end of 2026?",
+        "Will 3 Fed rate cuts happen in 2026?",
+        "Will the Fed’s lower bound reach 2.5% or lower before 2027?",
+        "Will 2026 be the fourth-hottest year on record?",
+        "U.S. agrees to a new trade deal with \"Taiwan\" before 2027?",
+        "Will the Court Force Trump to Refund Tariffs?",
+        "Tariff increase on Canada in effect by June 30?",
+        "Will Gold (GC) settle at $5,000-$5,400 in June?",
+        "Will the S&P 500 have the best performance in 2026?",
+        "Will Gold (GC) settle at $4,600-$5,000 in June?",
+        "ECB rate hike in 2026?",
+        "Will Gold (GC) settle at >$6,200 in June?",
+        "100% tariff on Canada in effect by June 30?",
+        "Will China invade Taiwan by end of 2026?",
+        "Will Discord’s market cap be $30B or greater at market close on IPO day?",
+        "Will inflation reach more than 4% in 2026?",
+        "Will US GDP growth in 2025 be greater than 2.5%?",
+        "OpenAI receives federal backstop for infrastructure before July?",
+        "Will the Fed decrease interest rates by 50+ bps after the June 2026 meeting?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $16 million?",
+        "Xi Jinping out before 2027?",
+        "Will Gold (GC) settle at <$3,800 in June?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $17 million?",
+        "Will Trump deport 750,000 or more people in 2025?",
+        "Will 2026 rank as the sixth-hottest year on record or lower?"
+      ],
+      "disruption_types": [
+        "agricultural_shock",
+        "climate_event",
+        "energy_supply",
+        "financial_crisis",
+        "geopolitical_conflict",
+        "political_instability",
+        "tech_disruption",
+        "trade_restriction",
+        "transport_disruption"
+      ],
+      "parameters": {
+        "soy_availability": -95.0,
+        "grain_price": 339448.6713,
+        "feed_cost": 79228.1625,
+        "food_price_index": 211.7582,
+        "credit_availability": -95.0,
+        "demand_shock": -95.0,
+        "currency_volatility": 2216.8378,
+        "import_cost_factor": 8.1573,
+        "export_volume": -95.0,
+        "supply_diversification_delay": 90.0,
+        "trade_corridor_disruption": -95.0,
+        "sanctions_impact": -95.0,
+        "uncertainty_index": 16.0,
+        "energy_supply_risk": -95.0,
+        "shipping_lead_time": 2.5,
+        "freight_cost": 3.0,
+        "route_availability": -30.0,
+        "energy_cost_factor": 3.24,
+        "gas_availability": -80.0,
+        "transport_fuel_cost": 2.25,
+        "agricultural_yield": -50.0,
+        "infrastructure_damage": -30.0,
+        "water_availability": -60.0,
+        "semiconductor_supply": -35.0,
+        "critical_mineral_cost": 2.0,
+        "it_system_downtime": 14.0,
+        "supplier_country_risk": 1.5,
+        "export_policy_uncertainty": -15.0,
+        "investment_freeze": -20.0
+      },
+      "severity_score": 1.0,
+      "description": ""
+    },
+    {
+      "scenario_id": 2,
+      "triggered_events": [
+        "1013523",
+        "1013522",
+        "1013524",
+        "964477",
+        "664911",
+        "654414",
+        "1013525",
+        "608410",
+        "690221",
+        "576880",
+        "517311",
+        "991022",
+        "690220",
+        "1013526",
+        "1320800",
+        "949495",
+        "669662",
+        "787477",
+        "562186",
+        "690215",
+        "1013527",
+        "999108",
+        "567687",
+        "906973",
+        "540844",
+        "670098",
+        "677356",
+        "906974",
+        "666823",
+        "666696",
+        "666822",
+        "608398",
+        "680949",
+        "949494",
+        "666818",
+        "609655",
+        "666829",
+        "616905",
+        "678689",
+        "691340",
+        "669661",
+        "1126854",
+        "1259282",
+        "677147",
+        "608400",
+        "1032259",
+        "670370",
+        "665728",
+        "610236",
+        "677352",
+        "691336",
+        "669660",
+        "562188"
+      ],
+      "triggered_questions": [
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+        "Will the ECB announce no change at the March 2026 meeting?",
+        "Will the Fed Cut–Pause–Pause in the next three decisions (Dec–Jan–Mar)?",
+        "Will there be no change in Fed interest rates after the March 2026 meeting?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+        "Will Anthropic not IPO by June 30, 2026?",
+        "Will the Fed’s lower bound reach 3.25% or lower before 2027?",
+        "Will US GDP growth in 2025 be between 2.0% and 2.5%?",
+        "Will Trump deport 250,000-500,000 people?",
+        "No change in Bank of Japan's interest rates after March 2026 meeting?",
+        "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $8 million?",
+        "Will Russia capture all of Pokrovsk by March 31?",
+        "Fed rate cut by June 2026 meeting?",
+        "Will there be no change in Fed interest rates after the April 2026 meeting?",
+        "Will CDU win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+        "Will Ken Paxton win the 2026 Texas Republican Primary?",
+        "Will the Fed’s lower bound reach 2.75% or lower before 2027?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $10 million?",
+        "ECB rate cut in 2026?",
+        "Russia x Ukraine ceasefire by end of 2026?",
+        "Will the Fed decrease interest rates by 25 bps after the June 2026 meeting?",
+        "Will bitcoin hit $1m before GTA VI?",
+        "Canada recession before 2027?",
+        "Will India strike Pakistan by December 31, 2026?",
+        "Will there be no change in Fed interest rates after the June 2026 meeting?",
+        "U.S. agrees to a new trade deal with \"Argentina\" before 2027?",
+        "Israel x Iran ceasefire broken by March 31, 2026?",
+        "U.S. agrees to a new trade deal with \"Indonesia\" before 2027?",
+        "Will Discord’s market cap be less than $15B at market close on IPO day?",
+        "Will inflation reach more than 3% in 2026?",
+        "Fed rate cut by April 2026 meeting?",
+        "U.S. agrees to a new trade deal with \"India\" before 2027?",
+        "US recession by end of 2026?",
+        "U.S. agrees to a new trade deal with \"Pakistan\" before 2027?",
+        "Will 3 Fed rate cuts happen in 2026?",
+        "Will 2026 be the fourth-hottest year on record?",
+        "AI Industry Downturn by December 31, 2026?",
+        "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
+        "Will the Court Force Trump to Refund Tariffs?",
+        "Tariff increase on Canada in effect by June 30?",
+        "Fed emergency rate cut before 2027?",
+        "Will Discord’s market cap be between $20B and $25B at market close on IPO day?",
+        "Will Gold (GC) settle at $4,600-$5,000 in June?",
+        "OpenAI receives federal backstop for infrastructure before July?",
+        "US defaults on debt by 2027?",
+        "NATO/EU troops fighting in Ukraine in June 30, 2026?",
+        "Will India strike Pakistan by March 31?",
+        "AI Industry Downturn by March 31, 2026?",
+        "Will the Fed decrease interest rates by 50+ bps after the April 2026 meeting?",
+        "Will Dawn Buckingham win the 2026 Texas Republican Primary?"
+      ],
+      "disruption_types": [
+        "agricultural_shock",
+        "climate_event",
+        "energy_supply",
+        "financial_crisis",
+        "geopolitical_conflict",
+        "tech_disruption",
+        "trade_restriction",
+        "transport_disruption"
+      ],
+      "parameters": {
+        "soy_availability": -95.0,
+        "grain_price": 990.4578,
+        "feed_cost": 450.36,
+        "food_price_index": 18.1899,
+        "credit_availability": -95.0,
+        "demand_shock": -95.0,
+        "currency_volatility": 3325.2567,
+        "import_cost_factor": 6.2749,
+        "export_volume": -95.0,
+        "supply_diversification_delay": 90.0,
+        "trade_corridor_disruption": -95.0,
+        "sanctions_impact": -95.0,
+        "uncertainty_index": 16.0,
+        "energy_supply_risk": -95.0,
+        "shipping_lead_time": 2.5,
+        "freight_cost": 3.0,
+        "route_availability": -30.0,
+        "energy_cost_factor": 10.4976,
+        "gas_availability": -95.0,
+        "transport_fuel_cost": 5.0625,
+        "agricultural_yield": -25.0,
+        "infrastructure_damage": -15.0,
+        "water_availability": -30.0,
+        "semiconductor_supply": -95.0,
+        "critical_mineral_cost": 8.0,
+        "it_system_downtime": 14.0
+      },
+      "severity_score": 1.0,
+      "description": ""
+    },
+    {
+      "scenario_id": 3,
+      "triggered_events": [
+        "1013523",
+        "1013522",
+        "1013524",
+        "964477",
+        "664911",
+        "654414",
+        "1013525",
+        "608410",
+        "690221",
+        "576880",
+        "517311",
+        "690220",
+        "1013526",
+        "540816",
+        "787477",
+        "562186",
+        "950853",
+        "1013527",
+        "540843",
+        "540844",
+        "1249981",
+        "678687",
+        "680949",
+        "663583",
+        "950852",
+        "562187",
+        "608363",
+        "678689",
+        "1126854",
+        "1032260",
+        "1007260",
+        "1032261",
+        "1032263",
+        "608401",
+        "559651",
+        "561829",
+        "678688",
+        "1032255",
+        "604470",
+        "608362"
+      ],
+      "triggered_questions": [
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+        "Will the ECB announce no change at the March 2026 meeting?",
+        "Will the Fed Cut–Pause–Pause in the next three decisions (Dec–Jan–Mar)?",
+        "Will there be no change in Fed interest rates after the March 2026 meeting?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+        "Will Anthropic not IPO by June 30, 2026?",
+        "Will the Fed’s lower bound reach 3.25% or lower before 2027?",
+        "Will US GDP growth in 2025 be between 2.0% and 2.5%?",
+        "Will Trump deport 250,000-500,000 people?",
+        "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $8 million?",
+        "Russia-Ukraine Ceasefire before GTA VI?",
+        "Will CDU win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+        "Will Ken Paxton win the 2026 Texas Republican Primary?",
+        "Will Gold have the best performance in 2026?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $10 million?",
+        "Will China invades Taiwan before GTA VI?",
+        "Will bitcoin hit $1m before GTA VI?",
+        "Bank of Japan increases interest rates by 25 bps after the April 2026 meeting?",
+        "Will 2026 be the second-hottest year on record?",
+        "Will inflation reach more than 3% in 2026?",
+        "Will the Iranian regime fall before 2027?",
+        "Will Bitcoin have the best performance in 2026?",
+        "Will John Cornyn win the 2026 Texas Republican Primary?",
+        "Will OpenAI’s market cap be between $500B and $750B at market close on IPO day?",
+        "Will 2026 be the fourth-hottest year on record?",
+        "Will the Court Force Trump to Refund Tariffs?",
+        "Will Gold (GC) settle at $5,000-$5,400 in June?",
+        "Will Russia capture all of Pokrovsk by February 28?",
+        "Will Gold (GC) settle at $5,400-$5,800 in June?",
+        "Will Gold (GC) settle at >$6,200 in June?",
+        "Will Discord’s market cap be between $25B and $30B at market close on IPO day?",
+        "Xi Jinping out before 2027?",
+        "Russia x Ukraine ceasefire by March 31, 2026?",
+        "Will 2026 be the third-hottest year on record?",
+        "Will Gold (GC) settle at <$3,800 in June?",
+        "Will China blockade Taiwan by June 30?",
+        "Will OpenAI’s market cap be less than $500B at market close on IPO day?"
+      ],
+      "disruption_types": [
+        "agricultural_shock",
+        "climate_event",
+        "financial_crisis",
+        "geopolitical_conflict",
+        "political_instability",
+        "trade_restriction",
+        "transport_disruption"
+      ],
+      "parameters": {
+        "soy_availability": -95.0,
+        "grain_price": 40642.3141,
+        "feed_cost": 12089.2582,
+        "food_price_index": 86.7362,
+        "credit_availability": -95.0,
+        "demand_shock": -90.0,
+        "currency_volatility": 11.3906,
+        "import_cost_factor": 2.197,
+        "export_volume": -60.0,
+        "supply_diversification_delay": 90.0,
+        "shipping_lead_time": 15.625,
+        "freight_cost": 27.0,
+        "route_availability": -90.0,
+        "trade_corridor_disruption": -95.0,
+        "sanctions_impact": -75.0,
+        "uncertainty_index": 8.0,
+        "energy_supply_risk": -90.0,
+        "agricultural_yield": -75.0,
+        "infrastructure_damage": -45.0,
+        "water_availability": -90.0,
+        "supplier_country_risk": 2.25,
+        "export_policy_uncertainty": -30.0,
+        "investment_freeze": -40.0
+      },
+      "severity_score": 1.0,
+      "description": ""
+    },
+    {
+      "scenario_id": 4,
+      "triggered_events": [
+        "1013523",
+        "1013522",
+        "1013524",
+        "964477",
+        "664911",
+        "654414",
+        "1013525",
+        "608410",
+        "690221",
+        "576880",
+        "517311",
+        "991022",
+        "690220",
+        "1013526",
+        "1320800",
+        "949495",
+        "540816",
+        "669662",
+        "787477",
+        "562186",
+        "690215",
+        "1013527",
+        "999108",
+        "567687",
+        "608368",
+        "1343082",
+        "787480",
+        "677356",
+        "906974",
+        "678687",
+        "1006892",
+        "680949",
+        "669661",
+        "704240",
+        "678686",
+        "608400",
+        "1032263"
+      ],
+      "triggered_questions": [
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+        "Will the ECB announce no change at the March 2026 meeting?",
+        "Will the Fed Cut–Pause–Pause in the next three decisions (Dec–Jan–Mar)?",
+        "Will there be no change in Fed interest rates after the March 2026 meeting?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+        "Will Anthropic not IPO by June 30, 2026?",
+        "Will the Fed’s lower bound reach 3.25% or lower before 2027?",
+        "Will US GDP growth in 2025 be between 2.0% and 2.5%?",
+        "Will Trump deport 250,000-500,000 people?",
+        "No change in Bank of Japan's interest rates after March 2026 meeting?",
+        "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $8 million?",
+        "Will Russia capture all of Pokrovsk by March 31?",
+        "Fed rate cut by June 2026 meeting?",
+        "Russia-Ukraine Ceasefire before GTA VI?",
+        "Will there be no change in Fed interest rates after the April 2026 meeting?",
+        "Will CDU win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+        "Will Ken Paxton win the 2026 Texas Republican Primary?",
+        "Will the Fed’s lower bound reach 2.75% or lower before 2027?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $10 million?",
+        "ECB rate cut in 2026?",
+        "Russia x Ukraine ceasefire by end of 2026?",
+        "Will OpenAI not IPO by December 31, 2026?",
+        "Will USD/KRW hit 1500 (High) in 2026?",
+        "Will SPD win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+        "Will India strike Pakistan by December 31, 2026?",
+        "Will there be no change in Fed interest rates after the June 2026 meeting?",
+        "Will 2026 be the second-hottest year on record?",
+        "Will Russia capture Lyman by March 31, 2026?",
+        "Will inflation reach more than 3% in 2026?",
+        "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
+        "2k+ container ship transits of Suez Canal in H1 2026?",
+        "Will 2026 be the hottest year on record?",
+        "Will Discord’s market cap be between $20B and $25B at market close on IPO day?",
+        "Will Gold (GC) settle at >$6,200 in June?"
+      ],
+      "disruption_types": [
+        "agricultural_shock",
+        "climate_event",
+        "energy_supply",
+        "financial_crisis",
+        "geopolitical_conflict",
+        "trade_restriction",
+        "transport_disruption"
+      ],
+      "parameters": {
+        "soy_availability": -95.0,
+        "grain_price": 990.4578,
+        "feed_cost": 450.36,
+        "food_price_index": 18.1899,
+        "credit_availability": -95.0,
+        "demand_shock": -95.0,
+        "currency_volatility": 129.7463,
+        "import_cost_factor": 1.3,
+        "export_volume": -20.0,
+        "supply_diversification_delay": 90.0,
+        "trade_corridor_disruption": -95.0,
+        "sanctions_impact": -95.0,
+        "uncertainty_index": 16.0,
+        "energy_supply_risk": -95.0,
+        "shipping_lead_time": 39.0625,
+        "freight_cost": 81.0,
+        "route_availability": -95.0,
+        "energy_cost_factor": 1.8,
+        "gas_availability": -40.0,
+        "transport_fuel_cost": 1.5,
+        "agricultural_yield": -50.0,
+        "infrastructure_damage": -30.0,
+        "water_availability": -60.0
+      },
+      "severity_score": 1.0,
+      "description": ""
+    },
+    {
+      "scenario_id": 5,
+      "triggered_events": [
+        "1013523",
+        "1013522",
+        "1013524",
+        "964477",
+        "664911",
+        "654414",
+        "1013525",
+        "608410",
+        "690221",
+        "576880",
+        "517311",
+        "991022",
+        "690220",
+        "1013526",
+        "949495",
+        "669662",
+        "787477",
+        "562186",
+        "958427",
+        "950853",
+        "1013527",
+        "540843",
+        "906973",
+        "540844",
+        "670098",
+        "608368",
+        "1343082",
+        "787480",
+        "1138161",
+        "1006892",
+        "666822",
+        "608398",
+        "950852",
+        "608363",
+        "678689",
+        "1032260",
+        "950854",
+        "1032261",
+        "608400",
+        "1032257",
+        "1136710",
+        "678688",
+        "608362"
+      ],
+      "triggered_questions": [
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+        "Will the ECB announce no change at the March 2026 meeting?",
+        "Will the Fed Cut–Pause–Pause in the next three decisions (Dec–Jan–Mar)?",
+        "Will there be no change in Fed interest rates after the March 2026 meeting?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+        "Will Anthropic not IPO by June 30, 2026?",
+        "Will the Fed’s lower bound reach 3.25% or lower before 2027?",
+        "Will US GDP growth in 2025 be between 2.0% and 2.5%?",
+        "Will Trump deport 250,000-500,000 people?",
+        "No change in Bank of Japan's interest rates after March 2026 meeting?",
+        "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $8 million?",
+        "Fed rate cut by June 2026 meeting?",
+        "Will there be no change in Fed interest rates after the April 2026 meeting?",
+        "Will CDU win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+        "Will Ken Paxton win the 2026 Texas Republican Primary?",
+        "Israel x Iran ceasefire broken by June 30, 2026?",
+        "Will Gold have the best performance in 2026?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $10 million?",
+        "Will China invades Taiwan before GTA VI?",
+        "Will the Fed decrease interest rates by 25 bps after the June 2026 meeting?",
+        "Will bitcoin hit $1m before GTA VI?",
+        "Canada recession before 2027?",
+        "Will OpenAI not IPO by December 31, 2026?",
+        "Will USD/KRW hit 1500 (High) in 2026?",
+        "Will SPD win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $12 million?",
+        "Will Russia capture Lyman by March 31, 2026?",
+        "U.S. agrees to a new trade deal with \"Indonesia\" before 2027?",
+        "Will Discord’s market cap be less than $15B at market close on IPO day?",
+        "Will Bitcoin have the best performance in 2026?",
+        "Will OpenAI’s market cap be between $500B and $750B at market close on IPO day?",
+        "Will 2026 be the fourth-hottest year on record?",
+        "Will Gold (GC) settle at $5,000-$5,400 in June?",
+        "Will the S&P 500 have the best performance in 2026?",
+        "Will Gold (GC) settle at $5,400-$5,800 in June?",
+        "Will Discord’s market cap be between $20B and $25B at market close on IPO day?",
+        "Will Gold (GC) settle at $4,200-$4,600 in June?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $16 million?",
+        "Will 2026 be the third-hottest year on record?",
+        "Will OpenAI’s market cap be less than $500B at market close on IPO day?"
+      ],
+      "disruption_types": [
+        "agricultural_shock",
+        "climate_event",
+        "energy_supply",
+        "financial_crisis",
+        "geopolitical_conflict",
+        "trade_restriction",
+        "transport_disruption"
+      ],
+      "parameters": {
+        "soy_availability": -95.0,
+        "grain_price": 199675.689,
+        "feed_cost": 49517.6016,
+        "food_price_index": 169.4066,
+        "credit_availability": -95.0,
+        "demand_shock": -95.0,
+        "currency_volatility": 57.665,
+        "import_cost_factor": 1.69,
+        "export_volume": -40.0,
+        "supply_diversification_delay": 90.0,
+        "shipping_lead_time": 6.25,
+        "freight_cost": 9.0,
+        "route_availability": -60.0,
+        "trade_corridor_disruption": -95.0,
+        "sanctions_impact": -75.0,
+        "uncertainty_index": 8.0,
+        "energy_supply_risk": -90.0,
+        "energy_cost_factor": 1.8,
+        "gas_availability": -40.0,
+        "transport_fuel_cost": 1.5,
+        "agricultural_yield": -50.0,
+        "infrastructure_damage": -30.0,
+        "water_availability": -60.0
+      },
+      "severity_score": 1.0,
+      "description": ""
+    },
+    {
+      "scenario_id": 6,
+      "triggered_events": [
+        "1013523",
+        "1013522",
+        "1013524",
+        "964477",
+        "664911",
+        "1013525",
+        "608410",
+        "690221",
+        "991022",
+        "690220",
+        "1013526",
+        "949495",
+        "787477",
+        "562186",
+        "1013527",
+        "906974",
+        "666822",
+        "608398",
+        "586301",
+        "666827",
+        "1176221",
+        "1259282",
+        "677147",
+        "1032261",
+        "663472"
+      ],
+      "triggered_questions": [
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+        "Will the ECB announce no change at the March 2026 meeting?",
+        "Will the Fed Cut–Pause–Pause in the next three decisions (Dec–Jan–Mar)?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+        "Will Anthropic not IPO by June 30, 2026?",
+        "Will the Fed’s lower bound reach 3.25% or lower before 2027?",
+        "No change in Bank of Japan's interest rates after March 2026 meeting?",
+        "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $8 million?",
+        "Fed rate cut by June 2026 meeting?",
+        "Will CDU win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+        "Will Ken Paxton win the 2026 Texas Republican Primary?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $10 million?",
+        "Will there be no change in Fed interest rates after the June 2026 meeting?",
+        "U.S. agrees to a new trade deal with \"Indonesia\" before 2027?",
+        "Will Discord’s market cap be less than $15B at market close on IPO day?",
+        "Supreme Court rules in favor of Trump's tariffs?",
+        "U.S. agrees to a new trade deal with \"South Korea\" before 2027?",
+        "U.S. agrees to a new trade deal with \"Taiwan\" before 2027?",
+        "Tariff increase on Canada in effect by June 30?",
+        "Fed emergency rate cut before 2027?",
+        "Will Gold (GC) settle at $5,400-$5,800 in June?",
+        "Will Trump meet with Putin by March 31, 2026?"
+      ],
+      "disruption_types": [
+        "agricultural_shock",
+        "financial_crisis",
+        "geopolitical_conflict",
+        "trade_restriction",
+        "transport_disruption"
+      ],
+      "parameters": {
+        "soy_availability": -95.0,
+        "grain_price": 118.5879,
+        "feed_cost": 68.7195,
+        "food_price_index": 7.4506,
+        "credit_availability": -95.0,
+        "demand_shock": -95.0,
+        "currency_volatility": 25.6289,
+        "shipping_lead_time": 2.5,
+        "freight_cost": 3.0,
+        "route_availability": -30.0,
+        "trade_corridor_disruption": -95.0,
+        "sanctions_impact": -50.0,
+        "uncertainty_index": 4.0,
+        "energy_supply_risk": -60.0,
+        "import_cost_factor": 3.7129,
+        "export_volume": -95.0,
+        "supply_diversification_delay": 90.0
+      },
+      "severity_score": 1.0,
+      "description": ""
+    },
+    {
+      "scenario_id": 7,
+      "triggered_events": [
+        "1013523",
+        "1013522",
+        "1013524",
+        "964477",
+        "654414",
+        "1013525",
+        "690221",
+        "576880",
+        "517311",
+        "690220",
+        "1320800",
+        "949495",
+        "562186",
+        "690215",
+        "958427",
+        "950853",
+        "1013527",
+        "999108",
+        "677356",
+        "678687",
+        "666823",
+        "608398",
+        "680949",
+        "666818",
+        "1007579",
+        "1007260",
+        "608399",
+        "950854",
+        "1032257",
+        "955825",
+        "1013528",
+        "1032262",
+        "1138152"
+      ],
+      "triggered_questions": [
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+        "Will the ECB announce no change at the March 2026 meeting?",
+        "Will there be no change in Fed interest rates after the March 2026 meeting?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+        "Will the Fed’s lower bound reach 3.25% or lower before 2027?",
+        "Will US GDP growth in 2025 be between 2.0% and 2.5%?",
+        "Will Trump deport 250,000-500,000 people?",
+        "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+        "Will Russia capture all of Pokrovsk by March 31?",
+        "Fed rate cut by June 2026 meeting?",
+        "Will Ken Paxton win the 2026 Texas Republican Primary?",
+        "Will the Fed’s lower bound reach 2.75% or lower before 2027?",
+        "Israel x Iran ceasefire broken by June 30, 2026?",
+        "Will Gold have the best performance in 2026?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $10 million?",
+        "ECB rate cut in 2026?",
+        "Will India strike Pakistan by December 31, 2026?",
+        "Will 2026 be the second-hottest year on record?",
+        "U.S. agrees to a new trade deal with \"Argentina\" before 2027?",
+        "Will Discord’s market cap be less than $15B at market close on IPO day?",
+        "Will inflation reach more than 3% in 2026?",
+        "U.S. agrees to a new trade deal with \"India\" before 2027?",
+        "Will Russia capture Sumy by March 31, 2027?",
+        "Will Russia capture all of Pokrovsk by February 28?",
+        "Will Discord’s market cap be between $15B and $20B at market close on IPO day?",
+        "Will the S&P 500 have the best performance in 2026?",
+        "Will Gold (GC) settle at $4,200-$4,600 in June?",
+        "Nuclear weapon detonation by December 31?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $15 million?",
+        "Will Gold (GC) settle at $5,800-$6,200 in June?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $20 million?"
+      ],
+      "disruption_types": [
+        "agricultural_shock",
+        "climate_event",
+        "energy_supply",
+        "financial_crisis",
+        "geopolitical_conflict",
+        "trade_restriction"
+      ],
+      "parameters": {
+        "soy_availability": -95.0,
+        "grain_price": 2862.4231,
+        "feed_cost": 1152.9215,
+        "food_price_index": 28.4217,
+        "credit_availability": -95.0,
+        "demand_shock": -95.0,
+        "currency_volatility": 17.0859,
+        "import_cost_factor": 2.197,
+        "export_volume": -60.0,
+        "supply_diversification_delay": 90.0,
+        "trade_corridor_disruption": -95.0,
+        "sanctions_impact": -95.0,
+        "uncertainty_index": 16.0,
+        "energy_supply_risk": -95.0,
+        "energy_cost_factor": 5.832,
+        "gas_availability": -95.0,
+        "transport_fuel_cost": 3.375,
+        "agricultural_yield": -25.0,
+        "infrastructure_damage": -15.0,
+        "water_availability": -30.0
+      },
+      "severity_score": 1.0,
+      "description": ""
+    },
+    {
+      "scenario_id": 8,
+      "triggered_events": [
+        "1013523",
+        "1013522",
+        "1013524",
+        "964477",
+        "664911",
+        "654414",
+        "1013525",
+        "608410",
+        "690221",
+        "576880",
+        "517311",
+        "991022",
+        "690220",
+        "949495",
+        "540816",
+        "669662",
+        "562186",
+        "690215",
+        "950853",
+        "1013527",
+        "999108",
+        "567687",
+        "906973",
+        "670098",
+        "608368",
+        "1249981",
+        "787480",
+        "906974",
+        "678687",
+        "666696",
+        "666822",
+        "608398",
+        "949494",
+        "666818",
+        "1114183",
+        "616905",
+        "669661",
+        "677147",
+        "608400",
+        "999095",
+        "949493",
+        "648872"
+      ],
+      "triggered_questions": [
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+        "Will the ECB announce no change at the March 2026 meeting?",
+        "Will the Fed Cut–Pause–Pause in the next three decisions (Dec–Jan–Mar)?",
+        "Will there be no change in Fed interest rates after the March 2026 meeting?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+        "Will Anthropic not IPO by June 30, 2026?",
+        "Will the Fed’s lower bound reach 3.25% or lower before 2027?",
+        "Will US GDP growth in 2025 be between 2.0% and 2.5%?",
+        "Will Trump deport 250,000-500,000 people?",
+        "No change in Bank of Japan's interest rates after March 2026 meeting?",
+        "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+        "Fed rate cut by June 2026 meeting?",
+        "Russia-Ukraine Ceasefire before GTA VI?",
+        "Will there be no change in Fed interest rates after the April 2026 meeting?",
+        "Will Ken Paxton win the 2026 Texas Republican Primary?",
+        "Will the Fed’s lower bound reach 2.75% or lower before 2027?",
+        "Will Gold have the best performance in 2026?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $10 million?",
+        "ECB rate cut in 2026?",
+        "Russia x Ukraine ceasefire by end of 2026?",
+        "Will the Fed decrease interest rates by 25 bps after the June 2026 meeting?",
+        "Canada recession before 2027?",
+        "Will OpenAI not IPO by December 31, 2026?",
+        "Bank of Japan increases interest rates by 25 bps after the April 2026 meeting?",
+        "Will SPD win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+        "Will there be no change in Fed interest rates after the June 2026 meeting?",
+        "Will 2026 be the second-hottest year on record?",
+        "Israel x Iran ceasefire broken by March 31, 2026?",
+        "U.S. agrees to a new trade deal with \"Indonesia\" before 2027?",
+        "Will Discord’s market cap be less than $15B at market close on IPO day?",
+        "Fed rate cut by April 2026 meeting?",
+        "U.S. agrees to a new trade deal with \"India\" before 2027?",
+        "Will Russia capture Rodynske by February 28?",
+        "Will 3 Fed rate cuts happen in 2026?",
+        "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
+        "Fed emergency rate cut before 2027?",
+        "Will Discord’s market cap be between $20B and $25B at market close on IPO day?",
+        "ECB rate hike in 2026?",
+        "Fed rate cut by March 2026 meeting?",
+        "US x Russia military clash by June 30, 2026?"
+      ],
+      "disruption_types": [
+        "agricultural_shock",
+        "climate_event",
+        "energy_supply",
+        "financial_crisis",
+        "geopolitical_conflict",
+        "trade_restriction",
+        "transport_disruption"
+      ],
+      "parameters": {
+        "soy_availability": -95.0,
+        "grain_price": 342.719,
+        "feed_cost": 175.9219,
+        "food_price_index": 11.6415,
+        "credit_availability": -95.0,
+        "demand_shock": -95.0,
+        "currency_volatility": 3325.2567,
+        "import_cost_factor": 2.197,
+        "export_volume": -60.0,
+        "supply_diversification_delay": 90.0,
+        "shipping_lead_time": 15.625,
+        "freight_cost": 27.0,
+        "route_availability": -90.0,
+        "trade_corridor_disruption": -95.0,
+        "sanctions_impact": -75.0,
+        "uncertainty_index": 8.0,
+        "energy_supply_risk": -90.0,
+        "agricultural_yield": -25.0,
+        "infrastructure_damage": -15.0,
+        "water_availability": -30.0,
+        "energy_cost_factor": 1.8,
+        "gas_availability": -40.0,
+        "transport_fuel_cost": 1.5
+      },
+      "severity_score": 1.0,
+      "description": ""
+    },
+    {
+      "scenario_id": 9,
+      "triggered_events": [
+        "1013523",
+        "1013522",
+        "1013524",
+        "964477",
+        "664911",
+        "654414",
+        "1013525",
+        "608410",
+        "690221",
+        "576880",
+        "517311",
+        "991022",
+        "690220",
+        "1013526",
+        "949495",
+        "669662",
+        "787477",
+        "958427",
+        "950853",
+        "540843",
+        "999108",
+        "906973",
+        "608368",
+        "1343082",
+        "677356",
+        "678687",
+        "1138161",
+        "1006892",
+        "666822",
+        "608398",
+        "680949",
+        "609655",
+        "608363",
+        "678689",
+        "669661",
+        "567621",
+        "608402",
+        "908713",
+        "1136711"
+      ],
+      "triggered_questions": [
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $5 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $4 million?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $6 million?",
+        "Will the ECB announce no change at the March 2026 meeting?",
+        "Will the Fed Cut–Pause–Pause in the next three decisions (Dec–Jan–Mar)?",
+        "Will there be no change in Fed interest rates after the March 2026 meeting?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $7 million?",
+        "Will Anthropic not IPO by June 30, 2026?",
+        "Will the Fed’s lower bound reach 3.25% or lower before 2027?",
+        "Will US GDP growth in 2025 be between 2.0% and 2.5%?",
+        "Will Trump deport 250,000-500,000 people?",
+        "No change in Bank of Japan's interest rates after March 2026 meeting?",
+        "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $8 million?",
+        "Fed rate cut by June 2026 meeting?",
+        "Will there be no change in Fed interest rates after the April 2026 meeting?",
+        "Will CDU win the most seats in the 2026 Rhineland-Palatinate parliamentary elections?",
+        "Israel x Iran ceasefire broken by June 30, 2026?",
+        "Will Gold have the best performance in 2026?",
+        "Will China invades Taiwan before GTA VI?",
+        "ECB rate cut in 2026?",
+        "Will the Fed decrease interest rates by 25 bps after the June 2026 meeting?",
+        "Will OpenAI not IPO by December 31, 2026?",
+        "Will USD/KRW hit 1500 (High) in 2026?",
+        "Will India strike Pakistan by December 31, 2026?",
+        "Will 2026 be the second-hottest year on record?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $12 million?",
+        "Will Russia capture Lyman by March 31, 2026?",
+        "U.S. agrees to a new trade deal with \"Indonesia\" before 2027?",
+        "Will Discord’s market cap be less than $15B at market close on IPO day?",
+        "Will inflation reach more than 3% in 2026?",
+        "US recession by end of 2026?",
+        "Will OpenAI’s market cap be between $500B and $750B at market close on IPO day?",
+        "Will 2026 be the fourth-hottest year on record?",
+        "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
+        "Will China invade Taiwan by end of 2026?",
+        "Will Discord’s market cap be $30B or greater at market close on IPO day?",
+        "Fed rate hike in 2026?",
+        "Will Logan Paul’s PSA 10 Pokémon Illustrator Sale Price be over $17 million?"
+      ],
+      "disruption_types": [
+        "agricultural_shock",
+        "climate_event",
+        "energy_supply",
+        "financial_crisis",
+        "geopolitical_conflict",
+        "trade_restriction",
+        "transport_disruption"
+      ],
+      "parameters": {
+        "soy_availability": -95.0,
+        "grain_price": 4866.1192,
+        "feed_cost": 1844.6744,
+        "food_price_index": 35.5271,
+        "credit_availability": -95.0,
+        "demand_shock": -95.0,
+        "currency_volatility": 194.6195,
+        "import_cost_factor": 1.69,
+        "export_volume": -40.0,
+        "supply_diversification_delay": 90.0,
+        "shipping_lead_time": 2.5,
+        "freight_cost": 3.0,
+        "route_availability": -30.0,
+        "energy_cost_factor": 3.24,
+        "gas_availability": -80.0,
+        "transport_fuel_cost": 2.25,
+        "trade_corridor_disruption": -95.0,
+        "sanctions_impact": -75.0,
+        "uncertainty_index": 8.0,
+        "energy_supply_risk": -90.0,
+        "agricultural_yield": -50.0,
+        "infrastructure_damage": -30.0,
+        "water_availability": -60.0
+      },
+      "severity_score": 1.0,
+      "description": ""
+    }
+  ],
+  "statistics": {
+    "avg_probability": 0.2004,
+    "max_probability": 0.9805,
+    "rising_count": 0,
+    "falling_count": 0,
+    "volatile_count": 0
+  }
+}
