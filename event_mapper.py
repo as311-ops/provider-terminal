@@ -275,16 +275,15 @@ KEYWORD_RULES: list[tuple[re.Pattern, str, float]] = [
     (re.compile(r"rail.*strike|train.*strike|railway.*disrupt", re.I), "transport_disruption", 0.8),
     (re.compile(r"container.*short|container.*crisis", re.I), "transport_disruption", 0.8),
 
-    # Agriculture
-    (re.compile(r"soy|soybean|wheat|corn|grain|crop|harvest|famine", re.I), "agricultural_shock", 0.9),
-    (re.compile(r"fertilizer|food price|agricultural|livestock", re.I), "agricultural_shock", 0.8),
-    (re.compile(r"drought.*crop|flood.*harvest", re.I), "agricultural_shock", 0.9),
-    (re.compile(r"coffee|cocoa|palm oil|sugar.*price|rice.*export|rice.*price", re.I), "agricultural_shock", 0.8),
-    (re.compile(r"food crisis|food shortage|hunger|malnutrition", re.I), "agricultural_shock", 0.9),
-    (re.compile(r"cattle|pork|poultry|dairy|meat.*price", re.I), "agricultural_shock", 0.7),
-    (re.compile(r"potash|ammonia|urea|nitrogen.*fertil", re.I), "agricultural_shock", 0.8),
-    (re.compile(r"el ni[nñ]o|la ni[nñ]a", re.I), "agricultural_shock", 0.8),
-    (re.compile(r"locust|pest.*outbreak|crop.*disease|blight", re.I), "agricultural_shock", 0.8),
+    # Agriculture (word boundaries to prevent false positives like "Price"→"rice", "Cornyn"→"corn")
+    (re.compile(r"\bsoy\b|soybean|\bwheat\b|\bcorn\b|\bgrain\b|\bcrop\b|\bharvest\b|\bfamine\b", re.I), "agricultural_shock", 0.9),
+    (re.compile(r"\bfertilizer\b|\bfood price\b|\bagricultural\b|\blivestock\b", re.I), "agricultural_shock", 0.8),
+    (re.compile(r"\bdrought\b.*\bcrop\b|\bflood\b.*\bharvest\b", re.I), "agricultural_shock", 0.9),
+    (re.compile(r"\bcoffee\b|\bcocoa\b|\bpalm oil\b|\bsugar\b.*\bprice\b|\brice\b.*\bexport\b|\brice\b.*\bprice\b", re.I), "agricultural_shock", 0.8),
+    (re.compile(r"\bfood crisis\b|\bfood shortage\b|\bhunger\b|\bmalnutrition\b", re.I), "agricultural_shock", 0.9),
+    (re.compile(r"\bcattle\b|\bpork\b|\bpoultry\b|\bdairy\b|\bmeat\b.*\bprice\b", re.I), "agricultural_shock", 0.7),
+    (re.compile(r"\bpotash\b|\bammonia\b|\burea\b|\bnitrogen\b.*\bfertil", re.I), "agricultural_shock", 0.8),
+    (re.compile(r"\blocust\b|\bpest\b.*\boutbreak\b|\bcrop disease\b|\bblight\b", re.I), "agricultural_shock", 0.8),
 
     # Financial
     (re.compile(r"recession|gdp.*negative|depression", re.I), "financial_crisis", 0.9),
