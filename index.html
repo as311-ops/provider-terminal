@@ -146,7 +146,7 @@ body::after {
 .crit-count { font-size:9px; color:var(--crit); font-weight:600; }
 .crit-dismiss { position:absolute; top:6px; right:10px; background:none; border:none; color:var(--db-gray); cursor:pointer; font-size:14px; }
 .crit-dismiss:hover { color:var(--crit); }
-.crit-items { display:flex; flex-direction:column; gap:3px; }
+.crit-items { display:flex; flex-direction:column; gap:3px; max-height:200px; overflow-y:auto; }
 .crit-item {
     display:grid;
     grid-template-columns:auto 1fr auto auto;
@@ -2117,7 +2117,8 @@ document.addEventListener('keydown',e=>{
         if (detailView) openDetail(); else render();
     } else if(e.key==='Enter'){
         e.preventDefault();
-        if(selIdx >= 0) openDetail();
+        if(detailView) closeDetail();
+        else if(selIdx >= 0) openDetail();
     } else if(e.key===' '){e.preventDefault();togglePause();}
     else if(e.key==='w'||e.key==='W')toggleWhatIf();
     else if(e.key==='g'||e.key==='G')toggleGraph();
