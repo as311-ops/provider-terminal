@@ -1,22 +1,10 @@
-# Python
 __pycache__/
 *.py[cod]
-*.egg-info/
 .venv/
 venv/
-dist/
-build/
-
-# State files (generated at runtime)
 monitor_state.json
 pipeline_state.json
 scenarios_output/
-
-# Archives
 *.tar.gz
-
-# OS
 .DS_Store
-
-# Misc
 =6.0
