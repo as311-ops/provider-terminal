@@ -1838,8 +1838,9 @@ function initGraph() {
     graphSelected = -1; graphHover = -1; graphDrag = -1;
     document.getElementById('graphDetail').classList.remove('active');
 
-    // Build nodes from current markets
-    const ms = Object.values(S);
+    // Build nodes from current markets (top 30 by impact for readability)
+    const allMs = Object.values(S);
+    const ms = [...allMs].sort((a,b) => (b.rel*b.prob) - (a.rel*a.prob)).slice(0, 30);
     graphNodes = ms.map((m, i) => {
         const tc = TC[m.type] || { c:'#7c4dff', l:m.type };
         const angle = (2 * Math.PI * i) / ms.length;
@@ -1945,7 +1946,7 @@ function initGraph() {
                 const a = graphNodes[i], b = graphNodes[j];
                 let dx = a.x - b.x, dy = a.y - b.y;
                 let d = Math.sqrt(dx*dx + dy*dy) || 1;
-                const force = 3000 / (d * d) * cooling;
+                const force = 5000 / (d * d) * cooling;
                 const fx = (dx/d) * force, fy = (dy/d) * force;
                 a.vx += fx; a.vy += fy;
                 b.vx -= fx; b.vy -= fy;
